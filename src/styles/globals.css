@@ -1,0 +1,166 @@
+@import './animations.css';
+
+:root {
+  /* Palette — Mode Sombre (Charbon Chaud & Ambre Électrique) */
+  --bg-deep: #0E0E0B;
+  --bg-surface: #141410;
+  --bg-elevated: #1C1C18;
+  --accent-primary: #F5A623;
+  /* Ambre électrique */
+  --accent-secondary: #5CDB95;
+  /* Vert sage */
+  --text-primary: #F2EFE4;
+  /* Crème */
+  --text-secondary: #9C9780;
+  /* Sable */
+  --text-muted: #5C594D;
+  --border: #262620;
+  --border-accent: #F5A62330;
+
+  /* Palette — Mode Clair (Parchemin & Ambre Profond) */
+  --bg-deep-light: #FAF7F0;
+  --bg-surface-light: #F0EDE4;
+  --bg-elevated-light: #E8E4D9;
+  --accent-primary-light: #C4780A;
+  --accent-secondary-light: #2D7A5F;
+  --text-primary-light: #1A1916;
+  --text-secondary-light: #6B6758;
+  --text-muted-light: #9C9780;
+  --border-light: #DDD9CE;
+  --border-accent-light: #C4780A30;
+
+  /* Typographie */
+  --font-syne: 'Syne', sans-serif;
+  --font-dm-sans: 'DM Sans', sans-serif;
+  --font-jetbrains-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-dm-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-deep);
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  cursor: none;
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body[data-theme='light'] {
+  --bg-deep: var(--bg-deep-light);
+  --bg-surface: var(--bg-surface-light);
+  --bg-elevated: var(--bg-elevated-light);
+  --accent-primary: var(--accent-primary-light);
+  --accent-secondary: var(--accent-secondary-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --text-muted: var(--text-muted-light);
+  --border: var(--border-light);
+  --border-accent: var(--border-accent-light);
+  color-scheme: light;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.03;
+  /* Subtile identité africaine (Kente pattern) */
+  pointer-events: none;
+  z-index: 9998;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-syne);
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(32px, 5vw, 56px);
+  /* Réduit suite au feedback UX, mais garde le caractère Syne */
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+h2.section-title {
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 700;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+/* Numéros de section en filigrane */
+h2.section-title::before {
+  content: attr(data-number);
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  font-size: 2em;
+  opacity: 0.05;
+  z-index: -1;
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+section {
+  padding: clamp(60px, 10vw, 120px) clamp(20px, 5vw, 60px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.custom-cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
+}
+
+.custom-cursor.interactable {
+  width: 40px;
+  height: 40px;
+  opacity: 0.2;
+}
+
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background-color: var(--accent-primary);
+  z-index: 10001;
+}
