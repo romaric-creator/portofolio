@@ -39,7 +39,7 @@ const Hero: React.FC<HeroProps> = ({ addRevealElement }) => {
   );
 
   return (
-    <section id="hero" className="hero-section">
+    <section id="hero" className="hero-section reveal-element" ref={addRevealElement}>
       {africanPattern}
       <div className="hero-grid-container">
         <div className="hero-content-main">
