@@ -32,7 +32,4 @@
     color-scheme: light;
   }
 
-  @media (pointer: fine) {
-    body { cursor: none; }
-  }
 }
