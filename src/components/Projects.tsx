@@ -1,103 +1,150 @@
+import { motion } from 'framer-motion';
+import { ExternalLink, ArrowUpRight } from 'lucide-react';
 import { PROJECTS } from '../data/projects';
-import '../styles/projects.css';
 
-interface Project {
-  id: string;
-  name: string;
-  tagline: string;
-  description: string;
-  stack: string[];
-  links: { github: string | null; live: string | null };
-  visualPlaceholder?: string;
-}
+type Project = typeof PROJECTS[0];
 
-interface ProjectCardProps {
-  project: Project;
-  isLarge?: boolean;
-}
+const GithubIcon = () => (
+  <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+  </svg>
+);
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, isLarge = false }) => {
-  // Fonction pour calculer la rotation 3D au survol
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const xAxis = (rect.width / 2 - (e.clientX - rect.left)) / 25;
-    const yAxis = (e.clientY - rect.top - rect.height / 2) / 25;
-    card.style.transform = `perspective(1000px) rotateX(${yAxis}deg) rotateY(${xAxis}deg)`;
-  };
-
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const card = e.currentTarget;
-    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-  };
-
+function ProjectCard({ project, className = '' }: { project: Project; className?: string }) {
   return (
-    <div
-      className={`project-card ${isLarge ? 'large' : ''}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+    <motion.div
+      whileHover={{ y: -4, boxShadow: '0 12px 24px -8px rgba(0,0,0,0.08)' }}
+      transition={{ duration: 0.2 }}
+      className={`relative bg-canvas border border-line rounded-lg p-6 flex flex-col overflow-hidden group hover:border-amber transition-all h-full ${className}`}
     >
-      <span className="project-number watermark-number">{project.id}</span>
-      <div className="card-left-border"></div>
-      <h3 className="card-title">{project.name}</h3>
-      <p className="project-tagline">{project.tagline}</p>
-      <p className="project-description">{project.description}</p>
-      <div className="project-stack">
+      <div className="flex items-center justify-between">
+        <span className="text-amber font-bold text-sm">{project.id}</span>
+        {project.links.github && (
+          <a
+            href={`https://${project.links.github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sand hover:text-amber transition-colors p-1"
+          >
+            <ArrowUpRight size={16} />
+          </a>
+        )}
+      </div>
+
+      <h3 className="font-display font-extrabold text-ink text-xl mt-3 group-hover:text-amber transition-colors leading-tight">
+        {project.name}
+      </h3>
+      <p className="text-sand text-xs font-medium mt-1.5 leading-relaxed">{project.tagline}</p>
+      <p className="text-sand text-sm mt-3 leading-relaxed flex-1">{project.description}</p>
+
+      <div className="flex flex-wrap gap-1.5 mt-5">
         {project.stack.map((tech) => (
-          <span key={tech} className="tag-label">{tech}</span>
+          <span
+            key={tech}
+            className="text-[11px] bg-surface text-ink px-2 py-0.5 border border-line rounded font-medium"
+          >
+            {tech}
+          </span>
         ))}
       </div>
-      <div className="project-links">
+
+      <div className="flex gap-4 mt-4 pt-4 border-t border-line">
         {project.links.github && (
-          <a href={`https://${project.links.github}`} target="_blank" rel="noopener noreferrer" className="ghost-button">
-            GitHub →
+          <a
+            href={`https://${project.links.github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs text-sand hover:text-amber transition-colors font-medium"
+          >
+            <GithubIcon />
+            Code source
           </a>
         )}
         {project.links.live && (
-          <a href={`https://${project.links.live}`} target="_blank" rel="noopener noreferrer" className="ghost-button">
-            Live Démo →
+          <a
+            href={project.links.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs text-sand hover:text-amber transition-colors font-medium"
+          >
+            <ExternalLink size={12} />
+            Demo
           </a>
         )}
-      </div>
-      <div className="visual-placeholder">
-        {/* Un placeholder visuel stylisé */}
-        {project.visualPlaceholder && (
-          <div className={`gradient-placeholder ${project.visualPlaceholder}`}></div>
+        {!project.links.github && !project.links.live && (
+          <span className="text-xs text-dust font-medium">Projet prive</span>
         )}
       </div>
-    </div>
+    </motion.div>
   );
-};
-
-interface ProjectsProps {
-  addRevealElement: (el: HTMLElement | null) => void;
 }
 
-const Projects: React.FC<ProjectsProps> = ({ addRevealElement }) => {
-
-  // Pour l'agencement asymétrique 60/40, les projets 2 et 3 seront sur la même ligne.
-  const project1 = PROJECTS[0];
-  const project2 = PROJECTS[1];
-  const project3 = PROJECTS[2];
-  const project4 = PROJECTS[3];
-
+export default function Projects() {
   return (
-    <section id="projects" className="projects-section reveal-element" ref={addRevealElement}> {/* Ajout de ref et classe */}
-      <h2 className="section-title" data-number="03">03. Mes Projets Réalisés</h2>
-      <div className="projects-grid">
-        <ProjectCard project={project1} isLarge={true} />
-        <div className="projects-row-60-40">
-          <ProjectCard project={project2} />
-          <ProjectCard project={project3} />
+    <section id="projects" className="py-28 px-6 bg-surface">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.55 }}
+        >
+          <span className="inline-block text-amber text-xs font-semibold tracking-[0.2em] uppercase mb-4">
+            Projets Realises
+          </span>
+          <h2 className="font-display text-3xl lg:text-4xl font-extrabold text-ink">
+            Ce que j'ai construit
+          </h2>
+          <p className="text-sand text-base mt-3 max-w-lg">
+            Une selection de projets web et mobile qui illustrent mon savoir-faire technique.
+          </p>
+        </motion.div>
+
+        {/* Desktop bento grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="hidden md:grid gap-5 mt-12"
+          style={{
+            gridTemplateColumns: '1.6fr 1fr',
+            gridTemplateRows: '280px 280px auto auto auto auto',
+          }}
+        >
+          <div className="h-full" style={{ gridColumn: '1', gridRow: '1 / span 2' }}>
+            <ProjectCard project={PROJECTS[0]} className="h-full" />
+          </div>
+          <div className="h-full" style={{ gridColumn: '2', gridRow: '1' }}>
+            <ProjectCard project={PROJECTS[1]} className="h-full" />
+          </div>
+          <div className="h-full" style={{ gridColumn: '2', gridRow: '2' }}>
+            <ProjectCard project={PROJECTS[2]} className="h-full" />
+          </div>
+          <div style={{ gridColumn: '1', gridRow: '3' }}>
+            <ProjectCard project={PROJECTS[3]} />
+          </div>
+          <div style={{ gridColumn: '2', gridRow: '3' }}>
+            <ProjectCard project={PROJECTS[4]} />
+          </div>
+          <div style={{ gridColumn: '1 / span 2', gridRow: '4' }}>
+            <ProjectCard project={PROJECTS[5]} />
+          </div>
+          <div style={{ gridColumn: '1', gridRow: '5' }}>
+            <ProjectCard project={PROJECTS[6]} />
+          </div>
+          <div style={{ gridColumn: '2', gridRow: '5' }}>
+            <ProjectCard project={PROJECTS[7]} />
+          </div>
+        </motion.div>
+
+        {/* Mobile stack */}
+        <div className="md:hidden flex flex-col gap-4 mt-12">
+          {PROJECTS.map((p) => (
+            <ProjectCard key={p.id} project={p} />
+          ))}
         </div>
-        <ProjectCard project={project4} />
       </div>
     </section>
   );
-};
-
-export default Projects;
+}
