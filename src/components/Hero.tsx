@@ -1,87 +1,136 @@
-import React, { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { MapPin, ArrowDown, ArrowRight } from 'lucide-react';
 import { PROFILE } from '../data/projects';
-import '../styles/hero.css';
 import profileImg from '../assets/IMG-20260214-WA0033.jpg';
 
-interface HeroProps {
-  addRevealElement: (el: HTMLElement | null) => void;
-}
+const ease = [0.23, 1, 0.32, 1] as const;
 
-const Hero: React.FC<HeroProps> = ({ addRevealElement }) => {
-  const heroTextRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    // Animation du titre mot par mot
-    if (heroTextRef.current && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const words = heroTextRef.current.children;
-      Array.from(words).forEach((word, index) => {
-        (word as HTMLElement).style.animationDelay = `${index * 0.1}s`;
-      });
-    }
-  }, []);
-
-  // Placeholder pour le pattern SVG africain
-  const africanPattern = (
-    <svg className="african-pattern" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <pattern id="kentePattern" width="10" height="10" patternUnits="userSpaceOnUse">
-          <path d="M0 0L5 5L0 10L-5 5L0 0Z" fill="var(--text-primary)" opacity="0.025" />
-        </pattern>
-      </defs>
-      <rect x="0" y="0" width="100%" height="100%" fill="url(#kentePattern)" />
-    </svg>
-  );
-
-  const linkedinIcon = (
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-    </svg>
-  );
-
+export default function Hero() {
   return (
-    <section id="hero" className="hero-section reveal-element" ref={addRevealElement}>
-      {africanPattern}
-      <div className="hero-grid-container">
-        <div className="hero-content-main">
-          <div className="hero-branding-intro">
-            <span className="hero-surname">Tenda Christian Boupda</span>
-            <div className="name-line"></div>
-          </div>
+    <section
+      id="hero"
+      className="relative min-h-screen bg-canvas overflow-hidden flex flex-col justify-center"
+    >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(var(--color-line) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          opacity: 0.4,
+        }}
+      />
 
-          <h1 className="hero-title-editorial" ref={heroTextRef}>
-            {PROFILE.heroPhrase.split(' ').map((word, index) => (
-              <span key={index} className="word-reveal">
-                {word}&nbsp;
+      <div className="max-w-6xl mx-auto px-6 w-full pt-24 pb-20 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+          <div className="lg:col-span-7 order-2 lg:order-1 flex flex-col gap-7">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease }}
+            >
+              <span className="inline-flex items-center gap-2 bg-amber/10 text-amber px-3 py-1.5 text-xs font-semibold tracking-wide rounded-full">
+                <span className="w-2 h-2 rounded-full bg-amber animate-pulse" />
+                Disponible pour des projets
               </span>
-            ))}
-          </h1>
+            </motion.div>
 
-          <div className="hero-details">
-            <div className="detail-item">
-              <span className="detail-label">Status</span>
-              <p className="detail-value">{PROFILE.status}</p>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Localisation</span>
-              <p className="detail-value">{PROFILE.location}</p>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">LinkedIn</span>
-              <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer" className="detail-link">
-                {linkedinIcon} connect
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.08, ease }}
+              className="font-display text-[2.4rem] sm:text-5xl lg:text-[3.2rem] xl:text-[3.75rem] font-extrabold text-ink leading-[1.08]"
+            >
+              Je transforme les idées en{' '}
+              <span className="text-amber">solutions numériques.</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.16, ease }}
+              className="text-sand text-base lg:text-lg leading-relaxed max-w-lg"
+            >
+              {PROFILE.tagline}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.24, ease }}
+              className="flex flex-wrap items-center gap-8 py-5 border-y border-line"
+            >
+              <div>
+                <span className="font-display text-3xl font-extrabold text-ink">{PROFILE.stats.exp}</span>
+                <p className="text-xs text-sand font-medium mt-0.5">ans d'experience</p>
+              </div>
+              <div className="w-px h-8 bg-line hidden sm:block" />
+              <div>
+                <span className="font-display text-3xl font-extrabold text-ink">{PROFILE.stats.projects}</span>
+                <p className="text-xs text-sand font-medium mt-0.5">projets livres</p>
+              </div>
+              <div className="w-px h-8 bg-line hidden sm:block" />
+              <div className="flex items-center gap-2">
+                <MapPin size={14} className="text-amber flex-shrink-0" />
+                <span className="text-sand text-sm font-medium">{PROFILE.location}</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.32, ease }}
+              className="flex flex-wrap gap-4"
+            >
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 bg-ink text-canvas px-7 py-3.5 font-display font-semibold text-sm rounded-lg hover:bg-amber transition-colors"
+              >
+                Voir mes projets
+                <ArrowRight size={16} />
               </a>
-            </div>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 border-2 border-ink text-ink px-7 py-3.5 font-display font-semibold text-sm rounded-lg hover:border-amber hover:text-amber transition-colors"
+              >
+                Me contacter
+              </a>
+            </motion.div>
           </div>
-        </div>
 
-        <div className="hero-portrait-section">
-          <div className="portrait-wrapper">
-            <img src={profileImg} alt={PROFILE.fullName} className="portrait-main-img" />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.1, ease }}
+            className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end"
+          >
+            <div className="relative">
+              <div className="absolute -inset-4 bg-amber/5 rounded-2xl -z-10" />
+              <div className="relative w-56 h-72 sm:w-64 sm:h-80 lg:w-72 lg:h-[22rem] overflow-hidden rounded-xl border-2 border-line shadow-lg">
+                <img
+                  src={profileImg}
+                  alt={PROFILE.fullName}
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-ink/20 to-transparent" />
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
+
+      <motion.a
+        href="#about"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-sand hover:text-amber transition-colors"
+      >
+        <span className="text-[11px] font-medium tracking-wide">Decouvrir</span>
+        <motion.div animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}>
+          <ArrowDown size={16} />
+        </motion.div>
+      </motion.a>
     </section>
   );
-};
-
-export default Hero;
+}

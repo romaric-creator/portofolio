@@ -1,62 +1,49 @@
-import { useState, useEffect, useRef } from 'react';
-import '../styles/globals.css';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-const CustomCursor = () => {
-    const [isInteractable, setIsInteractable] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
-    const cursorRef = useRef<HTMLDivElement>(null);
-    const mousePos = useRef({ x: 0, y: 0 });
-    const cursorPos = useRef({ x: 0, y: 0 });
+export default function CustomCursor() {
+  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const [hovering, setHovering] = useState(false);
+  const [hasPointer, setHasPointer] = useState(false);
 
-    useEffect(() => {
-        const onMouseMove = (e: MouseEvent) => {
-            mousePos.current = { x: e.clientX, y: e.clientY };
-            if (!isVisible) setIsVisible(true);
+  useEffect(() => {
+    const mq = window.matchMedia('(pointer: fine)');
+    setHasPointer(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setHasPointer(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
 
-            const target = e.target as HTMLElement;
-            if (target) {
-                const isClickable = target.closest('a, button, [role="button"], .interactable');
-                setIsInteractable(!!isClickable);
-            }
-        };
+  useEffect(() => {
+    if (!hasPointer) return;
+    const onMove = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
+    const onOver = (e: MouseEvent) => {
+      const el = e.target as HTMLElement;
+      setHovering(!!el.closest('a, button, [data-hover]'));
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseover', onOver);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseover', onOver);
+    };
+  }, [hasPointer]);
 
-        const onMouseLeave = () => setIsVisible(false);
-        const onMouseEnter = () => setIsVisible(true);
+  if (!hasPointer) return null;
 
-        let animId: number;
-        const animate = () => {
-            const lerpFactor = 0.15;
-            cursorPos.current.x += (mousePos.current.x - cursorPos.current.x) * lerpFactor;
-            cursorPos.current.y += (mousePos.current.y - cursorPos.current.y) * lerpFactor;
-
-            if (cursorRef.current) {
-                cursorRef.current.style.left = `${cursorPos.current.x}px`;
-                cursorRef.current.style.top = `${cursorPos.current.y}px`;
-            }
-            animId = requestAnimationFrame(animate);
-        };
-
-        animId = requestAnimationFrame(animate);
-        window.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseleave', onMouseLeave);
-        document.addEventListener('mouseenter', onMouseEnter);
-
-        return () => {
-            cancelAnimationFrame(animId);
-            window.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseleave', onMouseLeave);
-            document.removeEventListener('mouseenter', onMouseEnter);
-        };
-    }, [isVisible]);
-
-    if (!isVisible) return null;
-
-    return (
-        <div
-            ref={cursorRef}
-            className={`custom-cursor ${isInteractable ? 'interactable' : ''}`}
-        />
-    );
-};
-
-export default CustomCursor;
+  return (
+    <motion.div
+      className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full bg-amber"
+      animate={{
+        x: pos.x,
+        y: pos.y,
+        width: hovering ? 20 : 8,
+        height: hovering ? 20 : 8,
+        marginLeft: hovering ? -10 : -4,
+        marginTop: hovering ? -10 : -4,
+        opacity: hovering ? 0.6 : 1,
+      }}
+      transition={{ type: 'spring', stiffness: 500, damping: 30, mass: 0.3 }}
+    />
+  );
+}

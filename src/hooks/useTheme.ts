@@ -3,16 +3,13 @@ import { useState, useEffect } from 'react';
 const useTheme = () => {
   const [theme, setTheme] = useState<string>(() => {
     // Vérifie si le thème est déjà enregistré dans localStorage ou si l'utilisateur préfère le mode sombre
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme;
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    // 'tc-v2' key resets any saved preference from previous versions
+    return localStorage.getItem('tc-theme-v2') ?? 'dark';
   });
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    localStorage.setItem('tc-theme-v2', theme);
   }, [theme]);
 
   const toggleTheme = (event?: React.MouseEvent | React.KeyboardEvent) => {

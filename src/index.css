@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+/* ─── Design tokens ─────────────────────────────────── */
+@theme inline {
+  --color-canvas:  #FAFAF7;
+  --color-surface: #F2F1EC;
+  --color-card:    #E9E8E2;
+  --color-amber:   #B36B00;
+  --color-sage:    #1B7A52;
+  --color-ink:     #141310;
+  --color-sand:    #4A4639;
+  --color-dust:    #6B6558;
+  --color-line:    #D4D1C8;
+
+  --font-display: 'Inter', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-code:    'Inter', sans-serif;
+}
+
+/* ─── Base ──────────────────────────────────────────── */
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color-scheme: light;
+  }
+
+  @media (pointer: fine) {
+    body { cursor: none; }
+  }
+}
