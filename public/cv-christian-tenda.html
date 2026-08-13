@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Christian Tenda | Développeur Full-Stack</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #141310;
+            background: #f5f5f5;
+            line-height: 1.5;
+            font-size: 13px;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: #fff;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            background: #141310;
+            color: #f0ece4;
+            padding: 36px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sidebar h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .sidebar .subtitle {
+            font-size: 13px;
+            color: #B36B00;
+            font-weight: 600;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-section {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 16px;
+        }
+
+        .sidebar-section h3 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #B36B00;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 11.5px;
+            color: #d4d0c8;
+            word-break: break-all;
+        }
+
+        .contact-item .icon {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            fill: #B36B00;
+        }
+
+        .contact-item a {
+            color: #d4d0c8;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: #B36B00;
+        }
+
+        .skill-category {
+            margin-bottom: 12px;
+        }
+
+        .skill-category h4 {
+            font-size: 11px;
+            color: #e8e4dc;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .skill-tag {
+            background: rgba(179, 107, 0, 0.2);
+            border: 1px solid rgba(179, 107, 0, 0.35);
+            color: #e8dcc8;
+            padding: 2px 7px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .languages-list {
+            list-style: none;
+            font-size: 11.5px;
+        }
+
+        .languages-list li {
+            margin-bottom: 4px;
+            color: #d4d0c8;
+        }
+
+        .languages-list li span {
+            color: #B36B00;
+            font-weight: 600;
+        }
+
+        /* --- Main Content --- */
+        .main {
+            padding: 36px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .main-section h2 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #141310;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #B36B00;
+            margin-bottom: 14px;
+        }
+
+        /* Experience */
+        .experience-item {
+            margin-bottom: 12px;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 3px;
+        }
+
+        .experience-title {
+            font-weight: 700;
+            font-size: 13px;
+            color: #141310;
+        }
+
+        .experience-date {
+            font-size: 11px;
+            color: #B36B00;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .experience-company {
+            font-size: 12px;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .experience-desc {
+            font-size: 12px;
+            color: #333;
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 10px;
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .education-title {
+            font-weight: 700;
+            font-size: 13px;
+            color: #141310;
+        }
+
+        .education-date {
+            font-size: 11px;
+            color: #B36B00;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .education-school {
+            font-size: 12px;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .project-card {
+            border: 1px solid #e8e4dc;
+            border-radius: 5px;
+            padding: 10px 12px;
+            background: #fdfcfa;
+        }
+
+        .project-card h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #B36B00;
+            margin-bottom: 3px;
+        }
+
+        .project-card p {
+            font-size: 10.5px;
+            color: #444;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .project-stack {
+            font-size: 9.5px;
+            color: #777;
+            font-style: italic;
+        }
+
+        /* --- Print Styles --- */
+        @media print {
+            body {
+                background: none;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                min-height: 100vh;
+            }
+
+            .sidebar {
+                background: #141310 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .skill-tag {
+                background: rgba(179, 107, 0, 0.2) !important;
+                border: 1px solid rgba(179, 107, 0, 0.35) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .project-card {
+                break-inside: avoid;
+            }
+
+            a {
+                text-decoration: none !important;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .page {
+                width: 100%;
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .sidebar {
+                padding: 24px 20px;
+            }
+
+            .main {
+                padding: 24px 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="header-block">
+                <h1>Christian<br>Tenda</h1>
+                <div class="subtitle">Développeur Full-Stack</div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Contact</h3>
+                <div class="contact-item">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span>Douala, Cameroun</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span>+237 678261699</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <a href="mailto:christiantendainfo2006@gmail.com">christiantendainfo2006@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    <a href="https://github.com/romaric-creator">github.com/romaric-creator</a>
+                </div>
+                <div class="contact-item">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                    <a href="https://cm.linkedin.com/in/christian-tenda-5a3529354">LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Compétences</h3>
+
+                <div class="skill-category">
+                    <h4>Frontend</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                        <span class="skill-tag">HTML5</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Mobile</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React Native</span>
+                        <span class="skill-tag">Expo</span>
+                        <span class="skill-tag">Firebase</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Backend</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">NestJS</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Prisma</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Outils</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">Postman</span>
+                        <span class="skill-tag">npm</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Langues</h3>
+                <ul class="languages-list">
+                    <li><span>Français</span> — Courant</li>
+                    <li><span>Anglais</span> — Débutant</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <section class="main-section">
+                <h2>Expérience Professionnelle</h2>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="experience-title">Développeur Freelance</span>
+                        <span class="experience-date">2022 — Présent</span>
+                    </div>
+                    <div class="experience-company">Indépendant</div>
+                    <p class="experience-desc">
+                        Réalisation de divers projets web et mobiles pour des clients locaux et internationaux.
+                        Conception, développement et déploiement d'applications complètes couvrant le frontend,
+                        le backend, et les applications mobiles.
+                    </p>
+                </div>
+            </section>
+
+            <section class="main-section">
+                <h2>Formation</h2>
+                <div class="education-item">
+                    <div class="education-header">
+                        <span class="education-title">BTS Génie Logiciel</span>
+                        <span class="education-date">2024 — 2026</span>
+                    </div>
+                    <div class="education-school">Institut Universitaire de la Côte (IUC), Douala</div>
+                </div>
+                <div class="education-item">
+                    <div class="education-header">
+                        <span class="education-title">Baccalauréat TI</span>
+                        <span class="education-date">2023 — 2024</span>
+                    </div>
+                    <div class="education-school">Collège Evangélique de New Bell</div>
+                </div>
+            </section>
+
+            <section class="main-section">
+                <h2>Projets Clés</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h4>GLOBEApp</h4>
+                        <p>Application de gestion commerciale multi-modules (hôtel, restaurant, caisse, comptabilité).</p>
+                        <span class="project-stack">React 19, NestJS, PostgreSQL, Redis, Docker</span>
+                    </div>
+                    <div class="project-card">
+                        <h4>VitaSang</h4>
+                        <p>Plateforme mobile de coordination du don de sang.</p>
+                        <span class="project-stack">React Native, Expo, Node.js, MySQL, Redis, BullMQ</span>
+                    </div>
+                    <div class="project-card">
+                        <h4>SafeDriving</h4>
+                        <p>Système de gestion d'auto-école desktop.</p>
+                        <span class="project-stack">React, Electron, NestJS, MySQL, TypeORM</span>
+                    </div>
+                    <div class="project-card">
+                        <h4>TechFlow</h4>
+                        <p>Application desktop de gestion de maintenance informatique.</p>
+                        <span class="project-stack">React, Electron, Prisma, Zustand</span>
+                    </div>
+                    <div class="project-card">
+                        <h4>Sparknest</h4>
+                        <p>Plateforme collaborative full-stack avec app mobile.</p>
+                        <span class="project-stack">React, TypeScript, React Native, Node.js</span>
+                    </div>
+                    <div class="project-card">
+                        <h4>Mentor-X</h4>
+                        <p>API de parrainage et réseau social universitaire.</p>
+                        <span class="project-stack">Node.js, Express, MySQL, Redis, Swagger</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

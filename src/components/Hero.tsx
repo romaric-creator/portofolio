@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, ArrowDown, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowDown, ArrowRight, Download } from 'lucide-react';
 import { PROFILE } from '../data/projects';
 import profileImg from '../assets/IMG-20260214-WA0033.jpg';
 
@@ -94,6 +94,14 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 border-2 border-ink text-ink px-7 py-3.5 font-display font-semibold text-sm rounded-lg hover:border-amber hover:text-amber transition-colors"
               >
                 Me contacter
+              </a>
+              <a
+                href="/cv-christian-tenda.pdf"
+                download
+                className="inline-flex items-center gap-2 text-sand px-4 py-3.5 font-display font-semibold text-sm hover:text-amber transition-colors"
+              >
+                <Download size={16} />
+                Mon CV
               </a>
             </motion.div>
           </div>
