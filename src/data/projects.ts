@@ -1,5 +1,5 @@
 export const PROFILE = {
-  fullName: "Christian Tenda",
+  fullName: "Tenda Boupda Christian Romaric",
   professionalTitle: "Développeur Full-Stack Passionné",
   location: "Douala, Cameroun 🇨🇲",
   github: "github.com/romaric-creator",
