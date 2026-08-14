@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - Christian Tenda | Développeur Full-Stack</title>
+    <title>CV - Tenda Boupda Christian Romaric | Développeur Full-Stack</title>
     <style>
         @page {
             size: A4;
@@ -20,17 +20,19 @@
             font-family: 'Segoe UI', 'Inter', Tahoma, sans-serif;
             color: #1a1a1a;
             background: #f0f0f0;
-            line-height: 1.45;
-            font-size: 12.5px;
+            line-height: 1.5;
+            font-size: 12px;
         }
 
         .page {
             width: 210mm;
-            min-height: 297mm;
+            height: 297mm;
             margin: 0 auto;
             background: #fff;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Accent bar left */
@@ -39,9 +41,9 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 6px;
+            width: 5px;
             height: 100%;
-            background: #B36B00;
+            background: linear-gradient(180deg, #B36B00 0%, #D4920A 100%);
         }
 
         /* ─── Header ─── */
@@ -49,134 +51,111 @@
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            padding: 30px 35px 25px 40px;
-            gap: 20px;
+            padding: 28px 30px 22px 35px;
+            gap: 16px;
+            border-bottom: 1px solid #f0ece4;
         }
 
         .header-name h1 {
-            font-size: 38px;
-            font-weight: 800;
-            line-height: 1.05;
+            font-size: 34px;
+            font-weight: 900;
+            line-height: 1;
             color: #141310;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
         }
 
         .header-name .title-line {
-            width: 50px;
+            width: 45px;
             height: 3px;
             background: #B36B00;
-            margin: 10px 0;
+            margin: 8px 0;
         }
 
         .header-name h2 {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             color: #B36B00;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         .header-photo {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            border: 4px solid #B36B00;
+            border: 3px solid #B36B00;
             overflow: hidden;
             background: #e8e4dc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .header-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        .header-photo .initials {
-            font-size: 36px;
-            font-weight: 800;
-            color: #B36B00;
+            object-position: top;
         }
 
         .header-contact {
             display: flex;
             flex-direction: column;
-            gap: 7px;
-            align-items: flex-start;
+            gap: 6px;
         }
 
         .header-contact .contact-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 11px;
-            color: #333;
+            gap: 7px;
+            font-size: 10.5px;
+            color: #444;
         }
 
         .header-contact .contact-item .icon {
-            width: 16px;
-            height: 16px;
+            width: 13px;
+            height: 13px;
             fill: #B36B00;
             flex-shrink: 0;
         }
 
         .header-contact .contact-item a {
-            color: #333;
+            color: #444;
             text-decoration: none;
         }
 
-        /* ─── Profile ─── */
-        .profile {
-            padding: 0 35px 20px 40px;
-        }
-
-        .profile h3 {
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #141310;
-            margin-bottom: 8px;
-        }
-
-        .profile p {
-            font-size: 12px;
-            color: #333;
-            line-height: 1.6;
+        /* ─── Content ─── */
+        .content {
+            flex: 1;
+            padding: 16px 30px 18px 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         /* ─── Section title ─── */
         .section-title {
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 12px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             color: #141310;
-            padding-bottom: 6px;
+            padding-bottom: 5px;
             border-bottom: 2px solid #B36B00;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* ─── Profile ─── */
+        .profile p {
+            font-size: 11px;
+            color: #333;
+            line-height: 1.6;
         }
 
         /* ─── Experience ─── */
-        .experience {
-            padding: 0 35px 20px 40px;
-        }
-
         .exp-item {
-            margin-bottom: 16px;
-            position: relative;
+            margin-bottom: 10px;
         }
 
-        .exp-item::before {
-            content: '';
-            position: absolute;
-            left: -18px;
-            top: 8px;
-            width: 2px;
-            height: calc(100% - 8px);
-            background: #e8e4dc;
+        .exp-item:last-child {
+            margin-bottom: 0;
         }
 
         .exp-header {
@@ -186,23 +165,22 @@
         }
 
         .exp-title {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: #141310;
         }
 
         .exp-date {
-            font-size: 11px;
+            font-size: 10px;
             color: #B36B00;
-            font-weight: 600;
-            font-style: italic;
+            font-weight: 700;
             white-space: nowrap;
         }
 
         .exp-company {
-            font-size: 11.5px;
-            color: #555;
-            font-weight: 600;
+            font-size: 10.5px;
+            color: #666;
+            font-weight: 500;
             margin-bottom: 4px;
         }
 
@@ -212,11 +190,11 @@
         }
 
         .exp-bullets li {
-            font-size: 11.5px;
+            font-size: 10.5px;
             color: #333;
-            padding-left: 12px;
+            padding-left: 10px;
             position: relative;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
             line-height: 1.5;
         }
 
@@ -228,112 +206,93 @@
             font-weight: bold;
         }
 
-        .exp-sub {
-            font-size: 11px;
-            color: #555;
-            padding-left: 20px;
-            position: relative;
-            margin-bottom: 2px;
-        }
-
-        .exp-sub::before {
-            content: '◦';
-            position: absolute;
-            left: 8px;
-            color: #999;
-        }
-
-        /* ─── Bottom section ─── */
-        .bottom {
+        /* ─── Bottom grid ─── */
+        .bottom-grid {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 1fr 1.4fr;
             gap: 25px;
-            padding: 10px 35px 30px 40px;
+            padding-top: 14px;
+            border-top: 1px solid #f0ece4;
         }
 
         /* ─── Formation ─── */
-        .formation-title-block {
+        .formation-header {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 14px;
+            gap: 6px;
+            margin-bottom: 10px;
         }
 
-        .formation-title-block .grad-icon {
-            width: 20px;
-            height: 20px;
+        .formation-header .grad-icon {
+            width: 16px;
+            height: 16px;
             fill: #B36B00;
         }
 
-        .formation-title-block h3 {
-            font-size: 14px;
-            font-weight: 700;
+        .formation-header h3 {
+            font-size: 12px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             color: #141310;
         }
 
         .edu-item {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .edu-item .edu-header {
+        .edu-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
         }
 
-        .edu-item .edu-degree {
-            font-size: 12px;
+        .edu-degree {
+            font-size: 11px;
             font-weight: 700;
             color: #141310;
         }
 
-        .edu-item .edu-date {
-            font-size: 11px;
+        .edu-date {
+            font-size: 10px;
             color: #B36B00;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        .edu-item .edu-school {
-            font-size: 11px;
-            color: #555;
+        .edu-school {
+            font-size: 10px;
+            color: #666;
             font-style: italic;
         }
 
         /* ─── Skills table ─── */
         .skills-table {
             width: 100%;
-            border-collapse: collapse;
-        }
-
-        .skills-table tr {
-            border-bottom: 1px solid #f0ece4;
-        }
-
-        .skills-table tr:last-child {
-            border-bottom: none;
+            border-collapse: separate;
+            border-spacing: 0 5px;
         }
 
         .skills-table td {
-            padding: 8px 10px;
+            padding: 6px 8px;
             vertical-align: middle;
         }
 
         .skills-table td:first-child {
             background: #B36B00;
             color: #fff;
-            font-size: 10.5px;
-            font-weight: 600;
+            font-size: 9.5px;
+            font-weight: 700;
             text-align: center;
-            width: 130px;
-            border-radius: 3px;
+            width: 105px;
+            border-radius: 4px;
             letter-spacing: 0.3px;
+            text-transform: uppercase;
         }
 
         .skills-table td:last-child {
-            font-size: 11.5px;
+            font-size: 10.5px;
             color: #333;
+            padding-left: 12px;
         }
 
         /* ─── Print ─── */
@@ -348,10 +307,11 @@
                 box-shadow: none;
                 margin: 0;
                 width: 100%;
+                height: 100vh;
             }
 
             .page::before {
-                background: #B36B00 !important;
+                background: linear-gradient(180deg, #B36B00 0%, #D4920A 100%) !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -375,13 +335,13 @@
         <!-- Header -->
         <div class="header">
             <div class="header-name">
-                <h1>CHRISTIAN<br>TENDA</h1>
+                <h1>TENDA BOUPDA<br>CHRISTIAN ROMARIC</h1>
                 <div class="title-line"></div>
-                <h2>Développeur<br>Full-Stack</h2>
+                <h2>Développeur Full-Stack</h2>
             </div>
 
             <div class="header-photo">
-                <img src="./photo-christian-tenda.jpg" alt="Christian Tenda">
+                <img src="./photo-christian-tenda.jpg" alt="Tenda Boupda Christian Romaric">
             </div>
 
             <div class="header-contact">
@@ -401,113 +361,143 @@
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                     <span>Douala, Cameroun</span>
                 </div>
+                <div class="contact-item">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <a href="https://cm.linkedin.com/in/christian-tenda-5a3529354">LinkedIn</a>
+                </div>
             </div>
         </div>
 
-        <!-- Profile -->
-        <div class="profile">
-            <h3>Profil</h3>
-            <p>
-                Développeur Full-Stack avec 4+ ans d'expérience, spécialisé en React, React Native, Node.js et TypeScript.
-                Expertise dans la conception d'architectures robustes et scalables, le développement d'applications web et mobiles
-                haute performance, ainsi que la mise en place de systèmes backend avec NestJS, Express et bases de données
-                relationnelles. Autonome, rigoureux et orienté résultats.
-            </p>
-        </div>
+        <!-- Content -->
+        <div class="content">
+            <!-- Profile -->
+            <section class="profile">
+                <h3 class="section-title">Profil</h3>
+                <p>
+                    Développeur Full-Stack avec 4+ ans d'expérience, spécialisé en React, React Native, Node.js et TypeScript.
+                    Expertise dans la conception d'architectures robustes et scalables, le développement d'applications web et
+                    mobiles haute performance, ainsi que la mise en place de systèmes backend avec NestJS, Express et bases de
+                    données relationnelles. Également compétent en développement d'applications desktop avec Electron.
+                    Autonome, rigoureux et orienté résultats.
+                </p>
+            </section>
 
-        <!-- Experience -->
-        <div class="experience">
-            <h3 class="section-title">Expériences Professionnelles</h3>
+            <!-- Experience -->
+            <section class="experience">
+                <h3 class="section-title">Expériences Professionnelles</h3>
 
-            <div class="exp-item">
-                <div class="exp-header">
-                    <span class="exp-title">Développeur Full-Stack Freelance</span>
-                    <span class="exp-date">2022 - Aujourd'hui</span>
-                </div>
-                <div class="exp-company">Indépendant — Douala</div>
-                <ul class="exp-bullets">
-                    <li><strong>GLOBEApp :</strong> Conception et développement d'un ERP de gestion commerciale multi-modules (hôtel, restaurant, caisse, comptabilité) avec architecture Docker multi-services</li>
-                    <li><strong>SafeDriving :</strong> Application desktop Electron de gestion d'auto-école multi-sites (inscriptions, paiements, présences, planning)</li>
-                    <li><strong>TechFlow :</strong> Logiciel desktop de gestion de maintenance informatique (tickets, facturation PDF, inventaire, rapports)</li>
-                    <li><strong>VitaSang :</strong> Application mobile de coordination du don de sang — mise en relation donneurs, hôpitaux et administration</li>
-                </ul>
-            </div>
-
-            <div class="exp-item">
-                <div class="exp-header">
-                    <span class="exp-title">Développeur Backend — Mentor-X</span>
-                    <span class="exp-date">2025 - 2026</span>
-                </div>
-                <div class="exp-company">Projet universitaire IUC</div>
-                <ul class="exp-bullets">
-                    <li>Développement d'une API REST de parrainage et réseau social universitaire</li>
-                    <li>Attribution automatique parrain/filleul, import PDF des listes de classe, cache Redis</li>
-                    <li>Documentation Swagger, tests et gestion multi-campus</li>
-                </ul>
-            </div>
-
-            <div class="exp-item">
-                <div class="exp-header">
-                    <span class="exp-title">Développeur Full-Stack — Sparknest</span>
-                    <span class="exp-date">2025</span>
-                </div>
-                <div class="exp-company">Plateforme collaborative</div>
-                <ul class="exp-bullets">
-                    <li>Développement d'un écosystème complet : site web, API backend et application mobile React Native</li>
-                    <li>Architecture TypeScript end-to-end, gestion d'utilisateurs, système de collaboration</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Bottom: Formation + Skills -->
-        <div class="bottom">
-            <div class="formation">
-                <div class="formation-title-block">
-                    <svg class="grad-icon" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-                    <h3>Formations</h3>
-                </div>
-
-                <div class="edu-item">
-                    <div class="edu-header">
-                        <span class="edu-degree">BTS en Génie Logiciel</span>
-                        <span class="edu-date">2024 - 2026</span>
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <span class="exp-title">Développeur Full-Stack Freelance</span>
+                        <span class="exp-date">2022 — Aujourd'hui</span>
                     </div>
-                    <div class="edu-school">Institut Universitaire de la Côte (IUC), Douala</div>
+                    <div class="exp-company">Indépendant — Douala, Cameroun</div>
+                    <ul class="exp-bullets">
+                        <li><strong>GLOBEApp :</strong> Conception d'un ERP de gestion commerciale multi-modules (hôtel, restaurant, caisse, comptabilité). Architecture Docker, RBAC, transactions sécurisées</li>
+                        <li><strong>SafeDriving :</strong> Application desktop Electron de gestion d'auto-école multi-sites (inscriptions, paiements, présences, planning moniteurs)</li>
+                        <li><strong>TechFlow :</strong> Logiciel desktop de gestion de maintenance informatique (tickets, facturation PDF, inventaire, rapports, export Excel)</li>
+                        <li><strong>VitaSang :</strong> Application mobile de coordination du don de sang — mise en relation donneurs, hôpitaux et administration. Notifications push, files d'attente BullMQ</li>
+                    </ul>
                 </div>
 
-                <div class="edu-item">
-                    <div class="edu-header">
-                        <span class="edu-degree">Baccalauréat TI</span>
-                        <span class="edu-date">2023 - 2024</span>
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <span class="exp-title">Développeur Backend — Mentor-X</span>
+                        <span class="exp-date">2025 — 2026</span>
                     </div>
-                    <div class="edu-school">Collège Evangélique de New Bell</div>
+                    <div class="exp-company">Projet universitaire — IUC, Douala</div>
+                    <ul class="exp-bullets">
+                        <li>Développement d'une API REST complète pour une plateforme de parrainage et réseau social universitaire</li>
+                        <li>Attribution automatique parrain/filleul, import PDF des listes de classe, cache Redis, documentation Swagger</li>
+                        <li>Gestion multi-campus et système de posts/commentaires/likes</li>
+                    </ul>
                 </div>
-            </div>
 
-            <div class="skills">
-                <h3 class="section-title">Compétences Techniques</h3>
-                <table class="skills-table">
-                    <tr>
-                        <td>Frontend</td>
-                        <td>React, Next.js, TypeScript, JavaScript, Tailwind CSS, HTML5</td>
-                    </tr>
-                    <tr>
-                        <td>Mobile</td>
-                        <td>React Native, Expo, Firebase</td>
-                    </tr>
-                    <tr>
-                        <td>Backend</td>
-                        <td>Node.js, NestJS, Express, PHP, PostgreSQL, MySQL, Redis, Prisma</td>
-                    </tr>
-                    <tr>
-                        <td>DevOps & déploiement</td>
-                        <td>Docker, Docker Compose, Netlify, Vercel</td>
-                    </tr>
-                    <tr>
-                        <td>Outils & tests</td>
-                        <td>Git/GitHub, Postman, Swagger, VS Code, npm, MERISE, UML</td>
-                    </tr>
-                </table>
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <span class="exp-title">Développeur Full-Stack — Sparknest</span>
+                        <span class="exp-date">2025</span>
+                    </div>
+                    <div class="exp-company">Plateforme collaborative</div>
+                    <ul class="exp-bullets">
+                        <li>Développement d'un écosystème complet : site web React, API backend Node.js et application mobile React Native</li>
+                        <li>Architecture TypeScript end-to-end, authentification, gestion d'utilisateurs et collaboration en temps réel</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <span class="exp-title">Data Science — AgrisIA</span>
+                        <span class="exp-date">2024</span>
+                    </div>
+                    <div class="exp-company">Projet de recherche</div>
+                    <ul class="exp-bullets">
+                        <li>Développement d'un modèle Machine Learning de prédiction du rendement agricole (tonnes/hectare)</li>
+                        <li>Analyse de données avec Pandas/NumPy, entraînement avec Scikit-learn, recommandations d'amélioration</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Bottom: Formation + Skills -->
+            <div class="bottom-grid">
+                <div class="formation">
+                    <div class="formation-header">
+                        <svg class="grad-icon" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+                        <h3>Formations</h3>
+                    </div>
+
+                    <div class="edu-item">
+                        <div class="edu-header">
+                            <span class="edu-degree">BTS en Génie Logiciel</span>
+                            <span class="edu-date">2024 — 2026</span>
+                        </div>
+                        <div class="edu-school">Institut Universitaire de la Côte (IUC), Douala</div>
+                    </div>
+
+                    <div class="edu-item">
+                        <div class="edu-header">
+                            <span class="edu-degree">Baccalauréat TI</span>
+                            <span class="edu-date">2023 — 2024</span>
+                        </div>
+                        <div class="edu-school">Collège Evangélique de New Bell</div>
+                    </div>
+
+                    <div style="margin-top: 14px;">
+                        <h3 class="section-title" style="font-size: 11px; margin-bottom: 8px;">Langues</h3>
+                        <div style="font-size: 10.5px; color: #333; margin-bottom: 4px;"><strong>Français</strong> — Langue maternelle</div>
+                        <div style="font-size: 10.5px; color: #333;"><strong>Anglais</strong> — Intermédiaire (B1)</div>
+                    </div>
+                </div>
+
+                <div class="skills">
+                    <h3 class="section-title">Compétences Techniques</h3>
+                    <table class="skills-table">
+                        <tr>
+                            <td>Frontend</td>
+                            <td>React, Next.js, TypeScript, JavaScript, Tailwind CSS, HTML5</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile</td>
+                            <td>React Native, Expo, Firebase</td>
+                        </tr>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Node.js, NestJS, Express, PHP, PostgreSQL, MySQL, Redis, Prisma</td>
+                        </tr>
+                        <tr>
+                            <td>DevOps</td>
+                            <td>Docker, Docker Compose, Netlify, Vercel, Railway</td>
+                        </tr>
+                        <tr>
+                            <td>Data Science</td>
+                            <td>Python, Pandas, NumPy, Scikit-learn, Matplotlib</td>
+                        </tr>
+                        <tr>
+                            <td>Outils</td>
+                            <td>Git/GitHub, Postman, Swagger, VS Code, npm, MERISE, UML</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
