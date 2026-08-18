@@ -15,7 +15,7 @@ export default function Timeline() {
             Parcours
           </span>
           <h2 className="font-display text-3xl lg:text-4xl font-extrabold text-ink">
-            Education &amp; Experience
+            Éducation &amp; Expérience
           </h2>
         </motion.div>
 
