@@ -33,6 +33,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-4">
           <FadeUp delay={0.05}>
             <h2 className="font-display text-3xl lg:text-4xl font-extrabold text-ink leading-tight">
+              Tenda Boupda Christian Romaric,<br />
               Développeur Full-Stack{' '}
               <span className="text-amber">basé à Douala</span>
             </h2>

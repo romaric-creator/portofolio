@@ -15,7 +15,7 @@ export default function Hero() {
         {/* Desktop: photo a droite avec fondu */}
         <img
           src={profileImg}
-          alt=""
+          alt="Tenda Boupda Christian Romaric — Développeur Full-Stack à Douala"
           className="hidden sm:block absolute right-[10%] w-1/2 lg:w-2/5 h-[calc(100%-50px)] object-cover object-top"
           style={{
             top: '50px',
@@ -27,24 +27,25 @@ export default function Hero() {
 
       <div className="max-w-6xl mx-auto px-6 w-full pt-24 pb-20 relative">
         <div className="max-w-2xl flex flex-col gap-7">
-          <motion.p
+          <motion.h1
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease }}
             className="font-display text-sm sm:text-base font-semibold text-sand tracking-wide"
           >
             {PROFILE.fullName}
-          </motion.p>
+          </motion.h1>
 
-          <motion.h1
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08, ease }}
             className="font-display text-[2.4rem] sm:text-5xl lg:text-[3.2rem] xl:text-[3.75rem] font-extrabold text-ink leading-[1.08]"
+            role="doc-subtitle"
           >
             Je transforme les idées en{' '}
             <span className="text-amber">solutions numériques.</span>
-          </motion.h1>
+          </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
