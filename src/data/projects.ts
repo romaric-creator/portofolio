@@ -1,7 +1,7 @@
 export const PROFILE = {
   fullName: "Tenda Boupda Christian Romaric",
   professionalTitle: "Développeur Full-Stack Passionné",
-  location: "Douala, Cameroun 🇨🇲",
+  location: "Douala, Cameroun",
   github: "github.com/romaric-creator",
   email: "christiantendainfo2006@gmail.com",
   phone: "+237 678261699",

@@ -32,4 +32,9 @@
     color-scheme: light;
   }
 
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }

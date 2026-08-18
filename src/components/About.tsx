@@ -14,10 +14,10 @@ const FadeUp = ({ children, delay = 0, className = '' }: { children: React.React
 );
 
 const STATS = [
-  { value: '4+',  label: "Annees d'experience" },
-  { value: '15+', label: 'Projets livres'       },
+  { value: '4+',  label: "Années d'expérience" },
+  { value: '15+', label: 'Projets livrés'       },
   { value: '2',   label: 'Plateformes : Web + Mobile' },
-  { value: 'BTS', label: 'Genie Logiciel, IUC'  },
+  { value: 'BTS', label: 'Génie Logiciel, IUC'  },
 ];
 
 export default function About() {
@@ -26,15 +26,15 @@ export default function About() {
       <div className="max-w-6xl mx-auto">
         <FadeUp>
           <span className="inline-block text-amber text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-            A propos
+            À propos
           </span>
         </FadeUp>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-4">
           <FadeUp delay={0.05}>
             <h2 className="font-display text-3xl lg:text-4xl font-extrabold text-ink leading-tight">
-              Developpeur Full-Stack{' '}
-              <span className="text-amber">base a Douala</span>
+              Développeur Full-Stack{' '}
+              <span className="text-amber">basé à Douala</span>
             </h2>
             <p className="text-sand text-base mt-6 leading-relaxed">{PROFILE.status}</p>
             <p className="text-sand text-sm mt-4 leading-relaxed">

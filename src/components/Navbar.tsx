@@ -4,21 +4,43 @@ import { X, Menu } from 'lucide-react';
 
 const NAV_LINKS = [
   { href: '#hero',     label: 'Accueil'   },
-  { href: '#about',    label: 'A propos'  },
+  { href: '#about',    label: 'À propos'  },
   { href: '#stack',    label: 'Stack'     },
   { href: '#projects', label: 'Projets'   },
   { href: '#timeline', label: 'Parcours'  },
   { href: '#contact',  label: 'Contact'   },
 ];
 
+const profileImg = '/photo-christian-tenda.jpg';
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('#hero');
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', fn, { passive: true });
     return () => window.removeEventListener('scroll', fn);
+  }, []);
+
+  useEffect(() => {
+    const ids = NAV_LINKS.map(l => l.href.slice(1));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        }
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -39,7 +61,11 @@ export default function Navbar() {
             <li key={href}>
               <a
                 href={href}
-                className="text-sm text-sand hover:text-ink font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-amber after:transition-all hover:after:w-full"
+                className={`text-sm font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-amber after:transition-all ${
+                  activeSection === href
+                    ? 'text-ink after:w-full'
+                    : 'text-sand hover:text-ink after:w-0 hover:after:w-full'
+                }`}
               >
                 {label}
               </a>
@@ -47,13 +73,22 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden text-ink hover:text-amber transition-colors p-2"
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-3">
+          <a href="#about" className="block md:hidden">
+            <img
+              src={profileImg}
+              alt="Mon profil"
+              className="w-9 h-9 rounded-full object-cover object-top border-2 border-line hover:border-amber transition-colors"
+            />
+          </a>
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden text-ink hover:text-amber transition-colors p-2"
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
