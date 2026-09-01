@@ -17,6 +17,19 @@
   --font-code:    'Inter', sans-serif;
 }
 
+/* ─── Textured image backgrounds ───────────────────── */
+.img-relief {
+  background-color: var(--color-surface);
+  background-image: radial-gradient(var(--color-line) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.img-relief-dark {
+  background-color: #1e1c18;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
 /* ─── Base ──────────────────────────────────────────── */
 @layer base {
   html { scroll-behavior: smooth; }

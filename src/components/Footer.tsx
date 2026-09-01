@@ -8,7 +8,7 @@ export default function Footer() {
           TC<span className="text-amber">.</span>
         </span>
         <p className="text-sm text-sand">
-          &copy; 2026 {PROFILE.fullName} &mdash; Douala, Cameroun
+          &copy; 2026 {PROFILE.fullName} · Douala, Cameroun
         </p>
         <a
           href={`https://${PROFILE.github}`}
