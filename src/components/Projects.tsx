@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Images } from 'lucide-react';
+import posthog from 'posthog-js';
 import { PROJECTS, TECH_ICONS } from '../data/projects';
 import { GithubIcon } from './Icons';
 import Lightbox from './Lightbox';
@@ -49,7 +50,7 @@ function ProjectCard({
       {/* Image / placeholder */}
       {thumb ? (
         <button
-          onClick={() => onOpenLightbox(screenshots!, 0, project.name)}
+          onClick={() => { onOpenLightbox(screenshots!, 0, project.name); posthog.capture('project_lightbox_opened', { project: project.name, category: project.category }); }}
           className="relative w-full h-52 img-relief overflow-hidden cursor-zoom-in flex-shrink-0"
           aria-label={`Voir les captures de ${project.name}`}
         >
@@ -84,6 +85,7 @@ function ProjectCard({
                 href={`https://${project.links.github}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => posthog.capture('project_github_clicked', { project: project.name })}
                 className="text-sand hover:text-ink transition-colors"
                 aria-label="Code source"
               >
@@ -95,6 +97,7 @@ function ProjectCard({
                 href={project.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => posthog.capture('project_live_clicked', { project: project.name })}
                 className="text-sand hover:text-amber transition-colors"
                 aria-label="Demo live"
               >

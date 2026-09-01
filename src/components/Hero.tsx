@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { MapPin, ArrowDown, ArrowRight, Download } from 'lucide-react';
+import posthog from 'posthog-js';
 import { PROFILE } from '../data/projects';
 const profileImg = '/photo-christian-tenda.jpg';
 
@@ -100,6 +101,7 @@ export default function Hero() {
             <a
               href="/cv-christian-tenda.pdf"
               download
+              onClick={() => posthog.capture('cv_downloaded')}
               className="inline-flex items-center gap-2 text-sand px-4 py-3.5 font-display font-semibold text-sm hover:text-amber transition-colors"
             >
               <Download size={16} />

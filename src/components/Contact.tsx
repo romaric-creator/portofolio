@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { MessageCircle, Mail, ArrowRight } from 'lucide-react';
+import posthog from 'posthog-js';
 import { PROFILE } from '../data/projects';
 import { GithubIcon, LinkedinIcon } from './Icons';
 
@@ -56,6 +57,7 @@ export default function Contact() {
         >
           <a
             href={`mailto:${PROFILE.email}`}
+            onClick={() => posthog.capture('contact_email_clicked')}
             className="inline-flex items-center gap-3 bg-ink text-canvas px-8 py-4 font-display font-semibold text-sm rounded-lg hover:bg-amber transition-colors"
           >
             Envoyer un email
@@ -76,6 +78,7 @@ export default function Contact() {
               href={href}
               target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noopener noreferrer"
+              onClick={() => posthog.capture('contact_social_clicked', { platform: label })}
               className="flex items-center gap-2.5 border border-line px-5 py-3 rounded-lg text-ink hover:border-amber hover:text-amber transition-colors"
             >
               <Icon />

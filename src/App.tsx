@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import posthog from 'posthog-js';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,6 +11,21 @@ import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 
 function App() {
+  useEffect(() => {
+    const fired = new Set<number>();
+    const onScroll = () => {
+      const pct = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+      [25, 50, 75, 100].forEach(t => {
+        if (pct >= t && !fired.has(t)) {
+          fired.add(t);
+          posthog.capture('scroll_depth', { percent: t });
+        }
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <>
       <CustomCursor />
