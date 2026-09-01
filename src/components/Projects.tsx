@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Images, Lock } from 'lucide-react';
+import { ExternalLink, Images } from 'lucide-react';
 import { PROJECTS, TECH_ICONS } from '../data/projects';
 import { GithubIcon } from './Icons';
 import Lightbox from './Lightbox';
