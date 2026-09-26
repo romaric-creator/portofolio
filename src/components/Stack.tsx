@@ -3,7 +3,7 @@ import {
   SiReact, SiTypescript, SiTailwindcss, SiNextdotjs, SiFramer, SiExpo,
   SiNodedotjs, SiNestjs, SiExpress, SiJsonwebtokens, SiSocketdotio, SiPhp,
   SiPostgresql, SiMysql, SiRedis, SiPrisma, SiDocker, SiSequelize,
-  SiGit, SiGithub, SiEslint, SiElectron, SiSwagger, SiPostman,
+  SiGithub, SiEslint, SiElectron, SiSwagger, SiPostman,
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
 import { STACK_EXPERTISE } from '../data/projects';
