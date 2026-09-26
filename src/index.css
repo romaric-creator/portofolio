@@ -1,33 +1,65 @@
 @import "tailwindcss";
 
-/* ─── Design tokens ─────────────────────────────────── */
-@theme inline {
-  --color-canvas:  #FAFAF7;
-  --color-surface: #F2F1EC;
-  --color-card:    #E9E8E2;
-  --color-amber:   #B36B00;
-  --color-sage:    #1B7A52;
-  --color-ink:     #141310;
-  --color-sand:    #4A4639;
-  --color-dust:    #6B6558;
-  --color-line:    #D4D1C8;
+/* ─── Design tokens (CSS vars for dark mode swap) ──── */
+@theme {
+  --color-canvas:  var(--c-canvas);
+  --color-surface: var(--c-surface);
+  --color-card:    var(--c-card);
+  --color-amber:   var(--c-amber);
+  --color-ink:     var(--c-ink);
+  --color-sand:    var(--c-sand);
+  --color-dust:    var(--c-dust);
+  --color-line:    var(--c-line);
 
-  --font-display: 'Inter', sans-serif;
-  --font-body:    'Inter', sans-serif;
-  --font-code:    'Inter', sans-serif;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body:    'Hanken Grotesk', system-ui, sans-serif;
+  --font-code:    'JetBrains Mono', 'Courier New', monospace;
+}
+
+:root {
+  --c-canvas:  #f7f4ef;
+  --c-surface: #ede9e2;
+  --c-card:    #e4dfd6;
+  --c-amber:   #a73400;
+  --c-ink:     #1c1a16;
+  --c-sand:    #6b5f52;
+  --c-dust:    #9c8e82;
+  --c-line:    #d8d2c8;
+}
+
+.dark {
+  --c-canvas:  #0f0e0c;
+  --c-surface: #1a1918;
+  --c-card:    #222120;
+  --c-amber:   #e8520a;
+  --c-ink:     #ede9e3;
+  --c-sand:    #a89890;
+  --c-dust:    #6e6259;
+  --c-line:    #2e2c28;
 }
 
 /* ─── Textured image backgrounds ───────────────────── */
 .img-relief {
   background-color: var(--color-surface);
-  background-image: radial-gradient(var(--color-line) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 18px 18px;
 }
 
 .img-relief-dark {
-  background-color: #1e1c18;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-color: var(--color-canvas);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 18px 18px;
+}
+
+/* ─── Animations ────────────────────────────────────── */
+@keyframes marquee-x {
+  from { transform: translateX(0) }
+  to   { transform: translateX(-50%) }
+}
+
+/* ─── Contact form placeholder ─────────────────────── */
+.contact-input::placeholder {
+  color: rgba(0,0,0,0.3);
 }
 
 /* ─── Base ──────────────────────────────────────────── */
@@ -35,14 +67,22 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
     background-color: var(--color-canvas);
     color: var(--color-ink);
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color-scheme: light;
+  }
+
+  .dark body {
+    color-scheme: dark;
+  }
+
+  ::selection {
+    background-color: var(--color-amber);
+    color: #f0ede8;
   }
 
   :focus-visible {

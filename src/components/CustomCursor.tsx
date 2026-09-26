@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
 
 export default function CustomCursor() {
-  const [pos, setPos] = useState({ x: -100, y: -100 });
-  const [hovering, setHovering] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
   const [hasPointer, setHasPointer] = useState(false);
 
   useEffect(() => {
@@ -16,10 +14,16 @@ export default function CustomCursor() {
 
   useEffect(() => {
     if (!hasPointer) return;
-    const onMove = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
+    const el = ref.current;
+    if (!el) return;
+
+    const onMove = (e: MouseEvent) => {
+      el.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+    };
     const onOver = (e: MouseEvent) => {
-      const el = e.target as HTMLElement;
-      setHovering(!!el.closest('a, button, [data-hover]'));
+      const target = e.target as HTMLElement;
+      const hover = !!target.closest('a, button, [data-hover]');
+      el.dataset.hover = hover ? '1' : '';
     };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseover', onOver);
@@ -32,18 +36,10 @@ export default function CustomCursor() {
   if (!hasPointer) return null;
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full bg-amber"
-      animate={{
-        x: pos.x,
-        y: pos.y,
-        width: hovering ? 20 : 8,
-        height: hovering ? 20 : 8,
-        marginLeft: hovering ? -10 : -4,
-        marginTop: hovering ? -10 : -4,
-        opacity: hovering ? 0.6 : 1,
-      }}
-      transition={{ type: 'spring', stiffness: 500, damping: 30, mass: 0.3 }}
+    <div
+      ref={ref}
+      className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full bg-amber w-2 h-2 -ml-1 -mt-1 transition-[width,height,margin,opacity] duration-150 data-[hover='1']:w-5 data-[hover='1']:h-5 data-[hover='1']:-ml-2.5 data-[hover='1']:-mt-2.5 data-[hover='1']:opacity-60"
+      style={{ willChange: 'transform' }}
     />
   );
 }

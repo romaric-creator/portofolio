@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.tsx'
 
 if (import.meta.env.PROD) {
-  posthog.init('phc_BEbvV6LeZRcM8JcjjA87Enhd6zafLej2R89ApZhXJGNa', {
+  posthog.init(import.meta.env.VITE_POSTHOG_KEY ?? '', {
     api_host: 'https://us.i.posthog.com',
     defaults: '2026-05-30',
     person_profiles: 'identified_only',

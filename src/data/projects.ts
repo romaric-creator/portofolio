@@ -5,7 +5,7 @@ export const PROFILE = {
   github: "github.com/romaric-creator",
   email: "christiantendainfo2006@gmail.com",
   phone: "+237 678261699",
-  education: "BTS Génie Logiciel — Institut Universitaire de la Côte (IUC), Douala",
+  education: "BTS Génie Logiciel, Institut Universitaire de la Côte (IUC), Douala",
   status: "Développeur Full Stack avec 4 ans d'expérience, spécialisé dans la création d'applications web et mobiles modernes.",
   heroPhrase: "Je transforme les idées en solutions numériques efficaces et intuitives.",
   tagline: "Autonome, rigoureux et capable de travailler en équipe, je construis des systèmes web et mobiles haute performance.",
@@ -35,10 +35,17 @@ export const PROJECTS = [
     stack: ["React 19", "NestJS", "PostgreSQL", "Redis", "Prisma", "Docker", "Ant Design"],
     links: {
       github: "github.com/romaric-creator/GLOBEApp",
-      live: null
+      live: null,
+      demo: null,
     },
     screenshots: ["/screenshots/globeapp.png"],
-    visualPlaceholder: "gradient-vitasang"
+    visualPlaceholder: "gradient-vitasang",
+    caseStudy: {
+      problem: "Les hôtels et restaurants de Douala géraient réservations, commandes et comptabilité sur papier ou Excel, causant erreurs et pertes.",
+      process: "Conception modulaire : chaque métier (hôtel, restaurant, caisse, compta) est un module indépendant avec son propre RBAC. Architecture Docker pour isoler les services.",
+      solution: "Plateforme unifiée couvrant tout le cycle : réservation → check-in → commande → facturation → comptabilité en partie double.",
+      results: ["+40% d'efficacité opérationnelle", "Zéro double saisie", "Rapports temps réel"],
+    },
   },
   {
     id: "02",
@@ -49,10 +56,17 @@ export const PROJECTS = [
     stack: ["React Native", "Expo", "Node.js", "Express", "MySQL", "Redis", "BullMQ"],
     links: {
       github: null,
-      live: null
+      live: null,
+      demo: null,
     },
     screenshots: ["/screenshots/vitasang-1.jpg", "/screenshots/vitasang-2.jpg", "/screenshots/vitasang-3.jpg", "/screenshots/vitasang-4.jpg"],
-    visualPlaceholder: "gradient-flexystore"
+    visualPlaceholder: "gradient-flexystore",
+    caseStudy: {
+      problem: "Au Cameroun, trouver un donneur de sang compatible en urgence repose sur le bouche-à-oreille, retardant les transfusions vitales.",
+      process: "Mise en place d'un système de matching donneur/receveur par groupe sanguin avec files d'attente BullMQ pour gérer les pics de demande.",
+      solution: "App mobile connectant donneurs, hôpitaux et administration avec notifications push en temps réel et géolocalisation.",
+      results: ["Coordination don de sang", "Notifications temps réel", "Tableau de bord admin"],
+    },
   },
   {
     id: "03",
@@ -63,7 +77,8 @@ export const PROJECTS = [
     stack: ["React", "TypeScript", "React Native", "Node.js", "Express"],
     links: {
       github: "github.com/romaric-creator/sparknest",
-      live: null
+      live: null,
+      demo: null,
     },
     visualPlaceholder: "gradient-vitasang"
   },
@@ -76,7 +91,8 @@ export const PROJECTS = [
     stack: ["Python", "Jupyter", "Scikit-learn", "Pandas", "NumPy"],
     links: {
       github: "github.com/romaric-creator/AgrisIa",
-      live: null
+      live: null,
+      demo: null,
     },
     screenshots: ["/screenshots/agris-ia.jpg"],
     visualPlaceholder: "gradient-flexystore"
@@ -90,21 +106,29 @@ export const PROJECTS = [
     stack: ["Node.js", "Express", "MySQL", "Sequelize", "Redis", "Cloudinary", "Swagger"],
     links: {
       github: "github.com/romaric-creator/Mentor-X-backend",
-      live: null
+      live: null,
+      demo: null,
     },
     screenshots: ["/screenshots/mentorx-overview.jpg"],
-    visualPlaceholder: "gradient-flexystore"
+    visualPlaceholder: "gradient-flexystore",
+    caseStudy: {
+      problem: "L'IUC n'avait aucun systeme structure de parrainage entre anciens et nouveaux etudiants, tout se faisait manuellement.",
+      process: "Algorithme d'attribution automatique parrain/filleul base sur la filiere et le campus, avec import PDF des listes de classe.",
+      solution: "API REST complete avec fil d'actualites social, cache Redis pour la performance, et documentation Swagger.",
+      results: ["Attribution automatisee", "Import PDF des listes", "Cache Redis integre"],
+    },
   },
   {
     id: "06",
-    name: "Taskly — API REST",
+    name: "Taskly API REST",
     category: "Backend",
     tagline: "API haute performance de gestion de projets en équipe.",
     description: "API REST TypeScript pour la gestion collaborative de projets et de tâches. Authentification JWT, rôles, endpoints RESTful documentés.",
     stack: ["TypeScript", "Node.js", "Express", "MySQL", "JWT"],
     links: {
       github: "github.com/romaric-creator/Taskly",
-      live: null
+      live: null,
+      demo: null,
     },
     visualPlaceholder: "gradient-vitasang"
   },
@@ -117,7 +141,8 @@ export const PROJECTS = [
     stack: ["React", "TypeScript", "Electron", "NestJS", "MySQL", "TypeORM", "Tailwind"],
     links: {
       github: null,
-      live: null
+      live: null,
+      demo: null,
     },
     screenshots: [
       "/screenshots/safedriving-16-02-35.png",
@@ -127,7 +152,13 @@ export const PROJECTS = [
       "/screenshots/safedriving-16-02-57.png",
       "/screenshots/safedriving-16-03-01.png",
     ],
-    visualPlaceholder: "gradient-flexystore"
+    visualPlaceholder: "gradient-flexystore",
+    caseStudy: {
+      problem: "L'auto-ecole gerait inscriptions, paiements et planning sur papier a travers plusieurs sites, sans vue d'ensemble.",
+      process: "Architecture client/serveur Electron + NestJS permettant une utilisation hors-ligne avec synchronisation.",
+      solution: "Application desktop complete : inscriptions, paiements, presences, planning moniteurs, suivi apprenants multi-sites.",
+      results: ["Gestion multi-sites", "Workflow automatise", "Synchronisation hors-ligne"],
+    },
   },
   {
     id: "08",
@@ -138,9 +169,16 @@ export const PROJECTS = [
     stack: ["React", "TypeScript", "Electron", "Prisma", "Zustand", "Tailwind", "React PDF"],
     links: {
       github: null,
-      live: null
+      live: null,
+      demo: null,
     },
-    visualPlaceholder: "gradient-vitasang"
+    visualPlaceholder: "gradient-vitasang",
+    caseStudy: {
+      problem: "Les ateliers de reparation informatique suivaient les tickets et la facturation manuellement, sans historique client.",
+      process: "State management Zustand pour la reactivite, Prisma pour la base de donnees, React PDF pour la facturation automatisee.",
+      solution: "Logiciel desktop complet : reception, tickets, facturation PDF, gestion clients, rapports et inventaire.",
+      results: ["Export PDF et Excel", "Historique client complet", "Gestion d'inventaire"],
+    },
   }
 ];
 
@@ -178,6 +216,77 @@ export const TECH_ICONS: Record<string, string> = {
   'Ant Design':   `${CDN}/icons/antdesign/antdesign-original.svg`,
   'Scikit-learn': `${CDN}/icons/scikitlearn/scikitlearn-original.svg`,
 };
+
+export const PROJECT_META: Record<string, { badge: string; metrics: string[] }> = {
+  "01": { badge: "Architecture d'entreprise", metrics: ["+40% efficacité opérationnelle", "Modules RBAC sécurisés"] },
+  "02": { badge: "Impact social", metrics: ["Coordination don de sang", "Notifications temps réel"] },
+  "03": { badge: "Plateforme collaborative", metrics: ["TypeScript end-to-end", "Multi-plateforme"] },
+  "04": { badge: "Intelligence artificielle", metrics: ["Prédiction ML agricole", "Recommandations optimisées"] },
+  "05": { badge: "API haute disponibilité", metrics: ["Cache Redis intégré", "Import PDF automatisé"] },
+  "06": { badge: "API REST", metrics: ["Auth JWT sécurisée", "Rôles et permissions"] },
+  "07": { badge: "Application métier", metrics: ["Gestion multi-sites", "Workflow automatisé"] },
+  "08": { badge: "Outil métier desktop", metrics: ["Export PDF et Excel", "State Zustand"] },
+};
+
+export const STACK_EXPERTISE = [
+  {
+    category: "Frontend & Mobile",
+    description: "Interfaces réactives, accessibles et performantes",
+    skills: [
+      { name: "React / React Native", level: "Expert" },
+      { name: "TypeScript", level: "Expert" },
+      { name: "Tailwind CSS", level: "Expert" },
+      { name: "Next.js", level: "Avancé" },
+      { name: "Framer Motion", level: "Avancé" },
+      { name: "Expo", level: "Avancé" },
+    ],
+  },
+  {
+    category: "Backend & API",
+    description: "Systèmes robustes, scalables, sécurisés",
+    skills: [
+      { name: "Node.js", level: "Expert" },
+      { name: "NestJS", level: "Expert" },
+      { name: "Express", level: "Expert" },
+      { name: "REST / JWT Auth", level: "Expert" },
+      { name: "WebSockets", level: "Avancé" },
+      { name: "PHP", level: "Intermédiaire" },
+    ],
+  },
+  {
+    category: "Données & Infrastructure",
+    description: "Persistence fiable, performances optimisées",
+    skills: [
+      { name: "PostgreSQL", level: "Avancé" },
+      { name: "MySQL", level: "Expert" },
+      { name: "Redis", level: "Avancé" },
+      { name: "Prisma", level: "Avancé" },
+      { name: "Docker", level: "Avancé" },
+      { name: "Sequelize", level: "Avancé" },
+    ],
+  },
+  {
+    category: "Qualité & Outillage",
+    description: "Code maintenable, livraisons maîtrisées",
+    skills: [
+      { name: "Git / GitHub", level: "Expert" },
+      { name: "ESLint / Prettier", level: "Strict" },
+      { name: "Electron", level: "Avancé" },
+      { name: "Swagger", level: "Avancé" },
+      { name: "Postman", level: "Expert" },
+      { name: "VS Code", level: "Expert" },
+    ],
+  },
+];
+
+export const NAV_LINKS = [
+  { href: '#about',    label: 'Identité'  },
+  { href: '#services', label: 'Capacités' },
+  { href: '#projects', label: 'Travaux'   },
+  { href: '#stack',    label: 'Stack'     },
+  { href: '#timeline', label: 'Parcours'  },
+  { href: '#contact',  label: 'Contact'   },
+];
 
 export const TIMELINE_EVENTS = [
   {
