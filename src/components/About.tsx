@@ -16,7 +16,6 @@ export default function About() {
     <section id="about" className="bg-canvas overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
 
-        {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,13 +23,11 @@ export default function About() {
           transition={{ duration: 0.5, ease }}
           className="font-code text-[10px] tracking-[0.2em] uppercase text-dust pt-28 pb-10"
         >
-          01 / Identité &amp; Démarche
+          À propos
         </motion.p>
 
-        {/* Main grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-0 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-0 lg:gap-20 items-start">
 
-          {/* Left — text */}
           <div>
             <motion.h2
               initial={{ opacity: 0, y: 28 }}
@@ -38,13 +35,11 @@ export default function About() {
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.7, delay: 0.05, ease }}
               className="font-display font-normal text-ink leading-[1.08]"
-              style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}
+              style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)' }}
             >
               Je transforme des besoins concrets
               <br className="hidden sm:block" /> en outils{' '}
-              <em className="text-amber" style={{ fontStyle: 'italic' }}>
-                numériques fonctionnels.
-              </em>
+              <em className="text-amber">numériques fonctionnels.</em>
             </motion.h2>
 
             <motion.p
@@ -57,23 +52,21 @@ export default function About() {
               Développeur Full-Stack basé à Douala, j'interviens sur l'ensemble du cycle de développement : interfaces, API, bases de données, déploiement. J'aime particulièrement remplacer des processus manuels par des outils simples, structurés et exploitables.
             </motion.p>
 
-            {/* Meta table */}
             <motion.dl
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.55, delay: 0.22, ease }}
-              className="mt-10 space-y-3"
+              className="mt-10 space-y-4"
             >
               {META.map(({ label, value }) => (
-                <div key={label} className="grid grid-cols-[120px_1fr] items-baseline gap-4">
-                  <dt className="font-code text-[9px] tracking-widest uppercase text-dust">{label}</dt>
+                <div key={label} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6">
+                  <dt className="font-code text-[9px] tracking-widest uppercase text-dust sm:w-28 flex-shrink-0">{label}</dt>
                   <dd className="font-body text-sm text-ink">{value}</dd>
                 </div>
               ))}
             </motion.dl>
 
-            {/* Status chips */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -81,27 +74,24 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.3, ease }}
               className="flex flex-wrap items-center gap-3 mt-10 pb-28"
             >
-              <span className="inline-flex items-center gap-2 font-code text-[10px] tracking-widest uppercase text-amber bg-amber/10 border border-amber/25 px-3 py-2">
+              <span className="inline-flex items-center gap-2 font-code text-[10px] tracking-widest uppercase text-amber bg-amber/10 px-4 py-2.5 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber" />
                 Disponible
               </span>
-              <span className="inline-flex items-center gap-2 font-code text-[10px] tracking-widest uppercase text-sand bg-surface border border-line px-3 py-2">
-                <MapPin size={10} />
+              <span className="inline-flex items-center gap-2 font-code text-[10px] tracking-widest uppercase text-sand bg-surface px-4 py-2.5 rounded-full">
+                <MapPin size={11} />
                 Douala, Cameroun
               </span>
-              <span className="inline-flex items-center gap-2 font-code text-[10px] tracking-widest uppercase text-sand bg-surface border border-line px-3 py-2">
-                <Wifi size={10} />
-                Remote &amp; On-site
+              <span className="inline-flex items-center gap-2 font-code text-[10px] tracking-widest uppercase text-sand bg-surface px-4 py-2.5 rounded-full">
+                <Wifi size={11} />
+                Remote & On-site
               </span>
             </motion.div>
           </div>
 
-          {/* Right — photo */}
-          <div className="hidden lg:block relative pt-6 pl-6">
-            {/* Photo */}
+          {/* Photo */}
+          <div className="hidden lg:block relative">
             <motion.div
-              className="relative"
-              style={{ marginTop: '1.5rem', marginLeft: '1.5rem' }}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.05 }}
@@ -111,20 +101,18 @@ export default function About() {
                 src={profileImg}
                 alt="Tenda Boupda Christian Romaric — Développeur Full-Stack"
                 loading="lazy"
-                className="w-full object-cover object-top"
+                className="w-full rounded-2xl object-cover object-top"
                 style={{
                   aspectRatio: '3/4',
                   filter: 'grayscale(10%) contrast(105%)',
-                  display: 'block',
                 }}
               />
             </motion.div>
 
-            {/* Name below */}
-            <div className="mt-5 ml-6">
+            <div className="mt-5">
               <p className="font-display text-base font-normal text-ink">{PROFILE.fullName}</p>
               <p className="font-code text-[10px] tracking-widest uppercase text-dust mt-1">
-                Développeur Full-Stack
+                Full-Stack Developer
               </p>
             </div>
           </div>

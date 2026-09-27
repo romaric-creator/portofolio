@@ -9,27 +9,25 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-canvas border-t border-line">
+    <footer className="bg-ink">
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
-          {/* Brand */}
           <div className="lg:col-span-1">
-            <a href="#hero" className="font-display text-2xl font-normal text-ink">
-              TENDA<span className="text-amber">•</span>
+            <a href="#hero" className="font-display text-2xl font-normal text-canvas">
+              TENDA<span className="text-amber">.</span>
             </a>
-            <p className="text-dust text-xs mt-3 leading-relaxed max-w-[200px]">
-              Développeur Full-Stack basé à Douala, disponible pour missions et collaborations.
+            <p className="text-canvas/50 text-sm mt-4 leading-relaxed max-w-[220px]">
+              Full-Stack Developer basé à Douala. Disponible pour missions et collaborations internationales.
             </p>
           </div>
 
-          {/* Navigation */}
           <div>
-            <p className="font-code text-[9px] tracking-widest uppercase text-dust mb-4">Navigation</p>
+            <p className="font-code text-[9px] tracking-widest uppercase text-canvas/40 mb-5">Navigation</p>
             <ul className="flex flex-col gap-3">
               {NAV_LINKS.map(({ href, label }) => (
                 <li key={href}>
-                  <a href={href} className="font-code text-[11px] text-sand hover:text-amber transition-colors">
+                  <a href={href} className="font-body text-sm text-canvas/60 hover:text-amber transition-colors">
                     {label}
                   </a>
                 </li>
@@ -37,16 +35,15 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Correspondance */}
           <div>
-            <p className="font-code text-[9px] tracking-widest uppercase text-dust mb-4">Correspondance</p>
+            <p className="font-code text-[9px] tracking-widest uppercase text-canvas/40 mb-5">Correspondance</p>
             <ul className="flex flex-col gap-3">
               <li>
                 <a
                   href={`mailto:${PROFILE.email}`}
-                  className="font-code text-[11px] text-sand hover:text-amber transition-colors inline-flex items-center gap-2"
+                  className="font-body text-sm text-canvas/60 hover:text-amber transition-colors inline-flex items-center gap-2"
                 >
-                  <Mail size={11} />
+                  <Mail size={13} />
                   Email
                 </a>
               </li>
@@ -55,18 +52,17 @@ export default function Footer() {
                   href={`https://wa.me/${PROFILE.phone.replace(/\D/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-code text-[11px] text-sand hover:text-amber transition-colors inline-flex items-center gap-2"
+                  className="font-body text-sm text-canvas/60 hover:text-amber transition-colors inline-flex items-center gap-2"
                 >
-                  <MessageCircle size={11} />
+                  <MessageCircle size={13} />
                   WhatsApp
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Réseaux */}
           <div>
-            <p className="font-code text-[9px] tracking-widest uppercase text-dust mb-4">Réseaux</p>
+            <p className="font-code text-[9px] tracking-widest uppercase text-canvas/40 mb-5">Réseaux</p>
             <ul className="flex flex-col gap-3">
               {SOCIALS.map(({ Icon, label, href }) => (
                 <li key={label}>
@@ -74,9 +70,9 @@ export default function Footer() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-code text-[11px] text-sand hover:text-amber transition-colors inline-flex items-center gap-2"
+                    className="font-body text-sm text-canvas/60 hover:text-amber transition-colors inline-flex items-center gap-2"
                   >
-                    <Icon size={11} />
+                    <Icon size={13} />
                     {label}
                   </a>
                 </li>
@@ -86,14 +82,13 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-line">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="font-code text-[10px] text-dust">
+      <div className="border-t border-canvas/10">
+        <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="font-body text-[12px] text-canvas/40">
             &copy; 2026 {PROFILE.fullName}
           </p>
-          <p className="font-code text-[10px] text-dust/50">
-            Douala, Cameroun · Portfolio v2
+          <p className="font-body text-[12px] text-canvas/30">
+            Douala, Cameroon · Portfolio v3
           </p>
         </div>
       </div>

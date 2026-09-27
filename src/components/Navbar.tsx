@@ -47,71 +47,59 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-canvas/90 backdrop-blur-md border-b border-line'
+            ? 'bg-canvas/80 backdrop-blur-xl border-b border-line/60 shadow-sm'
             : ''
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
-          {/* Logo */}
           <a
             href="#hero"
-            className="font-display text-lg font-normal text-ink leading-none flex-shrink-0"
+            className="font-display text-xl font-normal text-ink leading-none flex-shrink-0"
           >
-            TENDA<span className="text-amber">•</span>
+            TENDA<span className="text-amber">.</span>
           </a>
 
-          {/* Desktop links — centered */}
-          <ul className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+          <ul className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {NAV_LINKS.map(({ href, label }) => (
               <li key={href}>
                 <a
                   href={href}
-                  className={`relative font-code text-[11px] tracking-[0.12em] uppercase transition-colors ${
+                  className={`relative font-body text-[13px] font-medium px-4 py-2 rounded-full transition-all duration-200 ${
                     activeSection === href
-                      ? 'text-ink'
-                      : 'text-dust hover:text-sand'
+                      ? 'text-ink bg-surface'
+                      : 'text-dust hover:text-ink'
                   }`}
                 >
                   {label}
-                  {activeSection === href && (
-                    <motion.span
-                      layoutId="navUnderline"
-                      className="absolute left-0 right-0 block h-px bg-amber"
-                      style={{ bottom: '-3px' }}
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
                 </a>
               </li>
             ))}
           </ul>
 
-          {/* CTA + Theme toggle */}
           <div className="hidden md:flex items-center gap-3 flex-shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-2 text-dust hover:text-amber transition-colors"
+              className="p-2.5 rounded-full text-dust hover:text-amber hover:bg-surface transition-all duration-200"
               aria-label={dark ? 'Mode clair' : 'Mode sombre'}
             >
-              {dark ? <Sun size={15} /> : <Moon size={15} />}
+              {dark ? <Sun size={16} /> : <Moon size={16} />}
             </button>
             <a
               href="#contact"
-              className="group inline-flex items-center gap-1.5 font-code text-[11px] tracking-[0.12em] uppercase text-ink border border-line px-4 py-2 hover:border-amber hover:text-amber transition-colors"
+              className="group inline-flex items-center gap-1.5 font-body text-[13px] font-semibold text-canvas bg-ink px-5 py-2.5 rounded-full hover:bg-amber transition-colors duration-200"
             >
               Démarrer
-              <ArrowUpRight size={12} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight size={13} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
 
-          {/* Mobile: theme + hamburger */}
           <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={toggleTheme}
-              className="p-1 text-dust hover:text-amber transition-colors"
+              className="p-2 rounded-full text-dust hover:text-amber transition-colors"
               aria-label={dark ? 'Mode clair' : 'Mode sombre'}
             >
               {dark ? <Sun size={16} /> : <Moon size={16} />}
@@ -121,30 +109,29 @@ export default function Navbar() {
               className="text-ink hover:text-amber transition-colors p-1"
               aria-label="Toggle menu"
             >
-              {open ? <X size={18} /> : <Menu size={18} />}
+              {open ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-canvas flex flex-col justify-center px-8 md:hidden"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-canvas/98 backdrop-blur-xl flex flex-col justify-center px-8 md:hidden"
           >
-            <ul className="flex flex-col gap-6">
+            <ul className="flex flex-col gap-5">
               {NAV_LINKS.map(({ href, label }, i) => (
                 <motion.li
                   key={href}
-                  initial={{ opacity: 0, x: -16 }}
+                  initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -16 }}
-                  transition={{ delay: i * 0.04, duration: 0.25 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ delay: i * 0.05, duration: 0.3 }}
                 >
                   <a
                     href={href}
@@ -162,11 +149,11 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ delay: 0.28, duration: 0.25 }}
-              className="mt-12 inline-flex items-center gap-2 font-code text-[11px] tracking-widest uppercase text-amber border border-amber/40 px-5 py-3 self-start"
+              transition={{ delay: 0.3, duration: 0.25 }}
+              className="mt-10 inline-flex items-center gap-2 font-body text-sm font-semibold text-canvas bg-ink px-6 py-3.5 rounded-full self-start hover:bg-amber transition-colors"
             >
               Démarrer un projet
-              <ArrowUpRight size={13} />
+              <ArrowUpRight size={14} />
             </motion.a>
           </motion.div>
         )}

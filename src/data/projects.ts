@@ -1,28 +1,27 @@
 export const PROFILE = {
   fullName: "Tenda Boupda Christian Romaric",
-  professionalTitle: "Développeur Full-Stack Passionné",
-  location: "Douala, Cameroun",
+  professionalTitle: "Full-Stack Developer",
+  location: "Douala, Cameroon",
+  availability: "Working remotely with clients worldwide",
   github: "github.com/romaric-creator",
   email: "christiantendainfo2006@gmail.com",
   phone: "+237 678261699",
   education: "BTS Génie Logiciel, Institut Universitaire de la Côte (IUC), Douala",
-  status: "Développeur Full Stack avec 4 ans d'expérience, spécialisé dans la création d'applications web et mobiles modernes.",
-  heroPhrase: "Je transforme les idées en solutions numériques efficaces et intuitives.",
-  tagline: "Autonome, rigoureux et capable de travailler en équipe, je construis des systèmes web et mobiles haute performance.",
   linkedin: "https://cm.linkedin.com/in/christian-tenda-5a3529354",
   stats: {
     exp: "4+",
-    projects: "15+"
+    projects: "15+",
   },
-  languages: ["Français (Courant)", "Anglais (Débutant)"]
+  languages: ["Français (Courant)", "Anglais (Débutant)"],
 };
 
 export const TECH_STACK = {
-  "Frontend": ["React JS", "JavaScript", "CSS/Tailwind", "HTML5", "Next.js"],
-  "Mobile": ["React Native", "Firebase", "Expo", "PWA"],
-  "Backend": ["Node.js", "PHP", "Express.js", "MySQL", "Sequelize", "Redis"],
-  "Outils": ["Git/GitHub", "VS Code", "npm", "Docker", "Postman"],
-  "Centres d'intérêt": ["Technologie", "Musique", "Sport"]
+  "Frontend": ["React", "TypeScript", "Tailwind CSS"],
+  "Mobile": ["React Native", "Expo"],
+  "Backend": ["Node.js", "NestJS", "Express"],
+  "Data": ["MySQL", "PostgreSQL", "Redis", "Prisma", "Sequelize"],
+  "Infrastructure": ["Docker", "GitHub", "REST", "WebSockets"],
+  "Desktop": ["Electron"],
 };
 
 export const PROJECTS = [
@@ -236,7 +235,6 @@ export const STACK_EXPERTISE = [
       { name: "React / React Native", level: "Expert" },
       { name: "TypeScript", level: "Expert" },
       { name: "Tailwind CSS", level: "Expert" },
-      { name: "Next.js", level: "Avancé" },
       { name: "Framer Motion", level: "Avancé" },
       { name: "Expo", level: "Avancé" },
     ],
@@ -280,12 +278,39 @@ export const STACK_EXPERTISE = [
 ];
 
 export const NAV_LINKS = [
-  { href: '#about',    label: 'Identité'  },
-  { href: '#services', label: 'Capacités' },
   { href: '#projects', label: 'Travaux'   },
-  { href: '#stack',    label: 'Stack'     },
-  { href: '#timeline', label: 'Parcours'  },
+  { href: '#services', label: 'Services'  },
+  { href: '#process',  label: 'Processus' },
+  { href: '#about',    label: 'À propos'  },
   { href: '#contact',  label: 'Contact'   },
+];
+
+export const PROCESS_STEPS = [
+  {
+    num: '01',
+    title: 'Découverte',
+    description: 'Nous définissons ensemble le problème, les objectifs et les contraintes de votre projet.',
+  },
+  {
+    num: '02',
+    title: 'Planification',
+    description: 'Architecture, fonctionnalités, roadmap et estimation claire avant de coder.',
+  },
+  {
+    num: '03',
+    title: 'Développement',
+    description: 'Développement itératif avec démonstrations régulières pour valider chaque étape.',
+  },
+  {
+    num: '04',
+    title: 'Livraison',
+    description: 'Tests, déploiement et documentation pour une mise en production sereine.',
+  },
+  {
+    num: '05',
+    title: 'Support',
+    description: 'Maintenance, corrections et évolutions du produit après la livraison.',
+  },
 ];
 
 export const TIMELINE_EVENTS = [
@@ -302,7 +327,7 @@ export const TIMELINE_EVENTS = [
   {
     years: "2022 – 2026",
     title: "Développeur Freelance",
-    description: "Réalisation de divers projets web et mobiles pour des clients locaux et internationaux."
+    description: "Conception et développement d'applications web, mobiles et desktop pour des PME, startups et entrepreneurs."
   },
   {
     years: "2023 – 2024",

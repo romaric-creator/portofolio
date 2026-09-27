@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ─── Design tokens (CSS vars for dark mode swap) ──── */
+/* ─── Design tokens ────────────────────────────────── */
 @theme {
   --color-canvas:  var(--c-canvas);
   --color-surface: var(--c-surface);
@@ -11,34 +11,34 @@
   --color-dust:    var(--c-dust);
   --color-line:    var(--c-line);
 
-  --font-display: 'Newsreader', Georgia, serif;
-  --font-body:    'Hanken Grotesk', system-ui, sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
   --font-code:    'JetBrains Mono', 'Courier New', monospace;
 }
 
 :root {
-  --c-canvas:  #f7f4ef;
-  --c-surface: #ede9e2;
-  --c-card:    #e4dfd6;
-  --c-amber:   #a73400;
-  --c-ink:     #1c1a16;
-  --c-sand:    #6b5f52;
-  --c-dust:    #9c8e82;
-  --c-line:    #d8d2c8;
+  --c-canvas:  #faf9f6;
+  --c-surface: #f0ede8;
+  --c-card:    #e8e4dc;
+  --c-amber:   #b94a1e;
+  --c-ink:     #1a1815;
+  --c-sand:    #6d6259;
+  --c-dust:    #9a8f85;
+  --c-line:    #e0dbd3;
 }
 
 .dark {
-  --c-canvas:  #0f0e0c;
+  --c-canvas:  #111110;
   --c-surface: #1a1918;
-  --c-card:    #222120;
-  --c-amber:   #e8520a;
-  --c-ink:     #ede9e3;
+  --c-card:    #232221;
+  --c-amber:   #e8611a;
+  --c-ink:     #f0ece6;
   --c-sand:    #a89890;
   --c-dust:    #6e6259;
-  --c-line:    #2e2c28;
+  --c-line:    #2a2826;
 }
 
-/* ─── Textured image backgrounds ───────────────────── */
+/* ─── Textured backgrounds ─────────────────────────── */
 .img-relief {
   background-color: var(--color-surface);
   background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
@@ -51,29 +51,30 @@
   background-size: 18px 18px;
 }
 
-/* ─── Animations ────────────────────────────────────── */
+/* ─── Animations ───────────────────────────────────── */
 @keyframes marquee-x {
   from { transform: translateX(0) }
   to   { transform: translateX(-50%) }
 }
 
-/* ─── Contact form placeholder ─────────────────────── */
+/* ─── Contact form ─────────────────────────────────── */
 .contact-input::placeholder {
   color: rgba(0,0,0,0.3);
 }
 
-/* ─── Base ──────────────────────────────────────────── */
+/* ─── Base ─────────────────────────────────────────── */
 @layer base {
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     background-color: var(--color-canvas);
     color: var(--color-ink);
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
   }
 
   .dark body {
@@ -82,7 +83,7 @@
 
   ::selection {
     background-color: var(--color-amber);
-    color: #f0ede8;
+    color: #faf9f6;
   }
 
   :focus-visible {

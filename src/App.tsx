@@ -3,9 +3,10 @@ import posthog from 'posthog-js';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import MarqueeBand from './components/MarqueeBand';
-import About from './components/About';
-import Services from './components/Services';
 import Projects from './components/Projects';
+import Services from './components/Services';
+import Process from './components/Process';
+import About from './components/About';
 import Stack from './components/Stack';
 import Timeline from './components/Timeline';
 import Contact from './components/Contact';
@@ -45,9 +46,10 @@ function App() {
       <main id="main-content">
         <Hero />
         <MarqueeBand />
-        <About />
-        <Services />
         <Projects />
+        <Services />
+        <Process />
+        <About />
         <Stack />
         <Timeline />
         <Contact />

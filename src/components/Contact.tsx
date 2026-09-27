@@ -5,29 +5,65 @@ import posthog from 'posthog-js';
 import { PROFILE } from '../data/projects';
 import { GithubIcon, LinkedinIcon } from './Icons';
 
-const W    = '#f0ede8';
-const W60  = 'rgba(240,237,232,0.6)';
-const W20  = 'rgba(240,237,232,0.2)';
-const W10  = 'rgba(240,237,232,0.12)';
-const DARK = '#111110';
+const W    = '#f0ece6';
+const W60  = 'rgba(240,236,230,0.6)';
+const W20  = 'rgba(240,236,230,0.2)';
+const W10  = 'rgba(240,236,230,0.12)';
+const DARK = '#1a1815';
 
 const PHONE = PROFILE.phone.replace(/\D/g, '');
 
+const PROJECT_TYPES = [
+  'Application métier',
+  'SaaS / MVP',
+  'Application mobile',
+  'Automatisation',
+  'API / Backend',
+  'Autre',
+];
+
+
 export default function Contact() {
-  const [name, setName]       = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName]           = useState('');
+  const [email, setEmail]         = useState('');
+  const [company, setCompany]     = useState('');
+  const [projectType, setType]    = useState('');
+  const [message, setMessage]     = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
-    const greeting = name.trim() ? `Bonjour Christian, je m'appelle ${name.trim()}.\n\n` : '';
-    const text = encodeURIComponent(`${greeting}${message.trim()}`);
-    posthog.capture('contact_whatsapp_form', { hasName: !!name.trim() });
+
+    const parts = [];
+    if (name.trim()) parts.push(`Nom : ${name.trim()}`);
+    if (email.trim()) parts.push(`Email : ${email.trim()}`);
+    if (company.trim()) parts.push(`Entreprise : ${company.trim()}`);
+    if (projectType) parts.push(`Type : ${projectType}`);
+    parts.push(`\n${message.trim()}`);
+
+    const text = encodeURIComponent(parts.join('\n'));
+    posthog.capture('contact_project_request', {
+      hasName: !!name.trim(),
+      hasEmail: !!email.trim(),
+      projectType,
+    });
     window.open(`https://wa.me/${PHONE}?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
+  const inputBase = "w-full font-body text-[14px] px-4 py-3.5 outline-none transition-all duration-200 rounded-xl";
+  const inputStyle = {
+    background: 'rgba(0,0,0,0.04)',
+    border: '1px solid rgba(0,0,0,0.1)',
+    color: DARK,
+    caretColor: DARK,
+  };
+  const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    (e.currentTarget.style.borderColor = DARK);
+  const onBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)');
+
   return (
-    <section id="contact" className="py-28 px-6 overflow-hidden" style={{ background: '#a73400' }}>
+    <section id="contact" className="py-28 px-6 overflow-hidden" style={{ background: '#b94a1e' }}>
       <div className="max-w-6xl mx-auto">
 
         <motion.p
@@ -43,13 +79,12 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-4 items-start">
 
-          {/* Left — headline + info */}
           <div>
             <h2
               className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight"
               style={{ color: W }}
             >
-              {['Travaillons', 'ensemble.'].map((word, i) => (
+              {['Un projet ?', 'Parlons-en.'].map((word, i) => (
                 <motion.span
                   key={word}
                   initial={{ opacity: 0, y: 40 }}
@@ -72,7 +107,7 @@ export default function Contact() {
               className="text-base mt-6 max-w-md leading-relaxed"
               style={{ color: W60 }}
             >
-              Vous avez un projet numérique, un besoin d'automatisation ou une idée à transformer en produit ? Je suis disponible pour des missions freelance, collaborations et opportunités.
+              Décrivez votre besoin et je vous recontacte sous 24h pour en discuter.
             </motion.p>
 
             <motion.div
@@ -80,15 +115,15 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="flex flex-wrap gap-4 mt-8"
+              className="flex flex-wrap gap-3 mt-8"
             >
               <a
                 href={`mailto:${PROFILE.email}`}
                 onClick={() => posthog.capture('contact_email_clicked')}
-                className="inline-flex items-center gap-3 font-body font-semibold text-sm px-6 py-3 transition-opacity hover:opacity-90"
+                className="inline-flex items-center gap-3 font-body font-semibold text-sm px-6 py-3 rounded-full transition-opacity hover:opacity-90"
                 style={{ background: DARK, color: W }}
               >
-                <Mail size={14} />
+                <Mail size={15} />
                 Email
               </a>
               <a
@@ -96,11 +131,11 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => posthog.capture('contact_social_clicked', { platform: 'WhatsApp' })}
-                className="inline-flex items-center gap-3 font-body font-semibold text-sm px-6 py-3 hover:opacity-80 transition-opacity"
+                className="inline-flex items-center gap-3 font-body font-semibold text-sm px-6 py-3 rounded-full hover:opacity-80 transition-opacity"
                 style={{ border: `1px solid ${W20}`, color: W }}
               >
-                <MessageCircle size={14} />
-                WhatsApp direct
+                <MessageCircle size={15} />
+                WhatsApp
               </a>
             </motion.div>
 
@@ -117,7 +152,7 @@ export default function Contact() {
                 <a
                   href={`mailto:${PROFILE.email}`}
                   onClick={() => posthog.capture('contact_email_clicked')}
-                  className="font-code text-[10px] break-all hover:opacity-70 transition-opacity"
+                  className="font-body text-[12px] break-all hover:opacity-70 transition-opacity"
                   style={{ color: W }}
                 >
                   {PROFILE.email}
@@ -125,8 +160,8 @@ export default function Contact() {
               </div>
               <div>
                 <p className="font-code text-[9px] tracking-widest uppercase mb-2" style={{ color: W60 }}>Localisation</p>
-                <span className="font-code text-[10px] inline-flex items-center gap-1.5" style={{ color: W }}>
-                  <MapPin size={10} />
+                <span className="font-body text-[12px] inline-flex items-center gap-1.5" style={{ color: W }}>
+                  <MapPin size={11} />
                   {PROFILE.location}
                 </span>
               </div>
@@ -136,19 +171,19 @@ export default function Contact() {
                   <a href={`https://${PROFILE.github}`} target="_blank" rel="noopener noreferrer"
                     onClick={() => posthog.capture('contact_social_clicked', { platform: 'GitHub' })}
                     style={{ color: W }} className="hover:opacity-70 transition-opacity" aria-label="GitHub">
-                    <GithubIcon size={15} />
+                    <GithubIcon size={16} />
                   </a>
                   <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer"
                     onClick={() => posthog.capture('contact_social_clicked', { platform: 'LinkedIn' })}
                     style={{ color: W }} className="hover:opacity-70 transition-opacity" aria-label="LinkedIn">
-                    <LinkedinIcon size={15} />
+                    <LinkedinIcon size={16} />
                   </a>
                 </div>
               </div>
             </motion.div>
           </div>
 
-          {/* Right — WhatsApp form */}
+          {/* Form */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -157,67 +192,89 @@ export default function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-5 p-8"
-              style={{ background: 'rgba(240,237,232,0.92)', border: `1px solid rgba(240,237,232,0.4)` }}
+              className="flex flex-col gap-4 p-8 rounded-2xl"
+              style={{ background: 'rgba(240,236,230,0.94)' }}
             >
-              {/* Nom */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="contact-name" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
+                    Nom
+                  </label>
+                  <input
+                    id="contact-name" type="text" value={name}
+                    onChange={e => setName(e.target.value)}
+                    placeholder="Marie Dupont"
+                    className={`${inputBase} contact-input`} style={inputStyle}
+                    onFocus={onFocus} onBlur={onBlur}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="contact-email" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
+                    Email
+                  </label>
+                  <input
+                    id="contact-email" type="email" value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="marie@entreprise.com"
+                    className={`${inputBase} contact-input`} style={inputStyle}
+                    onFocus={onFocus} onBlur={onBlur}
+                  />
+                </div>
+              </div>
+
               <div className="flex flex-col gap-2">
-                <label htmlFor="contact-name" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
-                  Votre nom
+                <label htmlFor="contact-company" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
+                  Entreprise / Projet
                 </label>
                 <input
-                  id="contact-name"
-                  type="text"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  placeholder="Ex : Marie Dupont"
-                  className="contact-input w-full font-code text-[13px] px-4 py-3 outline-none transition-all"
-                  style={{
-                    background: 'rgba(0,0,0,0.05)',
-                    border: '1px solid rgba(0,0,0,0.15)',
-                    color: DARK,
-                    caretColor: DARK,
-                  }}
-                  onFocus={e => (e.currentTarget.style.borderColor = DARK)}
-                  onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.15)')}
+                  id="contact-company" type="text" value={company}
+                  onChange={e => setCompany(e.target.value)}
+                  placeholder="Nom de votre entreprise ou projet"
+                  className={`${inputBase} contact-input`} style={inputStyle}
+                  onFocus={onFocus} onBlur={onBlur}
                 />
               </div>
 
-              {/* Message */}
+              <div className="flex flex-col gap-2">
+                <label htmlFor="contact-type" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
+                  Type de projet
+                </label>
+                <select
+                  id="contact-type" value={projectType}
+                  onChange={e => setType(e.target.value)}
+                  className={inputBase} style={inputStyle}
+                  onFocus={onFocus} onBlur={onBlur}
+                >
+                  <option value="">Sélectionner...</option>
+                  {PROJECT_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+                </select>
+              </div>
+
               <div className="flex flex-col gap-2">
                 <label htmlFor="contact-message" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
-                  Votre message
+                  Description du projet
                 </label>
                 <textarea
-                  id="contact-message"
-                  value={message}
+                  id="contact-message" value={message}
                   onChange={e => setMessage(e.target.value)}
-                  placeholder="Décrivez votre projet ou votre besoin…"
-                  rows={5}
-                  required
-                  className="contact-input w-full font-body text-sm px-4 py-3 outline-none resize-none transition-all"
-                  style={{
-                    background: 'rgba(0,0,0,0.05)',
-                    border: '1px solid rgba(0,0,0,0.15)',
-                    color: DARK,
-                    caretColor: DARK,
-                  }}
-                  onFocus={e => (e.currentTarget.style.borderColor = DARK)}
-                  onBlur={e => (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.15)')}
+                  placeholder="Décrivez votre besoin, vos objectifs et vos contraintes..."
+                  rows={4} required
+                  className={`${inputBase} contact-input resize-none`} style={inputStyle}
+                  onFocus={onFocus} onBlur={onBlur}
                 />
               </div>
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-3 font-code text-[11px] tracking-widest uppercase px-6 py-4 mt-1 transition-opacity hover:opacity-90"
-                style={{ background: '#a73400', color: W }}
+                className="inline-flex items-center justify-center gap-3 font-body text-sm font-semibold px-6 py-4 mt-1 rounded-full transition-opacity hover:opacity-90"
+                style={{ background: '#b94a1e', color: W }}
               >
-                <Send size={14} />
-                Ouvrir WhatsApp avec ce message
+                <Send size={15} />
+                Envoyer ma demande
               </button>
 
-              <p className="font-code text-[9px]" style={{ color: 'rgba(0,0,0,0.45)' }}>
-                Cliquer sur le bouton prépare et ouvre WhatsApp avec votre message pré-rempli.
+              <p className="font-body text-[11px] text-center" style={{ color: 'rgba(0,0,0,0.4)' }}>
+                Le formulaire ouvre WhatsApp avec votre message. Vous pouvez aussi me contacter par email.
               </p>
             </form>
           </motion.div>

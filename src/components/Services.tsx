@@ -1,34 +1,41 @@
 import { motion } from 'framer-motion';
-import { Monitor, Smartphone, Server, AppWindow } from 'lucide-react';
+import { Briefcase, Rocket, Repeat, Smartphone, Server } from 'lucide-react';
 
 const SERVICES = [
   {
     num: '01',
-    icon: Monitor,
-    title: 'Applications Web',
-    description: 'Plateformes SaaS, dashboards de gestion, sites d\'entreprise et interfaces React à fort trafic. Du prototype jusqu\'à la mise en production.',
-    stack: ['React', 'TypeScript', 'Node.js', 'Tailwind CSS'],
+    icon: Briefcase,
+    title: 'Applications métier',
+    description: 'Applications adaptées aux processus spécifiques de votre entreprise : gestion, commandes, stocks, clients, opérations et tableaux de bord.',
+    stack: ['React', 'NestJS', 'PostgreSQL', 'Docker'],
   },
   {
     num: '02',
-    icon: Smartphone,
-    title: 'Applications Mobiles',
-    description: 'Apps iOS & Android avec React Native et Expo. Expériences soignées et performances proches du natif.',
-    stack: ['React Native', 'Expo'],
+    icon: Rocket,
+    title: 'SaaS & MVP',
+    description: "De l'idée au produit fonctionnel : architecture, interface, backend, base de données, authentification et déploiement.",
+    stack: ['React', 'TypeScript', 'Node.js', 'Prisma'],
   },
   {
     num: '03',
-    icon: Server,
-    title: 'Backend & API',
-    description: 'APIs RESTful robustes, bases de données relationnelles et documentaires, WebSockets, authentification JWT.',
-    stack: ['Node.js', 'Express', 'MySQL', 'MongoDB'],
+    icon: Repeat,
+    title: 'Automatisation',
+    description: 'Remplacement des tâches manuelles et workflows dispersés par des processus numériques centralisés et fiables.',
+    stack: ['Node.js', 'Express', 'Redis', 'BullMQ'],
   },
   {
     num: '04',
-    icon: AppWindow,
-    title: 'Desktop & Automatisation',
-    description: 'Applications bureau Electron, remplacement de workflows manuels par des outils numériques structurés et exploitables.',
-    stack: ['Electron', 'TypeScript', 'SQL'],
+    icon: Smartphone,
+    title: 'Applications mobiles',
+    description: 'Applications Android et iOS avec React Native, conçues autour des besoins réels des utilisateurs.',
+    stack: ['React Native', 'Expo', 'TypeScript'],
+  },
+  {
+    num: '05',
+    icon: Server,
+    title: 'Backend & Intégrations',
+    description: "APIs, systèmes d'authentification, bases de données, temps réel et intégration de services tiers.",
+    stack: ['NestJS', 'Express', 'MySQL', 'WebSockets'],
   },
 ];
 
@@ -42,54 +49,47 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.55 }}
-          className="mb-14"
+          className="mb-16"
         >
           <span className="font-code text-[10px] tracking-[0.2em] uppercase text-dust">
-            Ce que je construis
+            Comment je peux vous aider
           </span>
-          <h2 className="font-display text-3xl lg:text-4xl font-normal text-ink mt-3">
-            Quatre domaines,{' '}
-            <em className="text-amber" style={{ fontStyle: 'italic' }}>une seule exigence.</em>
+          <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3">
+            Des solutions pour{' '}
+            <em className="text-amber">chaque besoin.</em>
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-line">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {SERVICES.map((s, i) => {
             const Icon = s.icon;
             return (
               <motion.div
                 key={s.num}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: i * 0.08, duration: 0.5 }}
-                className="group bg-canvas hover:bg-surface transition-colors duration-300 p-8 flex flex-col gap-5"
+                className="group bg-surface rounded-2xl p-7 flex flex-col gap-5 hover:shadow-lg hover:shadow-ink/5 transition-all duration-300"
               >
-                {/* Header */}
                 <div className="flex items-start justify-between">
-                  <span className="font-code text-[11px] tracking-widest text-amber">{s.num}</span>
-                  <Icon
-                    size={20}
-                    className="text-dust group-hover:text-amber group-hover:-translate-y-1 transition-all duration-300"
-                  />
+                  <Icon size={22} className="text-amber" />
+                  <span className="font-code text-[13px] font-semibold text-amber">{s.num}</span>
                 </div>
 
-                {/* Title */}
-                <h3 className="font-display text-2xl font-normal text-ink leading-tight">
+                <h3 className="font-display text-xl font-normal text-ink leading-tight">
                   {s.title}
                 </h3>
 
-                {/* Description */}
                 <p className="text-sand text-sm leading-relaxed flex-1">
                   {s.description}
                 </p>
 
-                {/* Stack tags */}
-                <div className="flex flex-wrap gap-2 pt-2">
+                <div className="flex flex-wrap gap-2 pt-1">
                   {s.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="font-code text-[9px] tracking-widest uppercase text-dust border border-line px-2.5 py-1"
+                      className="font-code text-[9px] tracking-widest uppercase text-dust bg-canvas px-3 py-1.5 rounded-full"
                     >
                       {tech}
                     </span>
