@@ -5,7 +5,6 @@ import posthog from 'posthog-js';
 import { PROFILE } from '../data/projects';
 
 const ease = [0.23, 1, 0.32, 1] as const;
-const TAGS = ['Applications métier', 'SaaS', 'Automatisation', 'Web', 'Mobile'];
 
 function useCounter(target: number, duration = 1400) {
   const [count, setCount] = useState(0);
@@ -64,24 +63,9 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen bg-canvas flex flex-col overflow-hidden"
     >
-      <div className="flex-1 flex flex-col max-w-7xl mx-auto px-6 w-full pt-28 lg:pt-32">
-
-        {/* Tags */}
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease }}
-          className="flex flex-wrap gap-2 mb-6"
-        >
-          {TAGS.map((tag) => (
-            <span
-              key={tag}
-              className="font-code text-[10px] tracking-[0.12em] uppercase text-dust bg-surface px-3.5 py-2 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
-        </motion.div>
+      <div className="flex-1 flex flex-col lg:flex-row lg:items-center lg:gap-12 max-w-7xl mx-auto px-6 w-full pt-28 lg:pt-32">
+        {/* Left content */}
+        <div className="flex-1 flex flex-col">
 
         {/* H1 */}
         <motion.h1
@@ -161,6 +145,23 @@ export default function Hero() {
           <div className="flex flex-col gap-1">
             <span className="font-body text-sm font-medium text-ink">Web · Mobile · Desktop</span>
             <span className="font-code text-[10px] tracking-widest uppercase text-dust">plateformes</span>
+          </div>
+        </motion.div>
+        </div>
+
+        {/* Right photo - Desktop only */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3, ease }}
+          className="hidden lg:flex flex-1 items-center justify-center"
+        >
+          <div className="relative w-80 h-80 rounded-2xl overflow-hidden border border-line shadow-xl">
+            <img
+              src="/photo-christian-tenda.jpg"
+              alt="Christian Tenda"
+              className="w-full h-full object-cover"
+            />
           </div>
         </motion.div>
       </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
-import { ArrowUpRight, X, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { ArrowUpRight, X, ExternalLink } from 'lucide-react';
 import posthog from 'posthog-js';
 import { PROJECTS } from '../data/projects';
 
@@ -44,7 +44,7 @@ function useTilt(intensity = 8) {
 function useScreenshotPreview(screenshots: string[]) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [hovering, setHovering] = useState(false);
-  const intervalRef = useRef<ReturnType<typeof setInterval>>();
+  const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
   const onEnter = useCallback(() => {
     if (screenshots.length <= 1) return;
