@@ -5,11 +5,11 @@ import posthog from 'posthog-js';
 import { PROFILE } from '../data/projects';
 import { GithubIcon, LinkedinIcon } from './Icons';
 
-const W    = '#f0ece6';
-const W60  = 'rgba(240,236,230,0.6)';
-const W20  = 'rgba(240,236,230,0.2)';
-const W10  = 'rgba(240,236,230,0.12)';
-const DARK = '#1a1815';
+const W    = '#e2e8f0';
+const W60  = 'rgba(226,232,240,0.6)';
+const W20  = 'rgba(226,232,240,0.2)';
+const W10  = 'rgba(226,232,240,0.12)';
+const DARK = '#1e3a5f';
 
 const PHONE = PROFILE.phone.replace(/\D/g, '');
 
@@ -58,12 +58,12 @@ export default function Contact() {
     caretColor: DARK,
   };
   const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    (e.currentTarget.style.borderColor = DARK);
+    (e.currentTarget.style.borderColor = '#84c225');
   const onBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)');
 
   return (
-    <section id="contact" className="py-28 px-6 overflow-hidden" style={{ background: '#b94a1e' }}>
+    <section id="contact" className="py-28 px-6 overflow-hidden" style={{ background: '#1e3a5f' }}>
       <div className="max-w-6xl mx-auto">
 
         <motion.p
@@ -193,7 +193,7 @@ export default function Contact() {
             <form
               onSubmit={handleSubmit}
               className="flex flex-col gap-4 p-8 rounded-2xl"
-              style={{ background: 'rgba(240,236,230,0.94)' }}
+              style={{ background: 'rgba(255,255,255,0.95)' }}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
@@ -266,8 +266,8 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-3 font-body text-sm font-semibold px-6 py-4 mt-1 rounded-full transition-opacity hover:opacity-90"
-                style={{ background: '#b94a1e', color: W }}
+                className="inline-flex items-center justify-center gap-3 font-body text-sm font-semibold px-6 py-4 mt-1 rounded-full shadow-lg shadow-[#84c225]/30 hover:shadow-xl hover:shadow-[#84c225]/40 hover:scale-[1.02] transition-all duration-200"
+                style={{ background: '#84c225', color: '#ffffff' }}
               >
                 <Send size={15} />
                 Envoyer ma demande

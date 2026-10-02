@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import {
   SiReact, SiTypescript, SiTailwindcss, SiFramer, SiExpo,
-  SiNodedotjs, SiNestjs, SiExpress, SiJsonwebtokens, SiSocketdotio, SiPhp,
+  SiNodedotjs, SiNestjs, SiExpress, SiJsonwebtokens, SiSocketdotio,
   SiPostgresql, SiMysql, SiRedis, SiPrisma, SiDocker, SiSequelize,
-  SiGithub, SiEslint, SiElectron, SiSwagger, SiPostman,
+  SiGithub, SiGitlab, SiEslint, SiElectron, SiSwagger, SiPostman,
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
 import { STACK_EXPERTISE } from '../data/projects';
@@ -21,7 +21,6 @@ const ICONS: Record<string, IconComponent> = {
   'Express':              SiExpress,
   'REST / JWT Auth':      SiJsonwebtokens,
   'WebSockets':           SiSocketdotio,
-  'PHP':                  SiPhp,
   'PostgreSQL':           SiPostgresql,
   'MySQL':                SiMysql,
   'Redis':                SiRedis,
@@ -29,6 +28,7 @@ const ICONS: Record<string, IconComponent> = {
   'Docker':               SiDocker,
   'Sequelize':            SiSequelize,
   'Git / GitHub':         SiGithub,
+  'GitLab CI/CD':         SiGitlab,
   'ESLint / Prettier':    SiEslint,
   'Electron':             SiElectron,
   'Swagger':              SiSwagger,

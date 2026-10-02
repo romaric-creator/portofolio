@@ -7,8 +7,8 @@ import { PROJECTS } from '../data/projects';
 const ease = [0.23, 1, 0.32, 1] as const;
 
 const GRADIENTS: Record<string, string> = {
-  'gradient-vitasang': 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-  'gradient-flexystore': 'linear-gradient(135deg, #1a1612 0%, #2d1f10 50%, #3d2a14 100%)',
+  'gradient-vitasang': 'linear-gradient(135deg, #1e3a5f 0%, #2a4a6f 50%, #1e3a5f 100%)',
+  'gradient-flexystore': 'linear-gradient(135deg, #1e3a5f 0%, #3d6b2e 50%, #84c225 100%)',
 };
 
 const FEATURED_NAMES = ['GLOBEApp', 'SafeDriving'];

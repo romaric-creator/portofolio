@@ -248,7 +248,6 @@ export const STACK_EXPERTISE = [
       { name: "Express", level: "Expert" },
       { name: "REST / JWT Auth", level: "Expert" },
       { name: "WebSockets", level: "Avancé" },
-      { name: "PHP", level: "Intermédiaire" },
     ],
   },
   {
@@ -268,6 +267,7 @@ export const STACK_EXPERTISE = [
     description: "Code maintenable, livraisons maîtrisées",
     skills: [
       { name: "Git / GitHub", level: "Expert" },
+      { name: "GitLab CI/CD", level: "Avancé" },
       { name: "ESLint / Prettier", level: "Strict" },
       { name: "Electron", level: "Avancé" },
       { name: "Swagger", level: "Avancé" },

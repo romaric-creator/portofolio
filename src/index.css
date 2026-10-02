@@ -17,37 +17,21 @@
 }
 
 :root {
-  --c-canvas:  #faf9f6;
-  --c-surface: #f0ede8;
-  --c-card:    #e8e4dc;
-  --c-amber:   #b94a1e;
-  --c-ink:     #1a1815;
-  --c-sand:    #6d6259;
-  --c-dust:    #9a8f85;
-  --c-line:    #e0dbd3;
+  --c-canvas:  #f5f7fa;
+  --c-surface: #eaeff5;
+  --c-card:    #dde4ed;
+  --c-amber:   #84c225;
+  --c-ink:     #1e3a5f;
+  --c-sand:    #52525b;
+  --c-dust:    #71717a;
+  --c-line:    #d8dfe8;
 }
 
-.dark {
-  --c-canvas:  #111110;
-  --c-surface: #1a1918;
-  --c-card:    #232221;
-  --c-amber:   #e8611a;
-  --c-ink:     #f0ece6;
-  --c-sand:    #a89890;
-  --c-dust:    #6e6259;
-  --c-line:    #2a2826;
-}
 
 /* ─── Textured backgrounds ─────────────────────────── */
 .img-relief {
   background-color: var(--color-surface);
   background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 18px 18px;
-}
-
-.img-relief-dark {
-  background-color: var(--color-canvas);
-  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 18px 18px;
 }
 
@@ -77,13 +61,9 @@
     letter-spacing: -0.01em;
   }
 
-  .dark body {
-    color-scheme: dark;
-  }
-
   ::selection {
     background-color: var(--color-amber);
-    color: #faf9f6;
+    color: #ffffff;
   }
 
   :focus-visible {

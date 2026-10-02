@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Wifi } from 'lucide-react';
 import { PROFILE } from '../data/projects';
 
-const profileImg = '/photo-christian-tenda.jpg';
+const profileImg = '/image.png';
 const ease = [0.23, 1, 0.32, 1] as const;
 
 const META = [
@@ -35,7 +35,7 @@ export default function About() {
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.7, delay: 0.05, ease }}
               className="font-display font-normal text-ink leading-[1.08]"
-              style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)' }}
+              style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)' }}
             >
               Je transforme des besoins concrets
               <br className="hidden sm:block" /> en outils{' '}
@@ -90,7 +90,7 @@ export default function About() {
           </div>
 
           {/* Photo */}
-          <div className="hidden lg:block relative">
+          <div className="relative order-first lg:order-none">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
