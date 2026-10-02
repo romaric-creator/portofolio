@@ -37,7 +37,14 @@ export const PROJECTS = [
       live: null,
       demo: null,
     },
-    screenshots: ["/screenshots/globeapp.png"],
+    screenshots: [
+      "/screenshots/globeapp.png",
+      "/screenshots/globeapp-dashboard.png",
+      "/screenshots/globeapp-hotel.png",
+      "/screenshots/globeapp-restaurant.png",
+      "/screenshots/globeapp-caisse.png",
+      "/screenshots/globeapp-sauvegarde.png",
+    ],
     visualPlaceholder: "gradient-vitasang",
     caseStudy: {
       problem: "Les hôtels et restaurants de Douala géraient réservations, commandes et comptabilité sur papier ou Excel, causant erreurs et pertes.",
