@@ -4,10 +4,10 @@ import posthog from 'posthog-js'
 import './index.css'
 import App from './App.tsx'
 
-if (import.meta.env.PROD) {
-  posthog.init(import.meta.env.VITE_POSTHOG_KEY ?? '', {
+const phKey = import.meta.env.VITE_POSTHOG_KEY;
+if (phKey) {
+  posthog.init(phKey, {
     api_host: 'https://us.i.posthog.com',
-    defaults: '2026-05-30',
     person_profiles: 'identified_only',
     persistence: 'localStorage',
   })
