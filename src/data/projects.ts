@@ -285,11 +285,11 @@ export const STACK_EXPERTISE = [
 ];
 
 export const NAV_LINKS = [
-  { href: '#projects', label: 'Travaux'   },
-  { href: '#services', label: 'Services'  },
-  { href: '#process',  label: 'Processus' },
-  { href: '#about',    label: 'À propos'  },
-  { href: '#contact',  label: 'Contact'   },
+  { href: '#projects', label: 'Travaux'      },
+  { href: '#stack',    label: 'Compétences'  },
+  { href: '#services', label: 'Services'     },
+  { href: '#about',    label: 'À propos'     },
+  { href: '#contact',  label: 'Contact'      },
 ];
 
 export const PROCESS_STEPS = [
@@ -327,18 +327,8 @@ export const TIMELINE_EVENTS = [
     description: "Simis BTP Holding. Automatisation des processus internes, développement d'applications métier pour remplacer les workflows manuels, conseil en stratégie IT et création du site web de l'entreprise."
   },
   {
-    years: "2024 – 2026",
-    title: "BTS Génie Logiciel",
-    description: "Institut Universitaire de la Côte (IUC), Douala."
-  },
-  {
     years: "2022 – 2026",
     title: "Développeur Freelance",
     description: "Conception et développement d'applications web, mobiles et desktop pour des PME, startups et entrepreneurs."
-  },
-  {
-    years: "2023 – 2024",
-    title: "Baccalauréat TI (Technologies de l'Information)",
-    description: "Collège Evangélique de New Bell."
   }
 ];

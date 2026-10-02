@@ -170,6 +170,15 @@ export default function Hero() {
 
             {/* H1 */}
 
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.12, ease }}
+              className="font-display text-lg sm:text-xl text-ink/80 mb-2"
+            >
+              {PROFILE.fullName}
+            </motion.p>
+
             <motion.h1
               initial="hidden"
               animate="visible"
@@ -182,9 +191,9 @@ export default function Hero() {
                   },
                 },
               }}
-              className="max-w-4xl font-display font-normal leading-[0.98] tracking-[-0.035em] text-ink"
+              className="max-w-4xl font-display font-normal leading-[0.92] tracking-[-0.04em] text-ink"
               style={{
-                fontSize: 'clamp(2.2rem, 4.2vw, 3.8rem)',
+                fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
               }}
             >
               <motion.span
@@ -256,7 +265,7 @@ export default function Hero() {
               }}
               className="mt-8 max-w-xl"
             >
-              <p className="text-base leading-7 text-sand sm:text-lg">
+              <p className="text-base leading-relaxed text-sand sm:text-lg sm:leading-[1.75]">
                 Je conçois et développe des solutions digitales pour les
                 PME, startups et entrepreneurs, de l'idée jusqu'à la mise
                 en production.

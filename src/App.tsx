@@ -47,10 +47,10 @@ function App() {
         <Hero />
         <MarqueeBand />
         <Projects />
+        <Stack />
         <Services />
         <Process />
         <About />
-        <Stack />
         <Timeline />
         <Contact />
       </main>
