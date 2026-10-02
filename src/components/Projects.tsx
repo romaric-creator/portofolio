@@ -479,12 +479,17 @@ function CompactCard({ project, index, onClick }: {
           <p className="text-sand text-sm mt-1.5 line-clamp-2 leading-relaxed">
             {project.tagline}
           </p>
-          <div className="flex flex-wrap gap-2 mt-3">
-            {project.stack.slice(0, 3).map(tech => (
-              <span key={tech} className="font-code text-[10px] tracking-widest uppercase text-dust">
-                {tech}
-              </span>
-            ))}
+          <div className="flex items-center justify-between mt-3">
+            <div className="flex flex-wrap gap-2">
+              {project.stack.slice(0, 3).map(tech => (
+                <span key={tech} className="font-code text-[10px] tracking-widest uppercase text-dust">
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <span className="sm:hidden inline-flex items-center gap-1.5 font-body text-[11px] font-semibold text-amber">
+              Voir <ArrowUpRight size={12} />
+            </span>
           </div>
         </div>
       </motion.div>
@@ -529,9 +534,9 @@ function FeaturedSection({ onOpen }: { onOpen: (p: typeof PROJECTS[0]) => void }
                   <span className="font-code text-[10px] tracking-widest uppercase text-amber">{project.category}</span>
                   <h3 className="font-display text-xl font-normal text-white mt-1">{project.name}</h3>
                   <p className="text-white/70 text-sm mt-1 line-clamp-2">{project.tagline}</p>
-                </div>
-                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center">
-                  <ArrowUpRight size={14} className="text-white" />
+                  <span className="inline-flex items-center gap-1.5 mt-3 font-body text-[12px] font-semibold text-white bg-amber/90 px-4 py-2 rounded-full">
+                    Voir le projet <ArrowUpRight size={12} />
+                  </span>
                 </div>
               </div>
             );
