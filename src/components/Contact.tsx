@@ -203,7 +203,7 @@ export default function Contact() {
                   <input
                     id="contact-name" type="text" value={name}
                     onChange={e => setName(e.target.value)}
-                    placeholder="Marie Dupont"
+                    placeholder="Votre nom"
                     className={`${inputBase} contact-input`} style={inputStyle}
                     onFocus={onFocus} onBlur={onBlur}
                   />
@@ -215,7 +215,7 @@ export default function Contact() {
                   <input
                     id="contact-email" type="email" value={email}
                     onChange={e => setEmail(e.target.value)}
-                    placeholder="marie@entreprise.com"
+                    placeholder="votre@email.com"
                     className={`${inputBase} contact-input`} style={inputStyle}
                     onFocus={onFocus} onBlur={onBlur}
                   />
