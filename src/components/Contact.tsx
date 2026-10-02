@@ -63,7 +63,7 @@ export default function Contact() {
     (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)');
 
   return (
-    <section id="contact" className="py-28 px-6 overflow-hidden" style={{ background: '#1e3a5f' }}>
+    <section id="contact" className="py-20 px-6 overflow-hidden" style={{ background: '#1e3a5f' }}>
       <div className="max-w-6xl mx-auto">
 
         <motion.p

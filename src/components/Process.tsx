@@ -3,7 +3,7 @@ import { PROCESS_STEPS } from '../data/projects';
 
 export default function Process() {
   return (
-    <section id="process" className="py-28 px-6 bg-surface">
+    <section id="process" className="py-20 px-6 bg-surface">
       <div className="max-w-6xl mx-auto">
 
         <motion.div
@@ -16,7 +16,7 @@ export default function Process() {
           <span className="font-code text-[10px] tracking-[0.2em] uppercase text-dust">
             Mon processus
           </span>
-          <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3">
+          <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3 leading-[1.05] tracking-[-0.02em]">
             Comment{' '}
             <em className="text-amber">je travaille.</em>
           </h2>

@@ -3,7 +3,7 @@ import { TIMELINE_EVENTS } from '../data/projects';
 
 export default function Timeline() {
   return (
-    <section id="timeline" className="py-28 px-6 bg-surface">
+    <section id="timeline" className="py-20 px-6 bg-surface">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -15,7 +15,7 @@ export default function Timeline() {
           <span className="font-code text-[10px] tracking-[0.2em] uppercase text-dust">
             Parcours
           </span>
-          <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3 max-w-xl leading-tight">
+          <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3 max-w-xl leading-[1.05] tracking-[-0.02em]">
             L'évolution d'un{' '}
             <em className="text-amber">concepteur passionné.</em>
           </h2>

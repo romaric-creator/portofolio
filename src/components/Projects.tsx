@@ -567,7 +567,7 @@ export default function Projects() {
         {detail && <CaseStudy project={detail} onClose={() => setDetail(null)} />}
       </AnimatePresence>
 
-      <section id="projects" className="py-28 px-5 sm:px-6 bg-canvas">
+      <section id="projects" className="py-20 px-5 sm:px-6 bg-canvas">
         <div className="max-w-6xl mx-auto">
 
           <motion.div
@@ -580,7 +580,7 @@ export default function Projects() {
             <span className="font-code text-[10px] tracking-[0.2em] uppercase text-dust">
               Travaux sélectionnés
             </span>
-            <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3">
+            <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3 leading-[1.05] tracking-[-0.02em]">
               Ce que j'ai conçu{' '}
               <em className="text-amber">et livré.</em>
             </h2>

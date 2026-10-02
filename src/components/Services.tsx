@@ -41,7 +41,7 @@ const SERVICES = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-28 px-6 bg-canvas">
+    <section id="services" className="py-20 px-6 bg-canvas">
       <div className="max-w-6xl mx-auto">
 
         <motion.div
@@ -54,7 +54,7 @@ export default function Services() {
           <span className="font-code text-[10px] tracking-[0.2em] uppercase text-dust">
             Comment je peux vous aider
           </span>
-          <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3">
+          <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3 leading-[1.05] tracking-[-0.02em]">
             Des solutions pour{' '}
             <em className="text-amber">chaque besoin.</em>
           </h2>

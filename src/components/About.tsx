@@ -6,8 +6,8 @@ const profileImg = '/image.png';
 const ease = [0.23, 1, 0.32, 1] as const;
 
 const META = [
-  { label: 'Formation',    value: 'BTS Génie Logiciel, IUC Douala' },
   { label: 'Domaines',     value: 'Web · Mobile · Desktop · Backend' },
+  { label: 'Expérience',   value: `${PROFILE.stats.exp} ans · ${PROFILE.stats.projects} projets livrés` },
   { label: 'Langues',      value: 'Français · Anglais' },
 ];
 
@@ -21,7 +21,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease }}
-          className="font-code text-[10px] tracking-[0.2em] uppercase text-dust pt-28 pb-10"
+          className="font-code text-[10px] tracking-[0.2em] uppercase text-dust pt-20 pb-8"
         >
           À propos
         </motion.p>
@@ -34,8 +34,8 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.7, delay: 0.05, ease }}
-              className="font-display font-normal text-ink leading-[1.08]"
-              style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)' }}
+              className="font-display font-normal text-ink leading-[1.02] tracking-[-0.02em]"
+              style={{ fontSize: 'clamp(1.8rem, 3.2vw, 2.6rem)' }}
             >
               Je transforme des besoins concrets
               <br className="hidden sm:block" /> en outils{' '}
@@ -72,7 +72,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.5, delay: 0.3, ease }}
-              className="flex flex-wrap items-center gap-3 mt-10 pb-28"
+              className="flex flex-wrap items-center gap-3 mt-10 pb-20"
             >
               <span className="inline-flex items-center gap-2 font-code text-[10px] tracking-widest uppercase text-amber bg-amber/10 px-4 py-2.5 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber" />
