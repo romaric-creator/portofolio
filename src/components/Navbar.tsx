@@ -45,9 +45,27 @@ export default function Navbar() {
 
           <a
             href="#hero"
-            className="font-display text-xl font-normal text-ink leading-none flex-shrink-0"
+            className="group/logo flex items-center gap-2.5 flex-shrink-0"
           >
-            TENDA<span className="text-amber">.</span>
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              className="transition-transform duration-300 group-hover/logo:scale-105"
+            >
+              <path
+                d="M16 2L29 9.5V22.5L16 30L3 22.5V9.5L16 2Z"
+                className="fill-ink transition-colors duration-300 group-hover/logo:fill-[#17304f]"
+              />
+              <path
+                d="M8 9H24V13.5H18.5V24H13.5V13.5H8V9Z"
+                fill="white"
+              />
+            </svg>
+            <span className="font-display text-xl font-normal text-ink leading-none">
+              TENDA<span className="text-amber">.</span>
+            </span>
           </a>
 
           <ul className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
