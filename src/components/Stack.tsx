@@ -39,7 +39,7 @@ const ICONS: Record<string, IconComponent> = {
 
 export default function Stack() {
   return (
-    <section id="stack" className="py-28 px-6 bg-canvas">
+    <section id="stack" className="py-24 px-6" style={{ background: '#1e3a5f' }}>
       <div className="max-w-6xl mx-auto">
 
         <motion.div
@@ -47,18 +47,18 @@ export default function Stack() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.55 }}
-          className="mb-16"
+          className="mb-14"
         >
-          <span className="font-code text-[10px] tracking-[0.2em] uppercase text-dust">
-            Technologies
+          <span className="font-code text-[10px] tracking-[0.2em] uppercase text-white/50">
+            Compétences
           </span>
-          <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3">
+          <h2 className="font-display text-3xl lg:text-5xl font-normal text-white mt-3 leading-[1.05] tracking-[-0.02em]">
             Les outils que{' '}
             <em className="text-amber">je maîtrise.</em>
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {STACK_EXPERTISE.map((cat, i) => (
             <motion.div
               key={cat.category}
@@ -66,12 +66,13 @@ export default function Stack() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="bg-surface rounded-2xl p-7"
+              className="rounded-2xl p-6"
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}
             >
               <div className="mb-5">
                 <span className="font-code text-[9px] tracking-widest uppercase text-amber">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="font-display text-xl font-normal text-ink mt-1">{cat.category}</h3>
-                <p className="font-body text-[13px] text-dust mt-1">{cat.description}</p>
+                <h3 className="font-display text-xl font-normal text-white mt-1">{cat.category}</h3>
+                <p className="font-body text-[13px] text-white/50 mt-1">{cat.description}</p>
               </div>
 
               <div className="flex flex-wrap gap-2">
@@ -84,10 +85,11 @@ export default function Stack() {
                       whileInView={{ opacity: 1, scale: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.1 }}
                       transition={{ delay: i * 0.06 + j * 0.04, duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-                      className="inline-flex items-center gap-2.5 bg-canvas px-4 py-2.5 rounded-full"
+                      className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full"
+                      style={{ background: 'rgba(255,255,255,0.08)' }}
                     >
-                      {Icon && <Icon size={16} className="text-ink opacity-60 flex-shrink-0" />}
-                      <span className="font-body text-[13px] font-medium text-ink leading-none">
+                      {Icon && <Icon size={16} className="text-white/60 flex-shrink-0" />}
+                      <span className="font-body text-[13px] font-medium text-white/90 leading-none">
                         {skill.name}
                       </span>
                     </motion.div>
