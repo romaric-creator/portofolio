@@ -1,20 +1,20 @@
-import { useEffect } from 'react';
-import posthog from 'posthog-js';
+import { useEffect, lazy, Suspense } from 'react';
 import { useTranslation } from './i18n';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import MarqueeBand from './components/MarqueeBand';
-import Projects from './components/Projects';
-import Services from './components/Services';
-import Process from './components/Process';
-import About from './components/About';
-import Stack from './components/Stack';
-import Timeline from './components/Timeline';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
+
+const About = lazy(() => import('./components/About'));
+const Services = lazy(() => import('./components/Services'));
+const Projects = lazy(() => import('./components/Projects'));
+const Stack = lazy(() => import('./components/Stack'));
+const Process = lazy(() => import('./components/Process'));
+const Timeline = lazy(() => import('./components/Timeline'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+const CustomCursor = lazy(() => import('./components/CustomCursor'));
 
 function App() {
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ function App() {
       [25, 50, 75, 100].forEach(t => {
         if (pct >= t && !fired.has(t)) {
           fired.add(t);
-          posthog.capture('scroll_depth', { percent: t });
+          import('./lib/analytics').then(a => a.capture('scroll_depth', { percent: t }));
         }
       });
     };
@@ -38,7 +38,9 @@ function App() {
     <>
       <ScrollProgress />
       <BackToTop />
-      <CustomCursor />
+      <Suspense>
+        <CustomCursor />
+      </Suspense>
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-ink focus:text-canvas focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
@@ -49,15 +51,19 @@ function App() {
       <main id="main-content">
         <Hero />
         <MarqueeBand />
-        <About />
-        <Services />
-        <Projects />
-        <Stack />
-        <Process />
-        <Timeline />
-        <Contact />
+        <Suspense>
+          <About />
+          <Services />
+          <Projects />
+          <Stack />
+          <Process />
+          <Timeline />
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense>
+        <Footer />
+      </Suspense>
     </>
   );
 }

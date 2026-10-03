@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, ExternalLink } from 'lucide-react';
-import posthog from 'posthog-js';
+import { capture } from '../lib/analytics';
 import { PROFILE } from '../data/projects';
 import { useTranslation } from '../i18n';
 
@@ -235,7 +235,7 @@ export default function Hero() {
               <a
                 href="/cv-christian-tenda.pdf"
                 download
-                onClick={() => posthog.capture('cv_downloaded')}
+                onClick={() => capture('cv_downloaded')}
                 className="group inline-flex items-center gap-2 px-2 py-3 text-sm text-dust transition-colors hover:text-amber"
               >
                 <Download

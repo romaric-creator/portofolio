@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, X, ExternalLink, GitBranch, Heart, Maximize2, ChevronLeft, ChevronRight } from 'lucide-react';
-import posthog from 'posthog-js';
+import { capture } from '../lib/analytics';
 import { useTranslation } from '../i18n';
 import { useLocalizedProjects } from '../i18n/data';
 import { useLikes, type LikesApi } from '../hooks/useLikes';
@@ -731,7 +731,7 @@ export default function Projects() {
   const likes = useLikes();
 
   const openDetail = (project: Project) => {
-    posthog.capture('project_detail_opened', { project: project.name });
+    capture('project_detail_opened', { project: project.name });
     setDetail(project);
   };
 

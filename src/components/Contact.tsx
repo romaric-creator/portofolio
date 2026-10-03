@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Mail, MapPin, Send } from 'lucide-react';
-import posthog from 'posthog-js';
+import { capture } from '../lib/analytics';
 import { PROFILE } from '../data/projects';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { useTranslation } from '../i18n';
@@ -34,7 +34,7 @@ export default function Contact() {
     parts.push(`\n${message.trim()}`);
 
     const text = encodeURIComponent(parts.join('\n'));
-    posthog.capture('contact_project_request', {
+    capture('contact_project_request', {
       hasName: !!name.trim(),
       hasEmail: !!email.trim(),
       projectType,
@@ -111,7 +111,7 @@ export default function Contact() {
             >
               <a
                 href={`mailto:${PROFILE.email}`}
-                onClick={() => posthog.capture('contact_email_clicked')}
+                onClick={() => capture('contact_email_clicked')}
                 className="inline-flex items-center gap-3 font-body font-semibold text-sm px-6 py-3 rounded-full transition-opacity hover:opacity-90"
                 style={{ background: DARK, color: W }}
               >
@@ -122,7 +122,7 @@ export default function Contact() {
                 href={`https://wa.me/${PHONE}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => posthog.capture('contact_social_clicked', { platform: 'WhatsApp' })}
+                onClick={() => capture('contact_social_clicked', { platform: 'WhatsApp' })}
                 className="inline-flex items-center gap-3 font-body font-semibold text-sm px-6 py-3 rounded-full hover:opacity-80 transition-opacity"
                 style={{ border: `1px solid ${W20}`, color: W }}
               >
@@ -145,7 +145,7 @@ export default function Contact() {
                 </p>
                 <a
                   href={`mailto:${PROFILE.email}`}
-                  onClick={() => posthog.capture('contact_email_clicked')}
+                  onClick={() => capture('contact_email_clicked')}
                   className="font-body text-[12px] break-all hover:opacity-70 transition-opacity"
                   style={{ color: W }}
                 >
@@ -167,12 +167,12 @@ export default function Contact() {
                 </p>
                 <div className="flex items-center gap-4">
                   <a href={`https://${PROFILE.github}`} target="_blank" rel="noopener noreferrer"
-                    onClick={() => posthog.capture('contact_social_clicked', { platform: 'GitHub' })}
+                    onClick={() => capture('contact_social_clicked', { platform: 'GitHub' })}
                     style={{ color: W }} className="hover:opacity-70 transition-opacity" aria-label="GitHub">
                     <GithubIcon size={16} />
                   </a>
                   <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer"
-                    onClick={() => posthog.capture('contact_social_clicked', { platform: 'LinkedIn' })}
+                    onClick={() => capture('contact_social_clicked', { platform: 'LinkedIn' })}
                     style={{ color: W }} className="hover:opacity-70 transition-opacity" aria-label="LinkedIn">
                     <LinkedinIcon size={16} />
                   </a>
