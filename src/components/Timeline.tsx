@@ -1,28 +1,30 @@
 import { motion } from 'framer-motion';
-import { TIMELINE_EVENTS } from '../data/projects';
+import { useTranslation } from '../i18n';
 
 export default function Timeline() {
+  const { t } = useTranslation();
+
   return (
-    <section id="timeline" className="py-20 px-6 bg-surface">
+    <section id="timeline" className="py-14 px-6 bg-surface">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.55 }}
-          className="mb-14"
+          className="mb-10"
         >
           <span className="font-code text-[10px] tracking-[0.2em] uppercase text-dust">
-            Parcours
+            {t.timeline.sectionLabel}
           </span>
           <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3 max-w-xl leading-[1.05] tracking-[-0.02em]">
-            L'évolution d'un{' '}
-            <em className="text-amber">concepteur passionné.</em>
+            {t.timeline.heading}{' '}
+            <em className="text-amber">{t.timeline.headingEm}</em>
           </h2>
         </motion.div>
 
         <div className="space-y-3">
-          {TIMELINE_EVENTS.map((event, i) => (
+          {t.timeline.events.map((event, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 16 }}

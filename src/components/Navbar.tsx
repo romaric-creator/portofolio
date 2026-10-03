@@ -1,12 +1,21 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Menu, ArrowUpRight } from 'lucide-react';
-import { NAV_LINKS } from '../data/projects';
+import { useTranslation } from '../i18n';
 
 export default function Navbar() {
+  const { t, locale, toggleLocale } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+
+  const NAV_LINKS = [
+    { href: '#about',    label: t.nav.links.about     },
+    { href: '#services', label: t.nav.links.services  },
+    { href: '#projects', label: t.nav.links.projects },
+    { href: '#stack',    label: t.nav.links.skills   },
+    { href: '#contact',  label: t.nav.links.contact   },
+  ];
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
@@ -30,7 +39,8 @@ export default function Navbar() {
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locale]);
 
   return (
     <>
@@ -86,16 +96,30 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden md:flex items-center gap-3 flex-shrink-0">
+            <button
+              onClick={toggleLocale}
+              className="font-code text-[12px] tracking-widest uppercase px-3 py-2 rounded-full border border-line hover:border-ink text-dust hover:text-ink transition-all duration-200"
+              aria-label={locale === 'fr' ? 'Switch to English' : 'Passer en français'}
+            >
+              {locale === 'fr' ? 'EN' : 'FR'}
+            </button>
             <a
               href="#contact"
               className="group inline-flex items-center gap-1.5 font-body text-[13px] font-semibold text-white bg-amber px-5 py-2.5 rounded-full shadow-md shadow-amber/25 hover:bg-[#5a8a18] hover:shadow-lg hover:shadow-amber/35 transition-all duration-200"
             >
-              Démarrer
+              {t.nav.cta}
               <ArrowUpRight size={13} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
+            <button
+              onClick={toggleLocale}
+              className="font-code text-[11px] tracking-widest uppercase px-2.5 py-1.5 rounded-full border border-line text-dust hover:text-ink transition-all duration-200"
+              aria-label={locale === 'fr' ? 'Switch to English' : 'Passer en français'}
+            >
+              {locale === 'fr' ? 'EN' : 'FR'}
+            </button>
             <button
               onClick={() => setOpen(!open)}
               className="text-ink hover:text-amber transition-colors p-1"
@@ -144,7 +168,7 @@ export default function Navbar() {
               transition={{ delay: 0.3, duration: 0.25 }}
               className="mt-10 inline-flex items-center gap-2 font-body text-sm font-semibold text-white bg-amber px-6 py-3.5 rounded-full self-start shadow-lg shadow-amber/30 hover:bg-[#5a8a18] transition-all"
             >
-              Démarrer un projet
+              {t.nav.ctaFull}
               <ArrowUpRight size={14} />
             </motion.a>
           </motion.div>

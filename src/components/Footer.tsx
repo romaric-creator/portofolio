@@ -1,6 +1,7 @@
-import { PROFILE, NAV_LINKS } from '../data/projects';
+import { PROFILE } from '../data/projects';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { MessageCircle, Mail } from 'lucide-react';
+import { useTranslation } from '../i18n';
 
 const SOCIALS = [
   { Icon: GithubIcon,   label: 'GitHub',   href: `https://${PROFILE.github}` },
@@ -8,35 +9,26 @@ const SOCIALS = [
 ];
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-ink">
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
 
-          <div className="lg:col-span-1">
+          <div className="sm:col-span-1">
             <a href="#hero" className="font-display text-2xl font-normal text-canvas">
               TENDA<span className="text-amber">.</span>
             </a>
             <p className="text-canvas/50 text-sm mt-4 leading-relaxed max-w-[220px]">
-              Full-Stack Developer basé à Douala. Disponible pour missions et collaborations internationales.
+              {t.footer.tagline}
             </p>
           </div>
 
           <div>
-            <p className="font-code text-[9px] tracking-widest uppercase text-canvas/40 mb-5">Navigation</p>
-            <ul className="flex flex-col gap-3">
-              {NAV_LINKS.map(({ href, label }) => (
-                <li key={href}>
-                  <a href={href} className="font-body text-sm text-canvas/60 hover:text-amber transition-colors">
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="font-code text-[9px] tracking-widest uppercase text-canvas/40 mb-5">Correspondance</p>
+            <p className="font-code text-[9px] tracking-widest uppercase text-canvas/40 mb-5">
+              {t.footer.columns.correspondence}
+            </p>
             <ul className="flex flex-col gap-3">
               <li>
                 <a
@@ -62,7 +54,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="font-code text-[9px] tracking-widest uppercase text-canvas/40 mb-5">Réseaux</p>
+            <p className="font-code text-[9px] tracking-widest uppercase text-canvas/40 mb-5">
+              {t.footer.columns.socials}
+            </p>
             <ul className="flex flex-col gap-3">
               {SOCIALS.map(({ Icon, label, href }) => (
                 <li key={label}>
@@ -88,7 +82,7 @@ export default function Footer() {
             &copy; 2026 {PROFILE.fullName}
           </p>
           <p className="font-body text-[12px] text-canvas/30">
-            Douala, Cameroon · Portfolio v3
+            {t.footer.bottomBar}
           </p>
         </div>
       </div>

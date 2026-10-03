@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
+import { useTranslation } from '../i18n';
 
 export default function BackToTop() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function BackToTop() {
           transition={{ duration: 0.25 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="fixed bottom-8 right-8 z-50 w-10 h-10 bg-amber text-white flex items-center justify-center rounded-full shadow-lg shadow-amber/30 hover:bg-[#5a8a18] hover:shadow-xl transition-all duration-200"
-          aria-label="Retour en haut"
+          aria-label={t.backToTop}
         >
           <ArrowUp size={14} />
         </motion.button>

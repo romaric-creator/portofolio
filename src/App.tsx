@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import posthog from 'posthog-js';
+import { useTranslation } from './i18n';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import MarqueeBand from './components/MarqueeBand';
@@ -16,6 +17,8 @@ import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 
 function App() {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const fired = new Set<number>();
     const onScroll = () => {
@@ -40,17 +43,17 @@ function App() {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-ink focus:text-canvas focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
       >
-        Aller au contenu
+        {t.skipToContent}
       </a>
       <Navbar />
       <main id="main-content">
         <Hero />
         <MarqueeBand />
+        <About />
+        <Services />
         <Projects />
         <Stack />
-        <Services />
         <Process />
-        <About />
         <Timeline />
         <Contact />
       </main>

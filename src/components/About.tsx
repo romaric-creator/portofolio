@@ -1,19 +1,22 @@
 import { motion } from 'framer-motion';
 import { MapPin, Wifi } from 'lucide-react';
 import { PROFILE } from '../data/projects';
+import { useTranslation } from '../i18n';
 
 const profileImg = '/image.png';
 const ease = [0.23, 1, 0.32, 1] as const;
 
-const META = [
-  { label: 'Domaines',     value: 'Web · Mobile · Desktop · Backend' },
-  { label: 'Expérience',   value: `${PROFILE.stats.exp} ans · ${PROFILE.stats.projects} projets livrés` },
-  { label: 'Langues',      value: 'Français · Anglais' },
-];
-
 export default function About() {
+  const { t } = useTranslation();
+
+  const META = [
+    { label: t.about.metaLabels.domains,    value: t.about.metaValues.domains },
+    { label: t.about.metaLabels.experience, value: `${PROFILE.stats.exp} ${t.about.metaValues.expUnit} · ${PROFILE.stats.projects} ${t.about.metaValues.projectsUnit}` },
+    { label: t.about.metaLabels.languages,  value: t.about.metaValues.languages },
+  ];
+
   return (
-    <section id="about" className="bg-canvas overflow-hidden">
+    <section id="about" className="py-14 bg-canvas overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.p
@@ -21,9 +24,9 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease }}
-          className="font-code text-[10px] tracking-[0.2em] uppercase text-dust pt-20 pb-8"
+          className="font-code text-[10px] tracking-[0.2em] uppercase text-dust pb-8"
         >
-          À propos
+          {t.about.sectionLabel}
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-0 lg:gap-20 items-start">
@@ -37,9 +40,9 @@ export default function About() {
               className="font-display font-normal text-ink leading-[1.02] tracking-[-0.02em]"
               style={{ fontSize: 'clamp(1.8rem, 3.2vw, 2.6rem)' }}
             >
-              Je transforme des besoins concrets
-              <br className="hidden sm:block" /> en outils{' '}
-              <em className="text-amber">numériques fonctionnels.</em>
+              {t.about.headingLine1}
+              <br className="hidden sm:block" /> {t.about.headingLine2}{' '}
+              <em className="text-amber">{t.about.headingEm}</em>
             </motion.h2>
 
             <motion.p
@@ -49,7 +52,7 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.14, ease }}
               className="text-sand text-base leading-relaxed mt-7 max-w-lg"
             >
-              Développeur Full-Stack basé à Douala, j'interviens sur l'ensemble du cycle de développement : interfaces, API, bases de données, déploiement. J'aime particulièrement remplacer des processus manuels par des outils simples, structurés et exploitables.
+              {t.about.bio}
             </motion.p>
 
             <motion.dl
@@ -72,15 +75,15 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.5, delay: 0.3, ease }}
-              className="flex flex-wrap items-center gap-3 mt-10 pb-20"
+              className="flex flex-wrap items-center gap-3 mt-10"
             >
               <span className="inline-flex items-center gap-2 font-code text-[10px] tracking-widest uppercase text-amber bg-amber/10 px-4 py-2.5 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber" />
-                Disponible
+                {t.about.badges.available}
               </span>
               <span className="inline-flex items-center gap-2 font-code text-[10px] tracking-widest uppercase text-sand bg-surface px-4 py-2.5 rounded-full">
                 <MapPin size={11} />
-                Douala, Cameroun
+                {PROFILE.location}
               </span>
               <span className="inline-flex items-center gap-2 font-code text-[10px] tracking-widest uppercase text-sand bg-surface px-4 py-2.5 rounded-full">
                 <Wifi size={11} />

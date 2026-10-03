@@ -4,6 +4,7 @@ import { MessageCircle, Mail, MapPin, Send } from 'lucide-react';
 import posthog from 'posthog-js';
 import { PROFILE } from '../data/projects';
 import { GithubIcon, LinkedinIcon } from './Icons';
+import { useTranslation } from '../i18n';
 
 const W    = '#e2e8f0';
 const W60  = 'rgba(226,232,240,0.6)';
@@ -13,32 +14,23 @@ const DARK = '#1e3a5f';
 
 const PHONE = PROFILE.phone.replace(/\D/g, '');
 
-const PROJECT_TYPES = [
-  'Application métier',
-  'SaaS / MVP',
-  'Application mobile',
-  'Automatisation',
-  'API / Backend',
-  'Autre',
-];
-
-
 export default function Contact() {
-  const [name, setName]           = useState('');
-  const [email, setEmail]         = useState('');
-  const [company, setCompany]     = useState('');
-  const [projectType, setType]    = useState('');
-  const [message, setMessage]     = useState('');
+  const { t } = useTranslation();
+  const [name, setName]        = useState('');
+  const [email, setEmail]      = useState('');
+  const [company, setCompany]  = useState('');
+  const [projectType, setType] = useState('');
+  const [message, setMessage]  = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
 
     const parts = [];
-    if (name.trim()) parts.push(`Nom : ${name.trim()}`);
-    if (email.trim()) parts.push(`Email : ${email.trim()}`);
-    if (company.trim()) parts.push(`Entreprise : ${company.trim()}`);
-    if (projectType) parts.push(`Type : ${projectType}`);
+    if (name.trim())    parts.push(`${t.contact.whatsapp.name} : ${name.trim()}`);
+    if (email.trim())   parts.push(`${t.contact.whatsapp.email} : ${email.trim()}`);
+    if (company.trim()) parts.push(`${t.contact.whatsapp.company} : ${company.trim()}`);
+    if (projectType)    parts.push(`${t.contact.whatsapp.type} : ${projectType}`);
     parts.push(`\n${message.trim()}`);
 
     const text = encodeURIComponent(parts.join('\n'));
@@ -63,7 +55,7 @@ export default function Contact() {
     (e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)');
 
   return (
-    <section id="contact" className="py-20 px-6 overflow-hidden" style={{ background: '#1e3a5f' }}>
+    <section id="contact" className="py-14 px-6 overflow-hidden" style={{ background: '#1e3a5f' }}>
       <div className="max-w-6xl mx-auto">
 
         <motion.p
@@ -74,7 +66,7 @@ export default function Contact() {
           className="font-code text-[10px] tracking-[0.2em] uppercase"
           style={{ color: W60 }}
         >
-          Contact
+          {t.contact.sectionLabel}
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-4 items-start">
@@ -84,9 +76,9 @@ export default function Contact() {
               className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight"
               style={{ color: W }}
             >
-              {['Un projet ?', 'Parlons-en.'].map((word, i) => (
+              {t.contact.headingLines.map((word, i) => (
                 <motion.span
-                  key={word}
+                  key={i}
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.1 }}
@@ -107,7 +99,7 @@ export default function Contact() {
               className="text-base mt-6 max-w-md leading-relaxed"
               style={{ color: W60 }}
             >
-              Décrivez votre besoin et je vous recontacte sous 24h pour en discuter.
+              {t.contact.subtitle}
             </motion.p>
 
             <motion.div
@@ -148,7 +140,9 @@ export default function Contact() {
               style={{ borderTop: `1px solid ${W10}` }}
             >
               <div>
-                <p className="font-code text-[9px] tracking-widest uppercase mb-2" style={{ color: W60 }}>Email</p>
+                <p className="font-code text-[9px] tracking-widest uppercase mb-2" style={{ color: W60 }}>
+                  {t.contact.labels.email}
+                </p>
                 <a
                   href={`mailto:${PROFILE.email}`}
                   onClick={() => posthog.capture('contact_email_clicked')}
@@ -159,14 +153,18 @@ export default function Contact() {
                 </a>
               </div>
               <div>
-                <p className="font-code text-[9px] tracking-widest uppercase mb-2" style={{ color: W60 }}>Localisation</p>
+                <p className="font-code text-[9px] tracking-widest uppercase mb-2" style={{ color: W60 }}>
+                  {t.contact.labels.location}
+                </p>
                 <span className="font-body text-[12px] inline-flex items-center gap-1.5" style={{ color: W }}>
                   <MapPin size={11} />
                   {PROFILE.location}
                 </span>
               </div>
               <div>
-                <p className="font-code text-[9px] tracking-widest uppercase mb-2" style={{ color: W60 }}>Réseaux</p>
+                <p className="font-code text-[9px] tracking-widest uppercase mb-2" style={{ color: W60 }}>
+                  {t.contact.labels.socials}
+                </p>
                 <div className="flex items-center gap-4">
                   <a href={`https://${PROFILE.github}`} target="_blank" rel="noopener noreferrer"
                     onClick={() => posthog.capture('contact_social_clicked', { platform: 'GitHub' })}
@@ -198,24 +196,24 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="contact-name" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
-                    Nom
+                    {t.contact.form.name}
                   </label>
                   <input
                     id="contact-name" type="text" value={name}
                     onChange={e => setName(e.target.value)}
-                    placeholder="Votre nom"
+                    placeholder={t.contact.form.namePlaceholder}
                     className={`${inputBase} contact-input`} style={inputStyle}
                     onFocus={onFocus} onBlur={onBlur}
                   />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="contact-email" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
-                    Email
+                    {t.contact.form.email}
                   </label>
                   <input
                     id="contact-email" type="email" value={email}
                     onChange={e => setEmail(e.target.value)}
-                    placeholder="votre@email.com"
+                    placeholder={t.contact.form.emailPlaceholder}
                     className={`${inputBase} contact-input`} style={inputStyle}
                     onFocus={onFocus} onBlur={onBlur}
                   />
@@ -224,12 +222,12 @@ export default function Contact() {
 
               <div className="flex flex-col gap-2">
                 <label htmlFor="contact-company" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
-                  Entreprise / Projet
+                  {t.contact.form.company}
                 </label>
                 <input
                   id="contact-company" type="text" value={company}
                   onChange={e => setCompany(e.target.value)}
-                  placeholder="Nom de votre entreprise ou projet"
+                  placeholder={t.contact.form.companyPlaceholder}
                   className={`${inputBase} contact-input`} style={inputStyle}
                   onFocus={onFocus} onBlur={onBlur}
                 />
@@ -237,7 +235,7 @@ export default function Contact() {
 
               <div className="flex flex-col gap-2">
                 <label htmlFor="contact-type" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
-                  Type de projet
+                  {t.contact.form.projectType}
                 </label>
                 <select
                   id="contact-type" value={projectType}
@@ -245,19 +243,19 @@ export default function Contact() {
                   className={inputBase} style={inputStyle}
                   onFocus={onFocus} onBlur={onBlur}
                 >
-                  <option value="">Sélectionner...</option>
-                  {PROJECT_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+                  <option value="">{t.contact.form.projectTypePlaceholder}</option>
+                  {t.contact.projectTypes.map(pt => <option key={pt} value={pt}>{pt}</option>)}
                 </select>
               </div>
 
               <div className="flex flex-col gap-2">
                 <label htmlFor="contact-message" className="font-code text-[9px] tracking-widest uppercase" style={{ color: DARK }}>
-                  Description du projet
+                  {t.contact.form.message}
                 </label>
                 <textarea
                   id="contact-message" value={message}
                   onChange={e => setMessage(e.target.value)}
-                  placeholder="Décrivez votre besoin, vos objectifs et vos contraintes..."
+                  placeholder={t.contact.form.messagePlaceholder}
                   rows={4} required
                   className={`${inputBase} contact-input resize-none`} style={inputStyle}
                   onFocus={onFocus} onBlur={onBlur}
@@ -270,11 +268,11 @@ export default function Contact() {
                 style={{ background: '#84c225', color: '#ffffff' }}
               >
                 <Send size={15} />
-                Envoyer ma demande
+                {t.contact.form.submit}
               </button>
 
               <p className="font-body text-[11px] text-center" style={{ color: 'rgba(0,0,0,0.4)' }}>
-                Le formulaire ouvre WhatsApp avec votre message. Vous pouvez aussi me contacter par email.
+                {t.contact.form.disclaimer}
               </p>
             </form>
           </motion.div>

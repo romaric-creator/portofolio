@@ -2,16 +2,9 @@ import { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import { useTranslation } from '../i18n';
 
 const FONT_URL = 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/fonts/droid/droid_serif_bold.typeface.json';
-
-const LINES = [
-  'Je transforme',
-  'les processus',
-  'metier en',
-  'logiciels',
-  'simples.',
-];
 
 const VOWELS = new Set(['a','e','i','o','u','é','è','ê','à','â','î','ô','û','J','l']);
 
@@ -20,10 +13,12 @@ const LINE_HEIGHT = 2.6;
 const DEPTH = 0.45;
 
 export default function Text3D({ className = '' }: { className?: string }) {
+  const { t, locale } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    const LINES = t.text3d.lines;
     const container = containerRef.current;
     if (!container) return;
 
@@ -233,7 +228,8 @@ export default function Text3D({ className = '' }: { className?: string }) {
       renderer.dispose();
       if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
     };
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locale]);
 
   return <div ref={containerRef} className={className} />;
 }

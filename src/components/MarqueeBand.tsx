@@ -1,12 +1,9 @@
-const ITEMS = [
-  'Applications métier', 'SaaS', 'Automatisation',
-  'React', 'Node.js', 'TypeScript', 'React Native',
-  'Electron', 'Web', 'Mobile', 'Desktop', 'Backend',
-];
-
-const text = ITEMS.join('  ·  ') + '  ·  ';
+import { useTranslation } from '../i18n';
 
 export default function MarqueeBand() {
+  const { t } = useTranslation();
+  const text = t.marquee.items.join('  ·  ') + '  ·  ';
+
   return (
     <div className="bg-ink overflow-hidden py-3.5 select-none" aria-hidden="true">
       <div

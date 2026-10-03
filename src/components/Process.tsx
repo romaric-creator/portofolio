@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
-import { PROCESS_STEPS } from '../data/projects';
+import { useTranslation } from '../i18n';
 
 export default function Process() {
+  const { t } = useTranslation();
+
   return (
-    <section id="process" className="py-20 px-6 bg-surface">
+    <section id="process" className="py-14 px-6 bg-surface">
       <div className="max-w-6xl mx-auto">
 
         <motion.div
@@ -14,21 +16,21 @@ export default function Process() {
           className="mb-16"
         >
           <span className="font-code text-[10px] tracking-[0.2em] uppercase text-dust">
-            Mon processus
+            {t.process.sectionLabel}
           </span>
           <h2 className="font-display text-3xl lg:text-5xl font-normal text-ink mt-3 leading-[1.05] tracking-[-0.02em]">
-            Comment{' '}
-            <em className="text-amber">je travaille.</em>
+            {t.process.heading}{' '}
+            <em className="text-amber">{t.process.headingEm}</em>
           </h2>
           <p className="text-sand text-base leading-relaxed max-w-lg mt-5">
-            Un processus clair pour réduire l'incertitude et livrer un produit qui correspond à vos attentes.
+            {t.process.description}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          {PROCESS_STEPS.map((step, i) => (
+          {t.process.steps.map((step, i) => (
             <motion.div
-              key={step.num}
+              key={i}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
@@ -36,7 +38,7 @@ export default function Process() {
               className="bg-canvas rounded-2xl p-6 flex flex-col gap-4 hover:shadow-md hover:shadow-ink/5 transition-all duration-300"
             >
               <span className="font-code text-[13px] font-semibold text-amber">
-                {step.num}
+                {String(i + 1).padStart(2, '0')}
               </span>
               <h3 className="font-display text-lg font-normal text-ink">
                 {step.title}
