@@ -16,6 +16,8 @@ export function useLikes() {
   const [liked, setLiked] = useState<Set<string>>(getLocalLikes);
 
   useEffect(() => {
+    if (!supabase) return;
+
     supabase
       .from('project_likes')
       .select('project_id, count')
@@ -38,7 +40,7 @@ export function useLikes() {
       )
       .subscribe();
 
-    return () => { supabase.removeChannel(channel); };
+    return () => { supabase!.removeChannel(channel); };
   }, []);
 
   const toggle = useCallback(async (id: string) => {
@@ -54,7 +56,7 @@ export function useLikes() {
       [id]: Math.max(0, (prev[id] ?? 0) + (isLiked ? -1 : 1)),
     }));
 
-    await supabase.rpc(isLiked ? 'decrement_like' : 'increment_like', { p_id: id });
+    await supabase?.rpc(isLiked ? 'decrement_like' : 'increment_like', { p_id: id });
   }, [liked]);
 
   return { counts, liked, toggle };
