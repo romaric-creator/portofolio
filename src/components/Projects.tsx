@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, X, ExternalLink, GitBranch, Heart, Maximize2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { capture } from '../lib/analytics';
@@ -13,9 +13,10 @@ type Project = ReturnType<typeof useLocalizedProjects>[0];
 const GRADIENTS: Record<string, string> = {
   'gradient-vitasang': 'linear-gradient(135deg, #1e3a5f 0%, #2a4a6f 50%, #1e3a5f 100%)',
   'gradient-flexystore': 'linear-gradient(135deg, #1e3a5f 0%, #3d6b2e 50%, #84c225 100%)',
+  'gradient-gourmi': 'linear-gradient(135deg, #1c1408 0%, #3d2e10 50%, #6b5020 100%)',
 };
 
-const FEATURED_NAMES = ['GLOBEApp', 'SafeDriving'];
+const FEATURED_NAMES = ['Gourmi IQ', 'GLOBEApp', 'VitaSang'];
 
 const CATEGORY_COLORS: Record<string, string> = {
   'Web':     'text-sky-400 bg-sky-400/10',
@@ -24,6 +25,26 @@ const CATEGORY_COLORS: Record<string, string> = {
   'Backend': 'text-amber bg-amber/10',
   'Desktop': 'text-cyan-400 bg-cyan-400/10',
 };
+
+const STATUS_COLORS: Record<string, string> = {
+  'production':  'text-emerald-400 bg-emerald-400/10',
+  'delivered':   'text-sky-400 bg-sky-400/10',
+  'in-progress': 'text-amber bg-amber/10',
+  'prototype':   'text-violet-400 bg-violet-400/10',
+};
+
+/* ─── Status Badge ─── */
+function StatusBadge({ status }: { status?: string }) {
+  const { t } = useTranslation();
+  if (!status) return null;
+  const label = t.projects.statusLabels[status];
+  if (!label) return null;
+  return (
+    <span className={`inline-block font-code text-[9px] tracking-widest uppercase px-2 py-0.5 rounded-full ${STATUS_COLORS[status] ?? 'text-dust bg-surface'}`}>
+      {label}
+    </span>
+  );
+}
 
 /* ─── Like Button ─── */
 function LikeButton({ projectId, likes, variant = 'card' }: {
@@ -34,13 +55,9 @@ function LikeButton({ projectId, likes, variant = 'card' }: {
   const isLiked = likes.liked.has(projectId);
   const count = likes.counts[projectId] ?? 0;
 
-  const base = variant === 'featured'
-    ? `flex items-center gap-1.5 px-3 py-1.5 rounded-full backdrop-blur-sm transition-all duration-200 ${
-        isLiked ? 'bg-rose-500/80 text-white' : 'bg-black/40 text-white/80 hover:bg-rose-500/60'
-      }`
-    : `flex items-center gap-1.5 px-3 py-1.5 rounded-full backdrop-blur-sm transition-all duration-200 ${
-        isLiked ? 'bg-rose-500/80 text-white' : 'bg-black/40 text-white/80 hover:bg-rose-500/60'
-      }`;
+  const base = `flex items-center gap-1.5 px-3 py-1.5 rounded-full backdrop-blur-sm transition-all duration-200 ${
+    isLiked ? 'bg-rose-500/80 text-white' : 'bg-black/40 text-white/80 hover:bg-rose-500/60'
+  }`;
 
   return (
     <motion.button
@@ -90,6 +107,7 @@ function useScreenshotPreview(screenshots: string[]) {
 
   const onEnter = useCallback(() => {
     if (screenshots.length <= 1) return;
+    clearInterval(intervalRef.current);
     setHovering(true);
     setCurrentIdx(0);
     intervalRef.current = setInterval(() => {
@@ -214,11 +232,11 @@ function CaseStudy({ project, onClose }: { project: Project; onClose: () => void
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const fn = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    const fn = (e: KeyboardEvent) => { if (e.key === 'Escape' && !lightbox) onClose(); };
     document.addEventListener('keydown', fn);
     document.body.style.overflow = 'hidden';
     return () => { document.removeEventListener('keydown', fn); document.body.style.overflow = ''; };
-  }, [onClose]);
+  }, [onClose, lightbox]);
 
   useEffect(() => {
     if (shots.length <= 1 || !containerRef.current) return;
@@ -267,6 +285,7 @@ function CaseStudy({ project, onClose }: { project: Project; onClose: () => void
       >
         <div className="flex items-center gap-3">
           <span className="font-code text-[10px] tracking-widest uppercase text-amber">{project.category}</span>
+          {project.status && <StatusBadge status={project.status} />}
           <span className="w-px h-3 bg-line" />
           <span className="font-display text-sm text-ink">{project.name}</span>
         </div>
@@ -465,15 +484,23 @@ function CaseStudy({ project, onClose }: { project: Project; onClose: () => void
 }
 
 /* ─── Featured Card ─── */
-function FeaturedCard({ project, onClick, likes }: { project: Project; onClick: () => void; likes: LikesApi }) {
+function FeaturedCard({ project, onClick, likes, hero = false }: { project: Project; onClick: () => void; likes: LikesApi; hero?: boolean }) {
   const shots = project.screenshots ?? [];
   const gradient = GRADIENTS[project.visualPlaceholder] ?? GRADIENTS['gradient-vitasang'];
   const { ref, rotateX, rotateY, onMove, onLeave: tiltLeave } = useTilt(6);
   const preview = useScreenshotPreview(shots);
+  const { t } = useTranslation();
 
   const handleMove = (e: React.MouseEvent) => onMove(e);
-  const handleEnter = () => preview.onEnter();
-  const handleLeave = () => { tiltLeave(); preview.onLeave(); };
+  const handlePointerEnter = (e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
+    preview.onEnter();
+  };
+  const handlePointerLeave = (e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
+    tiltLeave();
+    preview.onLeave();
+  };
 
   return (
     <motion.div
@@ -482,8 +509,8 @@ function FeaturedCard({ project, onClick, likes }: { project: Project; onClick: 
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.6, ease }}
       onClick={onClick}
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
       className="group cursor-pointer"
       style={{ perspective: 800 }}
     >
@@ -493,7 +520,7 @@ function FeaturedCard({ project, onClick, likes }: { project: Project; onClick: 
         style={{ rotateX, rotateY }}
         className="relative overflow-hidden rounded-2xl will-change-transform"
       >
-        <div className="relative" style={{ aspectRatio: '16/9' }}>
+        <div className="relative" style={{ aspectRatio: hero ? '21/9' : '16/9' }}>
           {shots.length > 0 ? (
             <AnimatePresence mode="wait">
               <motion.img
@@ -515,15 +542,28 @@ function FeaturedCard({ project, onClick, likes }: { project: Project; onClick: 
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7">
-          <span className={`inline-block font-code text-[10px] tracking-widest uppercase px-2.5 py-1 rounded-full mb-2 ${CATEGORY_COLORS[project.category] ?? 'text-amber bg-amber/10'}`}>
-            {project.category}
-          </span>
-          <h3 className="font-display text-xl sm:text-2xl lg:text-3xl font-normal text-white mt-1 group-hover:text-amber transition-colors duration-300">
+          <div className="flex items-center gap-2 mb-2">
+            <span className={`inline-block font-code text-[10px] tracking-widest uppercase px-2.5 py-1 rounded-full ${CATEGORY_COLORS[project.category] ?? 'text-amber bg-amber/10'}`}>
+              {project.category}
+            </span>
+            {hero && (
+              <span className="inline-flex items-center gap-1 font-code text-[10px] tracking-widest uppercase px-2.5 py-1 rounded-full bg-amber text-white">
+                <span className="w-1 h-1 rounded-full bg-white/80 animate-pulse" />
+                {t.projects.flagship}
+              </span>
+            )}
+          </div>
+          <h3 className={`font-display font-normal text-white mt-1 group-hover:text-amber transition-colors duration-300 ${hero ? 'text-2xl sm:text-3xl lg:text-4xl' : 'text-xl sm:text-2xl lg:text-3xl'}`}>
             {project.name}
           </h3>
-          <p className="text-white/70 text-sm mt-2 max-w-lg line-clamp-2">
+          <p className={`text-white/70 text-sm mt-2 line-clamp-2 ${hero ? 'max-w-2xl' : 'max-w-lg'}`}>
             {project.tagline}
           </p>
+          {project.status && (
+            <div className="mt-2">
+              <StatusBadge status={project.status} />
+            </div>
+          )}
           <div className="flex flex-wrap gap-2 mt-3">
             {project.stack.slice(0, 4).map(tech => (
               <span key={tech} className="font-code text-[10px] tracking-widest uppercase text-white/50">
@@ -562,8 +602,15 @@ function CompactCard({ project, index, onClick, likes }: {
   const preview = useScreenshotPreview(shots);
 
   const handleMove = (e: React.MouseEvent) => onMove(e);
-  const handleEnter = () => preview.onEnter();
-  const handleLeave = () => { tiltLeave(); preview.onLeave(); };
+  const handlePointerEnter = (e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
+    preview.onEnter();
+  };
+  const handlePointerLeave = (e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
+    tiltLeave();
+    preview.onLeave();
+  };
 
   return (
     <motion.div
@@ -572,8 +619,8 @@ function CompactCard({ project, index, onClick, likes }: {
       viewport={{ once: true, amount: 0.15 }}
       transition={{ delay: index * 0.06, duration: 0.5, ease }}
       onClick={onClick}
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
       className="group cursor-pointer"
       style={{ perspective: 600 }}
     >
@@ -625,6 +672,11 @@ function CompactCard({ project, index, onClick, likes }: {
           <p className="text-sand text-sm mt-1.5 line-clamp-2 leading-relaxed">
             {project.tagline}
           </p>
+          {project.status && (
+            <div className="mt-2">
+              <StatusBadge status={project.status} />
+            </div>
+          )}
           <div className="flex flex-wrap gap-1.5 mt-3">
             {project.stack.slice(0, 3).map(tech => (
               <span key={tech} className="font-code text-[10px] tracking-widest uppercase text-dust bg-surface border border-line/40 px-2 py-0.5 rounded-full">
@@ -671,11 +723,20 @@ function FeaturedSection({ projects, onOpen, likes }: { projects: Project[]; onO
 
   return (
     <>
-      {/* Desktop: grid */}
-      <div className="hidden sm:grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-        {featured.map(project => (
-          <FeaturedCard key={project.id} project={project} onClick={() => onOpen(project)} likes={likes} />
-        ))}
+      {/* Desktop: hero + 2-col grid */}
+      <div className="hidden sm:block mb-5">
+        {featured[0] && (
+          <div className="mb-5">
+            <FeaturedCard key={featured[0].id} project={featured[0]} onClick={() => onOpen(featured[0])} likes={likes} hero />
+          </div>
+        )}
+        {featured.length > 1 && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            {featured.slice(1).map(project => (
+              <FeaturedCard key={project.id} project={project} onClick={() => onOpen(project)} likes={likes} />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Mobile: horizontal scroll with snap */}
@@ -726,19 +787,43 @@ function FeaturedSection({ projects, onOpen, likes }: { projects: Project[]; onO
 export default function Projects() {
   const { t } = useTranslation();
   const projects = useLocalizedProjects();
-  const rest = projects.filter(p => !FEATURED_NAMES.includes(p.name));
-  const [detail, setDetail] = useState<Project | null>(null);
+  const [detailId, setDetailId] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const likes = useLikes();
 
-  const openDetail = (project: Project) => {
+  const detail = detailId ? (projects.find(p => p.id === detailId) ?? null) : null;
+  const categories = useMemo(() => [...new Set(projects.map(p => p.category))], [projects]);
+  const rest = projects.filter(p => !FEATURED_NAMES.includes(p.name));
+  const filteredProjects = activeFilter ? projects.filter(p => p.category === activeFilter) : null;
+
+  const openDetail = useCallback((project: Project) => {
     capture('project_detail_opened', { project: project.name });
-    setDetail(project);
-  };
+    setDetailId(project.id);
+    history.pushState(null, '', `#project-${project.id}`);
+  }, []);
+
+  const closeDetail = useCallback(() => {
+    setDetailId(null);
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }, []);
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    const match = hash.match(/^#project-(.+)$/);
+    if (match) {
+      const p = projects.find(proj => proj.id === match[1]);
+      if (p) {
+        capture('project_detail_opened', { project: p.name });
+        setDetailId(p.id);
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <AnimatePresence>
-        {detail && <CaseStudy project={detail} onClose={() => setDetail(null)} />}
+        {detail && <CaseStudy project={detail} onClose={closeDetail} />}
       </AnimatePresence>
 
       <section id="projects" className="py-14 px-5 sm:px-6 bg-canvas">
@@ -749,7 +834,7 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.55 }}
-            className="mb-10"
+            className="mb-8"
           >
             <span className="font-code text-[10px] tracking-[0.2em] uppercase text-dust">
               {t.projects.sectionLabel}
@@ -760,19 +845,70 @@ export default function Projects() {
             </h2>
           </motion.div>
 
-          <FeaturedSection projects={projects} onOpen={openDetail} likes={likes} />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {rest.map((project, i) => (
-              <CompactCard
-                key={project.id}
-                project={project}
-                index={i}
-                onClick={() => openDetail(project)}
-                likes={likes}
-              />
-            ))}
+          <div className="flex items-center gap-2 mb-8 overflow-x-auto -mx-1 px-1 pb-1" style={{ scrollbarWidth: 'none' }}>
+            <button
+              onClick={() => setActiveFilter(null)}
+              className={`flex-shrink-0 font-code text-[10px] tracking-widest uppercase px-4 py-2 rounded-full border transition-all duration-200 ${
+                activeFilter === null
+                  ? 'bg-amber text-white border-amber'
+                  : 'text-dust border-line hover:text-ink hover:border-ink/30'
+              }`}
+            >
+              {t.projects.filterAll}
+              <span className="ml-1.5 opacity-60">{projects.length}</span>
+            </button>
+            {categories.map(cat => {
+              const count = projects.filter(p => p.category === cat).length;
+              const isActive = activeFilter === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveFilter(isActive ? null : cat)}
+                  className={`flex-shrink-0 font-code text-[10px] tracking-widest uppercase px-4 py-2 rounded-full border transition-all duration-200 ${
+                    isActive
+                      ? `${CATEGORY_COLORS[cat] ?? 'text-amber bg-amber/10'} border-current`
+                      : 'text-dust border-line hover:text-ink hover:border-ink/30'
+                  }`}
+                >
+                  {cat}
+                  <span className="ml-1.5 opacity-60">{count}</span>
+                </button>
+              );
+            })}
           </div>
+
+          {filteredProjects ? (
+            filteredProjects.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {filteredProjects.map((project, i) => (
+                  <CompactCard
+                    key={project.id}
+                    project={project}
+                    index={i}
+                    onClick={() => openDetail(project)}
+                    likes={likes}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-dust font-code text-sm text-center py-16">{t.projects.filterAll}</p>
+            )
+          ) : (
+            <>
+              <FeaturedSection projects={projects} onOpen={openDetail} likes={likes} />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {rest.map((project, i) => (
+                  <CompactCard
+                    key={project.id}
+                    project={project}
+                    index={i}
+                    onClick={() => openDetail(project)}
+                    likes={likes}
+                  />
+                ))}
+              </div>
+            </>
+          )}
 
         </div>
       </section>

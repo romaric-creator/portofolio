@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import { PROFILE } from '../data/projects';
 import { GithubIcon, LinkedinIcon } from './Icons';
-import { MessageCircle, Mail } from 'lucide-react';
+import { MessageCircle, Mail, Images } from 'lucide-react';
 import { useTranslation } from '../i18n';
 
 const SOCIALS = [
@@ -71,6 +72,15 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <Link
+                  to="/gallery"
+                  className="font-body text-sm text-canvas/60 hover:text-amber transition-colors inline-flex items-center gap-2"
+                >
+                  <Images size={13} />
+                  Gallery
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

@@ -1,5 +1,7 @@
 export const PROFILE = {
   fullName: "Tenda Boupda Christian Romaric",
+  firstName: "Christian Romaric",
+  lastName: "Tenda Boupda",
   professionalTitle: "Full-Stack Developer",
   location: "Douala, Cameroon",
   availability: "Working remotely with clients worldwide",
@@ -27,6 +29,7 @@ export const TECH_STACK = {
 export const PROJECTS = [
   {
     id: "01",
+    status: 'delivered',
     name: "GLOBEApp",
     category: "Web",
     tagline: "Application de gestion commerciale et comptabilité pour résidences, hôtels, restaurants et PME.",
@@ -55,6 +58,7 @@ export const PROJECTS = [
   },
   {
     id: "02",
+    status: 'delivered',
     name: "VitaSang",
     category: "Mobile",
     tagline: "Plateforme mobile de coordination du don de sang au Cameroun.",
@@ -76,6 +80,7 @@ export const PROJECTS = [
   },
   {
     id: "03",
+    status: 'in-progress',
     name: "Sparknest",
     category: "Web",
     tagline: "Plateforme collaborative full-stack avec application mobile.",
@@ -90,6 +95,7 @@ export const PROJECTS = [
   },
   {
     id: "04",
+    status: 'delivered',
     name: "AgrisIA",
     category: "IA",
     tagline: "IA de prédiction du rendement agricole.",
@@ -105,6 +111,7 @@ export const PROJECTS = [
   },
   {
     id: "05",
+    status: 'delivered',
     name: "Mentor-X",
     category: "Backend",
     tagline: "API de parrainage et réseau social universitaire (IUC).",
@@ -126,6 +133,7 @@ export const PROJECTS = [
   },
   {
     id: "06",
+    status: 'delivered',
     name: "Taskly API REST",
     category: "Backend",
     tagline: "API haute performance de gestion de projets en équipe.",
@@ -140,6 +148,7 @@ export const PROJECTS = [
   },
   {
     id: "07",
+    status: 'delivered',
     name: "SafeDriving",
     category: "Desktop",
     tagline: "Système de gestion complet pour auto-école (desktop).",
@@ -168,6 +177,7 @@ export const PROJECTS = [
   },
   {
     id: "08",
+    status: 'delivered',
     name: "TechFlow",
     category: "Desktop",
     tagline: "Application desktop de gestion de maintenance informatique.",
@@ -184,6 +194,36 @@ export const PROJECTS = [
       process: "State management Zustand pour la reactivite, Prisma pour la base de donnees, React PDF pour la facturation automatisee.",
       solution: "Logiciel desktop complet : reception, tickets, facturation PDF, gestion clients, rapports et inventaire.",
       results: ["Export PDF et Excel", "Historique client complet", "Gestion d'inventaire"],
+    },
+  },
+  {
+    id: "09",
+    name: "Gourmi IQ",
+    category: "Web",
+    status: "in-progress",
+    tagline: "SaaS restaurant multi-tenant avec copilote IA analytique, Tool Use natif et commandes temps réel.",
+    description: "Plateforme SaaS pour restaurants africains : dashboard admin, menu client QR, interface cuisine. Le cœur : Console IQ — copilote IA Cohere Command R+ avec pipeline Two-Pass, Tool Use natif (query_database, execute_manager_action, search_dish_images), snapshot temps réel injecté dans chaque preamble et 6 widgets UI générés dynamiquement (ChatChart, StockAlert, SmartActions, StrategyInsight, MenuForm, DecisionTool). Architecture microservices (9 services), cache Redis multi-niveau, Electron desktop, freemium IA.",
+    stack: ["React 18", "Node.js", "Express", "MySQL", "Socket.io", "Cohere AI", "Docker", "Electron"],
+    links: {
+      github: null,
+      live: null,
+      demo: null,
+    },
+    screenshots: [
+      "/screenshots/gourmi-orders.png",
+      "/screenshots/gourmi-menu.png",
+      "/screenshots/gourmi-researcher.png",
+      "/screenshots/gourmi-categories.png",
+      "/screenshots/gourmi-tables.png",
+      "/screenshots/gourmi-users.png",
+      "/screenshots/gourmi-menu-form.png",
+    ],
+    visualPlaceholder: "gradient-gourmi",
+    caseStudy: {
+      problem: "Les restaurants africains gèrent menus, commandes et cuisine avec des outils fragmentés, sans analytics centralisées ni intelligence opérationnelle.",
+      process: "Pipeline Two-Pass : Pass 1 (Cohere sélectionne les outils), exécution SQL whitlistée par tenant, Pass 2 (réponse streamée SSE avec résultats injectés). Snapshot temps réel (CA, stock critique, meilleur plat) injecté dans chaque preamble. Sécurité stricte : 6 tables whitelistées, injection tenant automatique, rate limiting par rôle.",
+      solution: "Console IQ (admin) : copilote analytique qui lit et écrit la BDD via Tool Use, génère 6 types de widgets UI custom. Menu Researcher : synthèse multi-source (Reddit, Wikidata, OpenFoodFacts + base africaine) avec labels de fiabilité. Recommandations client personnalisées basées sur l'historique.",
+      results: ["Pipeline Two-Pass + Tool Use natif", "6 widgets UI générés par l'IA", "Menu Researcher multi-source", "Snapshot BDD temps réel"],
     },
   }
 ];
@@ -232,6 +272,7 @@ export const PROJECT_META: Record<string, { badge: string; metrics: string[] }> 
   "06": { badge: "API REST", metrics: ["Auth JWT sécurisée", "Rôles et permissions"] },
   "07": { badge: "Application métier", metrics: ["Gestion multi-sites", "Workflow automatisé"] },
   "08": { badge: "Outil métier desktop", metrics: ["Export PDF et Excel", "State Zustand"] },
+  "09": { badge: "SaaS IA", metrics: ["Architecture microservices", "Assistant IA Cohere"] },
 };
 
 export const STACK_EXPERTISE = [

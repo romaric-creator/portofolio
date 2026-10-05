@@ -73,8 +73,8 @@ export default function Navbar() {
                 fill="white"
               />
             </svg>
-            <span className="font-display text-xl font-normal text-ink leading-none">
-              TENDA<span className="text-amber">.</span>
+            <span className="font-display text-2xl font-semibold leading-none">
+              <em className="text-amber italic tracking-[-0.03em]">TENDA</em><span className="text-ink/30 not-italic">.</span>
             </span>
           </a>
 

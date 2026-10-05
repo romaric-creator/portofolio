@@ -1,4 +1,5 @@
 import { useEffect, lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { useTranslation } from './i18n';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -15,8 +16,9 @@ const Timeline = lazy(() => import('./components/Timeline'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 const CustomCursor = lazy(() => import('./components/CustomCursor'));
+const Gallery = lazy(() => import('./pages/Gallery'));
 
-function App() {
+function HomePage() {
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -65,6 +67,15 @@ function App() {
         <Footer />
       </Suspense>
     </>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/gallery" element={<Suspense><Gallery /></Suspense>} />
+    </Routes>
   );
 }
 

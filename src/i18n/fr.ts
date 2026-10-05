@@ -24,7 +24,7 @@ export const fr: Translations = {
       'en logiciels simples',
       'et efficaces.',
     ],
-    subtitle: "Je conçois et développe des solutions digitales pour les PME, startups et entrepreneurs, de l'idée jusqu'à la mise en production.",
+    subtitle: "J'automatise les processus manuels des PME : d'Excel et WhatsApp vers une vraie application.",
     ctaPrimary: 'Démarrer un projet',
     ctaSecondary: 'Voir mes travaux',
     statExpLabel: "ans d'expérience",
@@ -49,6 +49,14 @@ export const fr: Translations = {
     viewProject: 'Voir le projet',
     view: 'Voir',
     demoLive: 'Demo live',
+    filterAll: 'Tout',
+    flagship: 'Projet phare',
+    statusLabels: {
+      production:    'En production',
+      delivered:     'Livré',
+      'in-progress': 'En cours',
+      prototype:     'Prototype',
+    },
     caseStudySections: {
       problem: 'Le problème',
       approach: "L'approche",
@@ -60,20 +68,20 @@ export const fr: Translations = {
         tagline: "Application de gestion commerciale et comptabilité pour résidences, hôtels, restaurants et PME.",
         description: "Système complet avec modules hôtel (réservations, check-in/out), bar/restaurant (commandes, workflow cuisine), ventes & caisse, comptabilité en partie double, gestion du personnel et rapports. Architecture Docker multi-services avec RBAC et transactions sécurisées.",
         caseStudy: {
-          problem: "Les hôtels et restaurants de Douala géraient réservations, commandes et comptabilité sur papier ou Excel, causant erreurs et pertes.",
-          process: "Conception modulaire : chaque métier (hôtel, restaurant, caisse, compta) est un module indépendant avec son propre RBAC. Architecture Docker pour isoler les services.",
-          solution: "Plateforme unifiée couvrant tout le cycle : réservation → check-in → commande → facturation → comptabilité en partie double.",
-          results: ["+40% d'efficacité opérationnelle", "Zéro double saisie", "Rapports temps réel"],
+          problem: "Les hôtels et restaurants de Douala géraient réservations, commandes et comptabilité sur papier ou Excel — aucune donnée partagée entre modules, pas de piste d'audit, doubles saisies fréquentes.",
+          process: "Chaque métier (hôtel, restaurant, caisse, compta) est un service isolé avec son propre RBAC, déployé via Docker Compose pour un scaling indépendant. Moteur de comptabilité en partie double développé from scratch avec garanties d'intégrité transactionnelle. Workflow événementiel entre modules : réservation → check-in → commande → facturation → écriture comptable.",
+          solution: "Une seule plateforme couvre l'intégralité du cycle opérationnel. Chaque équipe travaille dans son module, les managers obtiennent une vue consolidée. Zéro réconciliation manuelle entre systèmes.",
+          results: ["+40% d'efficacité opérationnelle mesurée sur site", "Zéro double saisie entre modules", "Rapports financiers temps réel remplaçant les totaux manuels de fin de journée"],
         },
       },
       '02': {
         tagline: "Plateforme mobile de coordination du don de sang au Cameroun.",
-        description: "Application mobile complète permettant la mise en relation entre donneurs de sang, hôpitaux et administration. Files d'attente asynchrones, notifications push, tableau de bord admin.",
+        description: "Application mobile complète (React Native + Expo) connectant donneurs, hôpitaux et administration. Files d'attente BullMQ avec lanes prioritaires, notifications push Firebase, matching géolocalisé, auth JWT multi-rôles (donneur, hôpital, admin) et dashboard web admin.",
         caseStudy: {
-          problem: "Au Cameroun, trouver un donneur de sang compatible en urgence repose sur le bouche-à-oreille, retardant les transfusions vitales.",
-          process: "Mise en place d'un système de matching donneur/receveur par groupe sanguin avec files d'attente BullMQ pour gérer les pics de demande.",
-          solution: "App mobile connectant donneurs, hôpitaux et administration avec notifications push en temps réel et géolocalisation.",
-          results: ["Coordination don de sang", "Notifications temps réel", "Tableau de bord admin"],
+          problem: "Au Cameroun, trouver un donneur de sang compatible en urgence repose entièrement sur le bouche-à-oreille et les appels — un processus qui perd des minutes critiques quand chaque minute compte.",
+          process: "Algorithme de matching par groupe sanguin, niveau d'urgence et proximité du donneur. Files d'attente BullMQ avec lanes prioritaires pour qu'aucune demande ne soit perdue lors des pics. Firebase Cloud Messaging gère la livraison push cross-platform. JWT + accès par rôle sépare les flux donneur, hôpital et admin.",
+          solution: "Une app mobile où les hôpitaux publient les urgences et les donneurs compatibles reçoivent une notification instantanée. La géolocalisation affine le rayon de match. Les admins coordonnent en temps réel depuis un dashboard web.",
+          results: ["Reconnu au Orange Innovation Challenge Cameroun (Finaliste OIC)", "Les files BullMQ absorbent les pics de demande sans perte d'événement", "Livraison push cross-platform Android et iOS via Firebase"],
         },
       },
       '03': {
@@ -118,16 +126,27 @@ export const fr: Translations = {
           results: ["Export PDF et Excel", "Historique client complet", "Gestion d'inventaire"],
         },
       },
+      '09': {
+        tagline: "SaaS restaurant multi-tenant avec copilote IA analytique, Tool Use natif et commandes temps réel.",
+        description: "Plateforme SaaS pour restaurants africains : dashboard admin, menu client QR, interface cuisine. Le cœur : Console IQ — copilote IA Cohere Command R+ avec pipeline Two-Pass, Tool Use natif (query_database, execute_manager_action, search_dish_images), snapshot temps réel injecté dans chaque preamble et 6 widgets UI générés dynamiquement (ChatChart, StockAlert, SmartActions, StrategyInsight, MenuForm, DecisionTool). Architecture microservices (9 services), cache Redis multi-niveau, Electron desktop, freemium IA.",
+        caseStudy: {
+          problem: "Les restaurants africains gèrent menus, commandes et cuisine avec des outils fragmentés, sans analytics centralisées ni intelligence opérationnelle.",
+          process: "Pipeline Two-Pass : Pass 1 (Cohere sélectionne les outils), exécution SQL whitelistée par tenant, Pass 2 (réponse streamée SSE avec résultats injectés). Snapshot temps réel (CA, stock critique, meilleur plat) injecté dans chaque preamble. Sécurité stricte : 6 tables whitelistées, injection tenant automatique, rate limiting par rôle.",
+          solution: "Console IQ (admin) : copilote analytique qui lit et écrit la BDD via Tool Use, génère 6 types de widgets UI custom. Menu Researcher : synthèse multi-source (Reddit, Wikidata, OpenFoodFacts + base africaine) avec labels de fiabilité. Recommandations client personnalisées basées sur l'historique.",
+          results: ["Pipeline Two-Pass + Tool Use natif", "6 widgets UI générés par l'IA", "Menu Researcher multi-source", "Snapshot BDD temps réel"],
+        },
+      },
     },
     meta: {
       '01': { badge: "Architecture d'entreprise", metrics: ["+40% efficacité opérationnelle", "Modules RBAC sécurisés"] },
-      '02': { badge: "Impact social", metrics: ["Coordination don de sang", "Notifications temps réel"] },
-      '03': { badge: "Plateforme collaborative", metrics: ["TypeScript end-to-end", "Multi-plateforme"] },
+      '02': { badge: "Impact social · Finaliste OIC", metrics: ["App mobile React Native", "Files asynchrones BullMQ"] },
+      '03': { badge: "Écosystème full-stack", metrics: ["Web + API + Mobile", "TypeScript end-to-end"] },
       '04': { badge: "Intelligence artificielle", metrics: ["Prédiction ML agricole", "Recommandations optimisées"] },
       '05': { badge: "API haute disponibilité", metrics: ["Cache Redis intégré", "Import PDF automatisé"] },
       '06': { badge: "API REST", metrics: ["Auth JWT sécurisée", "Rôles et permissions"] },
       '07': { badge: "Application métier", metrics: ["Gestion multi-sites", "Workflow automatisé"] },
       '08': { badge: "Outil métier desktop", metrics: ["Export PDF et Excel", "State Zustand"] },
+      '09': { badge: "SaaS IA · Projet phare", metrics: ["Pipeline Two-Pass + Tool Use", "9 microservices · Cache Redis"] },
     },
   },
 
@@ -149,24 +168,24 @@ export const fr: Translations = {
     headingEm: 'chaque besoin.',
     items: [
       {
-        title: 'Applications métier',
-        description: 'Applications adaptées aux processus spécifiques de votre entreprise : gestion, commandes, stocks, clients, opérations et tableaux de bord.',
-      },
-      {
-        title: 'SaaS & MVP',
-        description: "De l'idée au produit fonctionnel : architecture, interface, backend, base de données, authentification et déploiement.",
-      },
-      {
         title: 'Automatisation',
-        description: 'Remplacement des tâches manuelles et workflows dispersés par des processus numériques centralisés et fiables.',
+        description: "Je remplace Excel, les cahiers et les WhatsApp par des processus numériques centralisés : zéro double saisie, zéro perte d'information.",
+      },
+      {
+        title: 'Applications métier & SaaS',
+        description: "De l'idée au produit livré : gestion, commandes, stocks, caisse, facturation, tableaux de bord, et tout ce qui fait tourner votre activité.",
+      },
+      {
+        title: 'IA & Intégrations LLM',
+        description: "J'intègre de l'intelligence dans vos applications : prédiction, assistant automatisé, classification et recommandations basées sur vos données.",
       },
       {
         title: 'Applications mobiles',
-        description: 'Applications Android et iOS avec React Native, conçues autour des besoins réels des utilisateurs.',
+        description: 'Applications Android et iOS avec React Native, conçues autour des besoins réels des utilisateurs de terrain.',
       },
       {
-        title: 'Backend & Intégrations',
-        description: "APIs, systèmes d'authentification, bases de données, temps réel et intégration de services tiers.",
+        title: 'Backend & APIs',
+        description: 'APIs robustes, authentification sécurisée, bases de données, temps réel et intégrations de services tiers.',
       },
     ],
   },
@@ -215,7 +234,17 @@ export const fr: Translations = {
       {
         years: 'Juin – Août 2026',
         title: 'Stage Consultant IT',
-        description: "Simis BTP Holding. Automatisation des processus internes, développement d'applications métier pour remplacer les workflows manuels, conseil en stratégie IT et création du site web de l'entreprise.",
+        description: "SIMS BTP Holdings. Automatisation des processus internes, développement d'applications métier pour remplacer les workflows manuels, conseil en stratégie IT et création du site web de l'entreprise.",
+      },
+      {
+        years: '2025',
+        title: 'Co-fondateur & CTO — SparkNest',
+        description: "Co-fondation d'un collectif de solutions numériques basé à Douala. Conception d'applications web, mobile et desktop sur mesure pour les PME camerounaises.",
+      },
+      {
+        years: '2026',
+        title: 'VitaSang — Finaliste OIC',
+        description: "Application mobile de coordination du don de sang reconnue au concours Orange Innovation Challenge Cameroun.",
       },
       {
         years: '2022 – 2026',

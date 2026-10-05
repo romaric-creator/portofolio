@@ -148,9 +148,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.12, ease }}
-              className="font-display text-lg sm:text-xl text-ink/80 mb-2"
+              className="font-display text-lg sm:text-xl mb-2"
             >
-              {PROFILE.fullName}
+              <span className="text-ink/50">{PROFILE.lastName} </span>
+              <em className="text-amber italic tracking-[-0.04em]">{PROFILE.firstName}</em>
             </motion.p>
 
             {/* H1 */}

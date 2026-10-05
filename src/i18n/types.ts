@@ -56,6 +56,9 @@ export interface Translations {
     viewProject: string;
     view: string;
     demoLive: string;
+    filterAll: string;
+    flagship: string;
+    statusLabels: Record<string, string>;
     caseStudySections: {
       problem: string;
       approach: string;
