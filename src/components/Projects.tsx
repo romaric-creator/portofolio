@@ -47,10 +47,9 @@ function StatusBadge({ status }: { status?: string }) {
 }
 
 /* ─── Like Button ─── */
-function LikeButton({ projectId, likes, variant = 'card' }: {
+function LikeButton({ projectId, likes }: {
   projectId: string;
   likes: LikesApi;
-  variant?: 'card' | 'featured';
 }) {
   const isLiked = likes.liked.has(projectId);
   const count = likes.counts[projectId] ?? 0;
@@ -582,7 +581,7 @@ function FeaturedCard({ project, onClick, likes, hero = false }: { project: Proj
           <ArrowUpRight size={14} className="text-white" />
         </div>
         <div className="absolute top-4 left-4" onClick={e => e.stopPropagation()}>
-          <LikeButton projectId={project.id} likes={likes} variant="featured" />
+          <LikeButton projectId={project.id} likes={likes} />
         </div>
       </motion.div>
     </motion.div>
