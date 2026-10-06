@@ -27,6 +27,42 @@ interface GalleryAlbum {
 
 const ALBUMS: GalleryAlbum[] = [
   {
+    id: 'lafrique-qui-innove',
+    title: "L'Afrique Qui Innove — Competition",
+    titleFr: "L'Afrique Qui Innove — Concours",
+    subtitle: 'African tech innovation TV competition — finalist appearance',
+    subtitleFr: 'Concours télévisé d\'innovation tech africaine — participation en tant que finaliste',
+    year: '2025',
+    tag: 'Event',
+    tagFr: 'Événement',
+    items: [
+      { src: '/screenshots/lafi-2.jpg', caption: 'On set — L\'Afrique Qui Innove', captionFr: 'Sur le plateau — L\'Afrique Qui Innove' },
+      { src: '/screenshots/lafi-1.jpg', caption: 'Waiting before the pitch', captionFr: 'Attente avant le pitch' },
+      { src: '/screenshots/lafi-3.jpg', caption: 'The team — group photo', captionFr: 'L\'équipe — photo de groupe' },
+      { src: '/screenshots/lafi-4.jpg', caption: 'Team portrait', captionFr: 'Portrait d\'équipe' },
+      { src: '/screenshots/lafi-5.jpg', caption: 'During the competition', captionFr: 'Pendant la compétition' },
+    ],
+  },
+  {
+    id: 'techflow',
+    title: 'TechFlow — Repair Shop Manager',
+    titleFr: 'TechFlow — Gestion d\'atelier de réparation',
+    subtitle: 'Desktop app for managing repair tickets, billing and clients',
+    subtitleFr: 'Application desktop de gestion de tickets, facturation et clients pour ateliers tech',
+    year: '2026',
+    tag: 'Desktop app',
+    tagFr: 'App desktop',
+    items: [
+      { src: '/screenshots/techflow-login.png', caption: 'Login screen', captionFr: 'Écran de connexion' },
+      { src: '/screenshots/techflow-dashboard.png', caption: 'Dashboard — real-time overview', captionFr: 'Tableau de bord — vue temps réel' },
+      { src: '/screenshots/techflow-tickets.png', caption: 'Active repairs — ticket list', captionFr: 'Maintenance active — liste des tickets' },
+      { src: '/screenshots/techflow-ticket-detail.png', caption: 'Ticket detail — WhatsApp notification', captionFr: 'Détail ticket — notification WhatsApp' },
+      { src: '/screenshots/techflow-billing.png', caption: 'Billing — invoice management', captionFr: 'Facturation — gestion des factures' },
+      { src: '/screenshots/techflow-reports.png', caption: 'Accounting reports', captionFr: 'Rapports comptabilité' },
+      { src: '/screenshots/techflow-clients.png', caption: 'Client management', captionFr: 'Gestion des clients' },
+    ],
+  },
+  {
     id: 'vitasang-app',
     title: 'VitaSang — App Screenshots',
     titleFr: 'VitaSang — Captures de l\'app',

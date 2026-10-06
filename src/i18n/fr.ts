@@ -11,6 +11,7 @@ export const fr: Translations = {
       services: 'Services',
       about: 'À propos',
       contact: 'Contact',
+      gallery: 'Galerie',
     },
     cta: 'Démarrer',
     ctaFull: 'Démarrer un projet',

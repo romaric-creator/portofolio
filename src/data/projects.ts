@@ -188,6 +188,15 @@ export const PROJECTS = [
       live: null,
       demo: null,
     },
+    screenshots: [
+      "/screenshots/techflow-login.png",
+      "/screenshots/techflow-dashboard.png",
+      "/screenshots/techflow-tickets.png",
+      "/screenshots/techflow-ticket-detail.png",
+      "/screenshots/techflow-billing.png",
+      "/screenshots/techflow-reports.png",
+      "/screenshots/techflow-clients.png",
+    ],
     visualPlaceholder: "gradient-vitasang",
     caseStudy: {
       problem: "Les ateliers de reparation informatique suivaient les tickets et la facturation manuellement, sans historique client.",

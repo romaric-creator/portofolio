@@ -27,6 +27,7 @@ export interface Translations {
       services: string;
       about: string;
       contact: string;
+      gallery: string;
     };
     cta: string;
     ctaFull: string;

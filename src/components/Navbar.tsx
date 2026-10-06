@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Menu, ArrowUpRight } from 'lucide-react';
 import { useTranslation } from '../i18n';
 
 export default function Navbar() {
   const { t, locale, toggleLocale } = useTranslation();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
-  const NAV_LINKS = [
+  const NAV_LINKS: { href: string; label: string; isRoute?: boolean }[] = [
     { href: '#about',    label: t.nav.links.about     },
     { href: '#services', label: t.nav.links.services  },
     { href: '#projects', label: t.nav.links.projects },
     { href: '#stack',    label: t.nav.links.skills   },
+    { href: '/gallery',  label: t.nav.links.gallery, isRoute: true },
     { href: '#contact',  label: t.nav.links.contact   },
   ];
 
@@ -79,18 +82,31 @@ export default function Navbar() {
           </a>
 
           <ul className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
-            {NAV_LINKS.map(({ href, label }) => (
+            {NAV_LINKS.map(({ href, label, isRoute }) => (
               <li key={href}>
-                <a
-                  href={href}
-                  className={`relative font-body text-[13px] font-medium px-4 py-2 rounded-full transition-all duration-200 ${
-                    activeSection === href
-                      ? 'text-ink bg-surface'
-                      : 'text-dust hover:text-ink'
-                  }`}
-                >
-                  {label}
-                </a>
+                {isRoute ? (
+                  <Link
+                    to={href}
+                    className={`relative font-body text-[13px] font-medium px-4 py-2 rounded-full transition-all duration-200 ${
+                      location.pathname === href
+                        ? 'text-ink bg-surface'
+                        : 'text-dust hover:text-ink'
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                ) : (
+                  <a
+                    href={href}
+                    className={`relative font-body text-[13px] font-medium px-4 py-2 rounded-full transition-all duration-200 ${
+                      activeSection === href
+                        ? 'text-ink bg-surface'
+                        : 'text-dust hover:text-ink'
+                    }`}
+                  >
+                    {label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
@@ -141,7 +157,7 @@ export default function Navbar() {
             className="fixed inset-0 z-40 bg-canvas/98 backdrop-blur-xl flex flex-col justify-center px-8 md:hidden"
           >
             <ul className="flex flex-col gap-5">
-              {NAV_LINKS.map(({ href, label }, i) => (
+              {NAV_LINKS.map(({ href, label, isRoute }, i) => (
                 <motion.li
                   key={href}
                   initial={{ opacity: 0, x: -20 }}
@@ -149,13 +165,23 @@ export default function Navbar() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ delay: i * 0.05, duration: 0.3 }}
                 >
-                  <a
-                    href={href}
-                    onClick={() => setOpen(false)}
-                    className="font-display text-4xl font-normal text-ink hover:text-amber transition-colors"
-                  >
-                    {label}
-                  </a>
+                  {isRoute ? (
+                    <Link
+                      to={href}
+                      onClick={() => setOpen(false)}
+                      className="font-display text-4xl font-normal text-ink hover:text-amber transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={href}
+                      onClick={() => setOpen(false)}
+                      className="font-display text-4xl font-normal text-ink hover:text-amber transition-colors"
+                    >
+                      {label}
+                    </a>
+                  )}
                 </motion.li>
               ))}
             </ul>

@@ -11,6 +11,7 @@ export const en: Translations = {
       services: 'Services',
       about: 'About',
       contact: 'Contact',
+      gallery: 'Gallery',
     },
     cta: 'Start',
     ctaFull: 'Start a project',
