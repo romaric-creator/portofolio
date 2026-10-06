@@ -102,7 +102,7 @@ export default function About() {
             >
               <img
                 src={profileImg}
-                alt="Tenda Boupda Christian Romaric — Développeur Full-Stack"
+                alt="Tenda Boupda Christian Romaric - Développeur Full-Stack"
                 loading="lazy"
                 className="w-full rounded-2xl object-cover object-top"
                 style={{

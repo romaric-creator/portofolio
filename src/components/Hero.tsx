@@ -273,7 +273,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* RIGHT — PORTRAIT */}
+          {/* RIGHT - PORTRAIT */}
           <motion.div
             initial={{ opacity: 0, x: 35, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -286,7 +286,7 @@ export default function Hero() {
               <div className="relative overflow-hidden rounded-[24px] bg-[#e9ece8] shadow-2xl shadow-black/10">
                 <img
                   src="/image.png"
-                  alt="Christian Tenda — Full-Stack Developer"
+                  alt="Christian Tenda - Full-Stack Developer"
                   loading="eager"
                   fetchPriority="high"
                   className="block w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"

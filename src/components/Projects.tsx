@@ -343,7 +343,7 @@ function CaseStudy({ project, onClose }: { project: Project; onClose: () => void
 
         {cs ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 pb-20">
-            {/* Left — sticky screenshot */}
+            {/* Left - sticky screenshot */}
             <div className="lg:sticky lg:top-24 lg:self-start">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -402,7 +402,7 @@ function CaseStudy({ project, onClose }: { project: Project; onClose: () => void
               )}
             </div>
 
-            {/* Right — scrollable narrative */}
+            {/* Right - scrollable narrative */}
             <div className="space-y-14 lg:pt-2">
               {SECTIONS.map((section, i) => (
                 <motion.div

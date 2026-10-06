@@ -69,7 +69,7 @@ export const en: Translations = {
         tagline: "Business management and accounting app for hotels, restaurants, and SMBs.",
         description: "Complete system with hotel modules (reservations, check-in/out), bar/restaurant (orders, kitchen workflow), sales & POS, double-entry accounting, staff management and reports. Docker multi-service architecture with RBAC and secure transactions.",
         caseStudy: {
-          problem: "Hotels and restaurants in Douala managed reservations, orders and accounting on paper or Excel — no shared data between modules, no audit trail, frequent double entries.",
+          problem: "Hotels and restaurants in Douala managed reservations, orders and accounting on paper or Excel - no shared data between modules, no audit trail, frequent double entries.",
           process: "Each business domain (hotel, restaurant, POS, accounting) is an isolated service with its own RBAC, deployed via Docker Compose for independent scaling. Built a double-entry accounting engine from scratch with transaction integrity guarantees. Event-driven workflow connects modules: reservation → check-in → order → invoicing → ledger entry.",
           solution: "One unified platform covers the full operational cycle. Staff work in their module; managers get a consolidated view. Zero manual reconciliation between systems.",
           results: ["+40% operational efficiency measured on-site", "Zero double data entry across modules", "Real-time financial reports replacing end-of-day manual tallying"],
@@ -79,7 +79,7 @@ export const en: Translations = {
         tagline: "Mobile platform for coordinating blood donation in Cameroon.",
         description: "Full mobile app (React Native + Expo) connecting blood donors, hospitals and administration. BullMQ async queues with priority lanes, Firebase push notifications, geolocation matching, role-based JWT auth for 3 user types (donor, hospital, admin), and a web admin dashboard.",
         caseStudy: {
-          problem: "In Cameroon, finding a compatible blood donor in an emergency relies entirely on word of mouth and phone calls — a process that loses critical minutes when minutes matter.",
+          problem: "In Cameroon, finding a compatible blood donor in an emergency relies entirely on word of mouth and phone calls - a process that loses critical minutes when minutes matter.",
           process: "Designed a matching algorithm by blood type, urgency level and donor proximity. BullMQ async queues with priority lanes ensure no request is dropped during demand spikes. Firebase Cloud Messaging handles cross-platform push delivery. JWT + role-based access separates donor, hospital and admin flows.",
           solution: "A mobile app where hospitals post urgent requests and compatible donors receive an instant push notification. Geolocation narrows the match radius. Admins monitor the coordination in real time from a web dashboard.",
           results: ["Recognized at the Orange Innovation Challenge Cameroon (OIC Finalist)", "BullMQ queues absorb demand spikes without dropped events", "Cross-platform push delivery on Android and iOS via Firebase"],
@@ -97,7 +97,7 @@ export const en: Translations = {
         tagline: "Mentorship API and university social network (IUC).",
         description: "Complete backend for a student mentorship platform: automatic mentor/mentee assignment, PDF class list import, news feed with posts/comments/likes, Redis cache, Swagger docs and multi-campus management.",
         caseStudy: {
-          problem: "IUC had no structured mentorship system between alumni and new students — everything was done manually.",
+          problem: "IUC had no structured mentorship system between alumni and new students - everything was done manually.",
           process: "Automatic mentor/mentee assignment algorithm based on major and campus, with PDF class list import.",
           solution: "Complete REST API with social news feed, Redis cache for performance, and Swagger documentation.",
           results: ["Automated assignment", "PDF list import", "Integrated Redis cache"],
@@ -129,9 +129,9 @@ export const en: Translations = {
       },
       '09': {
         tagline: "Multi-tenant restaurant SaaS with analytical AI copilot, native Tool Use and real-time ordering.",
-        description: "SaaS platform for African restaurants: admin dashboard, QR code client menu, real-time kitchen interface. The core: Console IQ — a Cohere Command R+ AI copilot with Two-Pass pipeline, native Tool Use (query_database, execute_manager_action, search_dish_images), real-time snapshot injected into every preamble, and 6 dynamically generated UI widgets (ChatChart, StockAlert, SmartActions, StrategyInsight, MenuForm, DecisionTool). Microservices architecture (9 services), multi-level Redis cache, Electron desktop, AI freemium model.",
+        description: "SaaS platform for African restaurants: admin dashboard, QR code client menu, real-time kitchen interface. The core: Console IQ - a Cohere Command R+ AI copilot with Two-Pass pipeline, native Tool Use (query_database, execute_manager_action, search_dish_images), real-time snapshot injected into every preamble, and 6 dynamically generated UI widgets (ChatChart, StockAlert, SmartActions, StrategyInsight, MenuForm, DecisionTool). Microservices architecture (9 services), multi-level Redis cache, Electron desktop, AI freemium model.",
         caseStudy: {
-          problem: "African restaurants manage menus, orders and kitchen operations with fragmented tools — no centralised analytics or operational intelligence.",
+          problem: "African restaurants manage menus, orders and kitchen operations with fragmented tools - no centralised analytics or operational intelligence.",
           process: "Two-Pass pipeline: Pass 1 (Cohere selects tools), tenant-whitelisted SQL execution, Pass 2 (SSE-streamed response with injected results). Real-time snapshot (revenue, low stock, top dish) injected into every preamble. Strict security: 6 whitelisted tables, automatic tenant injection, per-role rate limiting.",
           solution: "Console IQ (admin): analytical copilot that reads and writes the DB via Tool Use, generating 6 custom UI widget types. Menu Researcher: multi-source synthesis (Reddit, Wikidata, OpenFoodFacts + African database) with reliability labels. Personalised client recommendations based on order history.",
           results: ["Two-Pass pipeline + native Tool Use", "6 AI-generated UI widgets", "Multi-source Menu Researcher", "Real-time DB snapshot"],
@@ -239,12 +239,12 @@ export const en: Translations = {
       },
       {
         years: '2025',
-        title: 'Co-founder & CTO — SparkNest',
+        title: 'Co-founder & CTO - SparkNest',
         description: "Co-founded a digital solutions collective based in Douala. Design and development of custom web, mobile and desktop applications for Cameroonian SMBs.",
       },
       {
         years: '2026',
-        title: 'VitaSang — OIC Finalist',
+        title: 'VitaSang - OIC Finalist',
         description: "Blood donation coordination mobile app recognised at the Orange Innovation Challenge Cameroon.",
       },
       {

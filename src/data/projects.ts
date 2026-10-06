@@ -211,7 +211,7 @@ export const PROJECTS = [
     category: "Web",
     status: "in-progress",
     tagline: "SaaS restaurant multi-tenant avec copilote IA analytique, Tool Use natif et commandes temps réel.",
-    description: "Plateforme SaaS pour restaurants africains : dashboard admin, menu client QR, interface cuisine. Le cœur : Console IQ — copilote IA Cohere Command R+ avec pipeline Two-Pass, Tool Use natif (query_database, execute_manager_action, search_dish_images), snapshot temps réel injecté dans chaque preamble et 6 widgets UI générés dynamiquement (ChatChart, StockAlert, SmartActions, StrategyInsight, MenuForm, DecisionTool). Architecture microservices (9 services), cache Redis multi-niveau, Electron desktop, freemium IA.",
+    description: "Plateforme SaaS pour restaurants africains : dashboard admin, menu client QR, interface cuisine. Le cœur : Console IQ - copilote IA Cohere Command R+ avec pipeline Two-Pass, Tool Use natif (query_database, execute_manager_action, search_dish_images), snapshot temps réel injecté dans chaque preamble et 6 widgets UI générés dynamiquement (ChatChart, StockAlert, SmartActions, StrategyInsight, MenuForm, DecisionTool). Architecture microservices (9 services), cache Redis multi-niveau, Electron desktop, freemium IA.",
     stack: ["React 18", "Node.js", "Express", "MySQL", "Socket.io", "Cohere AI", "Docker", "Electron"],
     links: {
       github: null,

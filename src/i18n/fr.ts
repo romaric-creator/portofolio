@@ -69,7 +69,7 @@ export const fr: Translations = {
         tagline: "Application de gestion commerciale et comptabilité pour résidences, hôtels, restaurants et PME.",
         description: "Système complet avec modules hôtel (réservations, check-in/out), bar/restaurant (commandes, workflow cuisine), ventes & caisse, comptabilité en partie double, gestion du personnel et rapports. Architecture Docker multi-services avec RBAC et transactions sécurisées.",
         caseStudy: {
-          problem: "Les hôtels et restaurants de Douala géraient réservations, commandes et comptabilité sur papier ou Excel — aucune donnée partagée entre modules, pas de piste d'audit, doubles saisies fréquentes.",
+          problem: "Les hôtels et restaurants de Douala géraient réservations, commandes et comptabilité sur papier ou Excel - aucune donnée partagée entre modules, pas de piste d'audit, doubles saisies fréquentes.",
           process: "Chaque métier (hôtel, restaurant, caisse, compta) est un service isolé avec son propre RBAC, déployé via Docker Compose pour un scaling indépendant. Moteur de comptabilité en partie double développé from scratch avec garanties d'intégrité transactionnelle. Workflow événementiel entre modules : réservation → check-in → commande → facturation → écriture comptable.",
           solution: "Une seule plateforme couvre l'intégralité du cycle opérationnel. Chaque équipe travaille dans son module, les managers obtiennent une vue consolidée. Zéro réconciliation manuelle entre systèmes.",
           results: ["+40% d'efficacité opérationnelle mesurée sur site", "Zéro double saisie entre modules", "Rapports financiers temps réel remplaçant les totaux manuels de fin de journée"],
@@ -79,7 +79,7 @@ export const fr: Translations = {
         tagline: "Plateforme mobile de coordination du don de sang au Cameroun.",
         description: "Application mobile complète (React Native + Expo) connectant donneurs, hôpitaux et administration. Files d'attente BullMQ avec lanes prioritaires, notifications push Firebase, matching géolocalisé, auth JWT multi-rôles (donneur, hôpital, admin) et dashboard web admin.",
         caseStudy: {
-          problem: "Au Cameroun, trouver un donneur de sang compatible en urgence repose entièrement sur le bouche-à-oreille et les appels — un processus qui perd des minutes critiques quand chaque minute compte.",
+          problem: "Au Cameroun, trouver un donneur de sang compatible en urgence repose entièrement sur le bouche-à-oreille et les appels - un processus qui perd des minutes critiques quand chaque minute compte.",
           process: "Algorithme de matching par groupe sanguin, niveau d'urgence et proximité du donneur. Files d'attente BullMQ avec lanes prioritaires pour qu'aucune demande ne soit perdue lors des pics. Firebase Cloud Messaging gère la livraison push cross-platform. JWT + accès par rôle sépare les flux donneur, hôpital et admin.",
           solution: "Une app mobile où les hôpitaux publient les urgences et les donneurs compatibles reçoivent une notification instantanée. La géolocalisation affine le rayon de match. Les admins coordonnent en temps réel depuis un dashboard web.",
           results: ["Reconnu au Orange Innovation Challenge Cameroun (Finaliste OIC)", "Les files BullMQ absorbent les pics de demande sans perte d'événement", "Livraison push cross-platform Android et iOS via Firebase"],
@@ -129,7 +129,7 @@ export const fr: Translations = {
       },
       '09': {
         tagline: "SaaS restaurant multi-tenant avec copilote IA analytique, Tool Use natif et commandes temps réel.",
-        description: "Plateforme SaaS pour restaurants africains : dashboard admin, menu client QR, interface cuisine. Le cœur : Console IQ — copilote IA Cohere Command R+ avec pipeline Two-Pass, Tool Use natif (query_database, execute_manager_action, search_dish_images), snapshot temps réel injecté dans chaque preamble et 6 widgets UI générés dynamiquement (ChatChart, StockAlert, SmartActions, StrategyInsight, MenuForm, DecisionTool). Architecture microservices (9 services), cache Redis multi-niveau, Electron desktop, freemium IA.",
+        description: "Plateforme SaaS pour restaurants africains : dashboard admin, menu client QR, interface cuisine. Le cœur : Console IQ - copilote IA Cohere Command R+ avec pipeline Two-Pass, Tool Use natif (query_database, execute_manager_action, search_dish_images), snapshot temps réel injecté dans chaque preamble et 6 widgets UI générés dynamiquement (ChatChart, StockAlert, SmartActions, StrategyInsight, MenuForm, DecisionTool). Architecture microservices (9 services), cache Redis multi-niveau, Electron desktop, freemium IA.",
         caseStudy: {
           problem: "Les restaurants africains gèrent menus, commandes et cuisine avec des outils fragmentés, sans analytics centralisées ni intelligence opérationnelle.",
           process: "Pipeline Two-Pass : Pass 1 (Cohere sélectionne les outils), exécution SQL whitelistée par tenant, Pass 2 (réponse streamée SSE avec résultats injectés). Snapshot temps réel (CA, stock critique, meilleur plat) injecté dans chaque preamble. Sécurité stricte : 6 tables whitelistées, injection tenant automatique, rate limiting par rôle.",
@@ -239,12 +239,12 @@ export const fr: Translations = {
       },
       {
         years: '2025',
-        title: 'Co-fondateur & CTO — SparkNest',
+        title: 'Co-fondateur & CTO - SparkNest',
         description: "Co-fondation d'un collectif de solutions numériques basé à Douala. Conception d'applications web, mobile et desktop sur mesure pour les PME camerounaises.",
       },
       {
         years: '2026',
-        title: 'VitaSang — Finaliste OIC',
+        title: 'VitaSang - Finaliste OIC',
         description: "Application mobile de coordination du don de sang reconnue au concours Orange Innovation Challenge Cameroun.",
       },
       {
