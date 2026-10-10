@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ArrowUpRight, X, ExternalLink, GitBranch, Heart, Maximize2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, X, ExternalLink, GitBranch, Heart, Maximize2, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { capture } from '../lib/analytics';
 import { useTranslation } from '../i18n';
 import { useLocalizedProjects } from '../i18n/data';
@@ -9,6 +9,21 @@ import { useLikes, type LikesApi } from '../hooks/useLikes';
 const ease = [0.23, 1, 0.32, 1] as const;
 
 type Project = ReturnType<typeof useLocalizedProjects>[0];
+
+/* ─── Extended Case Study Types ─── */
+type ArchModule = { id: string; label: string };
+type ArchNode = {
+  id: string; label: string; sublabel: string;
+  modules?: ArchModule[];
+  detail: { role: string; why: string; tech: string };
+};
+type WorkflowStep = { id: number; label: string; description: string; module: string; screenshotIdx?: number };
+type TechDecision = { tech: string; label: string; problem: string; decision: string; tradeoff: string; result: string };
+type ExtendedCS = {
+  architecture: { nodes: ArchNode[] };
+  workflow: { title: string; steps: WorkflowStep[] };
+  techDecisions: TechDecision[];
+};
 
 const GRADIENTS: Record<string, string> = {
   'gradient-vitasang': 'linear-gradient(135deg, #1e3a5f 0%, #2a4a6f 50%, #1e3a5f 100%)',
@@ -219,13 +234,273 @@ function ScreenshotLightbox({ shots, startIdx, onClose }: {
   );
 }
 
+/* ─── Architecture Explorer ─── */
+function ArchitectureExplorer({ nodes }: { nodes: ArchNode[] }) {
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const activeNode = nodes.find(n => n.id === activeId);
+
+  return (
+    <div className="pb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8">
+        <div>
+          {nodes.map((node, i) => (
+            <div key={node.id}>
+              <motion.button
+                whileHover={{ x: 2 }}
+                transition={{ duration: 0.15 }}
+                onClick={() => setActiveId(activeId === node.id ? null : node.id)}
+                className={`w-full text-left px-5 py-4 rounded-2xl border transition-all duration-200 ${
+                  activeId === node.id
+                    ? 'border-amber bg-amber/5'
+                    : 'border-line bg-surface hover:border-ink/30'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="font-display text-sm text-ink leading-tight">{node.label}</div>
+                    <div className="font-code text-[10px] tracking-widest uppercase text-dust mt-0.5">{node.sublabel}</div>
+                  </div>
+                  <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                    activeId === node.id ? 'bg-amber text-canvas rotate-45' : 'border border-line text-dust'
+                  }`}>
+                    <Plus size={11} />
+                  </div>
+                </div>
+                {node.modules && (
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {node.modules.map(mod => (
+                      <span key={mod.id} className="font-code text-[9px] tracking-widest uppercase px-2 py-1 rounded-full bg-amber/10 text-amber border border-amber/20">
+                        {mod.label}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </motion.button>
+              {i < nodes.length - 1 && (
+                <div className="flex justify-center my-1">
+                  <div className="w-px h-4 bg-line/50" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <AnimatePresence mode="wait">
+            {activeNode ? (
+              <motion.div
+                key={activeNode.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.28, ease }}
+                className="bg-surface rounded-2xl p-6 border border-line"
+              >
+                <span className="font-code text-[10px] tracking-widest uppercase text-amber">{activeNode.detail.tech}</span>
+                <h4 className="font-display text-xl text-ink mt-1 leading-tight">{activeNode.label}</h4>
+                <div className="mt-5 space-y-5">
+                  <div>
+                    <div className="font-code text-[9px] tracking-[0.18em] uppercase text-dust mb-1.5">Role</div>
+                    <p className="text-sand text-sm leading-relaxed">{activeNode.detail.role}</p>
+                  </div>
+                  <div className="w-full h-px bg-line/40" />
+                  <div>
+                    <div className="font-code text-[9px] tracking-[0.18em] uppercase text-dust mb-1.5">Pourquoi ce choix</div>
+                    <p className="text-sand text-sm leading-relaxed">{activeNode.detail.why}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex flex-col items-center justify-center gap-3 py-16 px-8 border border-dashed border-line rounded-2xl text-center"
+              >
+                <div className="w-8 h-8 rounded-full border border-line flex items-center justify-center">
+                  <Plus size={14} className="text-dust" />
+                </div>
+                <span className="font-code text-[10px] tracking-widest uppercase text-dust/60 leading-relaxed">
+                  Cliquez sur un composant<br />pour explorer son rôle
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Workflow Explorer ─── */
+function WorkflowExplorer({ data, screenshots }: { data: { title: string; steps: WorkflowStep[] }; screenshots: string[] }) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const step = data.steps[activeIdx];
+  const shot = step.screenshotIdx !== undefined ? screenshots[step.screenshotIdx] : undefined;
+
+  return (
+    <div>
+      <span className="font-code text-[10px] tracking-[0.2em] uppercase text-amber">{data.title}</span>
+
+      <div className="flex items-center mt-5 mb-8 overflow-x-auto pb-1" style={{ scrollbarWidth: 'none' }}>
+        {data.steps.map((s, i) => (
+          <div key={s.id} className="flex items-center">
+            <button
+              onClick={() => setActiveIdx(i)}
+              className="flex flex-col items-center gap-1.5 px-2 sm:px-3 flex-shrink-0"
+            >
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-code text-xs font-bold transition-all duration-200 ${
+                i < activeIdx
+                  ? 'bg-amber text-canvas'
+                  : i === activeIdx
+                  ? 'ring-2 ring-amber text-amber bg-canvas'
+                  : 'border border-line text-dust'
+              }`}>
+                {i < activeIdx ? (
+                  <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+                    <path d="M1 4.5L4.5 8L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                ) : i + 1}
+              </div>
+              <span className={`font-code text-[9px] tracking-widest uppercase whitespace-nowrap transition-colors ${
+                i === activeIdx ? 'text-ink' : 'text-dust'
+              }`}>
+                {s.label}
+              </span>
+            </button>
+            {i < data.steps.length - 1 && (
+              <div className={`flex-1 min-w-[16px] h-px mx-1 transition-colors duration-300 ${
+                i < activeIdx ? 'bg-amber' : 'bg-line'
+              }`} />
+            )}
+          </div>
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeIdx}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.25, ease }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-5"
+        >
+          <div className="bg-surface rounded-2xl p-6 border border-line flex flex-col">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="font-code text-[9px] tracking-widest uppercase text-dust">Module</span>
+              <span className="font-code text-[9px] tracking-widest uppercase text-amber bg-amber/10 px-2.5 py-0.5 rounded-full border border-amber/20">
+                {step.module}
+              </span>
+            </div>
+            <p className="text-ink text-sm sm:text-base leading-relaxed flex-1">{step.description}</p>
+            <div className="flex items-center justify-between mt-6 pt-4 border-t border-line/40">
+              <button
+                onClick={() => setActiveIdx(i => Math.max(0, i - 1))}
+                disabled={activeIdx === 0}
+                className="flex items-center gap-1.5 font-code text-[10px] tracking-widest uppercase text-dust hover:text-ink disabled:opacity-25 transition-colors"
+              >
+                <ChevronLeft size={12} /> Précédent
+              </button>
+              <span className="font-code text-[10px] tracking-widest uppercase text-dust/50">
+                {String(activeIdx + 1).padStart(2, '0')} / {String(data.steps.length).padStart(2, '0')}
+              </span>
+              <button
+                onClick={() => setActiveIdx(i => Math.min(data.steps.length - 1, i + 1))}
+                disabled={activeIdx === data.steps.length - 1}
+                className="flex items-center gap-1.5 font-code text-[10px] tracking-widest uppercase text-amber hover:text-ink disabled:opacity-25 transition-colors"
+              >
+                Suivant <ChevronRight size={12} />
+              </button>
+            </div>
+          </div>
+
+          {shot ? (
+            <div className="rounded-2xl overflow-hidden bg-surface border border-line" style={{ aspectRatio: '16/10' }}>
+              <img src={shot} alt="" className="w-full h-full object-cover object-top" />
+            </div>
+          ) : (
+            <div className="rounded-2xl bg-surface border border-dashed border-line hidden lg:flex items-center justify-center">
+              <span className="font-code text-[10px] uppercase tracking-widest text-dust/40">Capture</span>
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ─── Tech Decision Cards ─── */
+function TechDecisionCards({ decisions }: { decisions: TechDecision[] }) {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  return (
+    <div>
+      <span className="font-code text-[10px] tracking-[0.2em] uppercase text-amber">Décisions techniques</span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+        {decisions.map((d, i) => (
+          <motion.div
+            key={d.tech}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.07, duration: 0.4, ease }}
+            className={`bg-surface rounded-2xl border overflow-hidden cursor-pointer transition-colors duration-200 ${
+              openIdx === i ? 'border-amber' : 'border-line hover:border-ink/20'
+            }`}
+            onClick={() => setOpenIdx(openIdx === i ? null : i)}
+          >
+            <div className="p-5">
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="font-code text-[10px] tracking-widest uppercase text-amber">{d.tech}</span>
+                  <h4 className="font-display text-base text-ink mt-0.5">{d.label}</h4>
+                </div>
+                <div className={`w-6 h-6 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                  openIdx === i ? 'bg-amber border-amber text-canvas rotate-45' : 'border-line text-dust'
+                }`}>
+                  <Plus size={11} />
+                </div>
+              </div>
+            </div>
+            <AnimatePresence>
+              {openIdx === i && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.28 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-5 pb-5 pt-1 border-t border-line space-y-4">
+                    {([
+                      ['Problème', d.problem],
+                      ['Décision', d.decision],
+                    ] as [string, string][]).map(([label, text]) => (
+                      <div key={label}>
+                        <div className="font-code text-[10px] tracking-[0.15em] uppercase text-dust mb-1.5">{label}</div>
+                        <p className="text-sand text-sm leading-relaxed">{text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ─── Case Study ─── */
 function CaseStudy({ project, onClose }: { project: Project; onClose: () => void }) {
   const { t } = useTranslation();
   const [shotIdx, setShotIdx] = useState(0);
   const [lightbox, setLightbox] = useState(false);
+  const [activeTab, setActiveTab] = useState<'product' | 'architecture' | 'engineering'>('product');
   const shots = project.screenshots ?? [];
   const cs = project.caseStudy as { problem: string; process: string; solution: string; results: string[] } | undefined;
+  const ext = (project as any).caseStudyExtended as ExtendedCS | undefined;
   const gradient = GRADIENTS[project.visualPlaceholder] ?? GRADIENTS['gradient-vitasang'];
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -341,7 +616,43 @@ function CaseStudy({ project, onClose }: { project: Project; onClose: () => void
           </div>
         </motion.div>
 
-        {cs ? (
+        {ext && (
+          <div className="mb-10 border-b border-line">
+            <div className="flex overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
+              {([
+                ['product', 'Produit'],
+                ['architecture', 'Architecture'],
+                ['engineering', 'Ingénierie'],
+              ] as Array<['product' | 'architecture' | 'engineering', string]>).map(([tabId, label]) => (
+                <button
+                  key={tabId}
+                  onClick={() => setActiveTab(tabId)}
+                  className={`relative flex-shrink-0 font-code text-[12px] tracking-[0.15em] uppercase px-6 py-4 transition-colors duration-200 ${
+                    activeTab === tabId ? 'text-amber' : 'text-dust hover:text-ink'
+                  }`}
+                >
+                  {label}
+                  {activeTab === tabId && (
+                    <motion.div
+                      layoutId="tab-line"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-amber"
+                      transition={{ type: 'spring', bounce: 0.2, duration: 0.3 }}
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {ext && activeTab === 'architecture' ? (
+          <ArchitectureExplorer nodes={ext.architecture.nodes} />
+        ) : ext && activeTab === 'engineering' ? (
+          <div className="pb-20 space-y-14">
+            <WorkflowExplorer data={ext.workflow} screenshots={shots} />
+            <TechDecisionCards decisions={ext.techDecisions} />
+          </div>
+        ) : cs ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 pb-20">
             {/* Left - sticky screenshot */}
             <div className="lg:sticky lg:top-24 lg:self-start">
