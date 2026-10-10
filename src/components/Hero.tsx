@@ -85,7 +85,7 @@ function StatItem({
 }
 
 export default function Hero() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   const STATS = [
     { value: PROFILE.stats.exp,      label: t.hero.statExpLabel      },
@@ -234,7 +234,7 @@ export default function Hero() {
               </a>
 
               <a
-                href="/cv-christian-tenda.pdf"
+                href={locale === 'en' ? '/cv-christian-tenda-en.pdf' : '/cv-christian-tenda.pdf'}
                 download
                 onClick={() => capture('cv_downloaded')}
                 className="group inline-flex items-center gap-2 px-2 py-3 text-sm text-dust transition-colors hover:text-amber"
