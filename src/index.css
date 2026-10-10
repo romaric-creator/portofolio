@@ -48,7 +48,7 @@
 
 /* ─── Base ─────────────────────────────────────────── */
 @layer base {
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; font-size: 17px; }
 
   body {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;

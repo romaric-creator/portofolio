@@ -9,13 +9,13 @@
 @page { size: A4; margin: 0; }
 * { margin:0; padding:0; box-sizing:border-box; }
 :root { --sage:#6e8a73; --sage-l:#eef1ee; --ink:#2f2f2f; --mute:#6a6a6a; --line:#3a3a3a; }
-body { font-family:'Montserrat','Segoe UI',Arial,sans-serif; color:var(--ink); background:#dcdcdc; font-size:8.8px; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body { font-family:'Montserrat','Segoe UI',Arial,sans-serif; color:var(--ink); background:#dcdcdc; font-size:9.5px; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 a { color:inherit; text-decoration:none; }
 .page { width:210mm; height:297mm; margin:0 auto; background:#fff; position:relative; overflow:hidden; display:flex; flex-direction:column; }
 @media screen { .page { margin:8mm auto; box-shadow:0 2px 12px rgba(0,0,0,.25); } }
 
 /* En-tête */
-.top { position:relative; display:grid; grid-template-columns:1fr 33mm; align-items:center; gap:6mm; padding:13mm 76mm 0 16mm; }
+.top { position:relative; display:grid; grid-template-columns:1fr 33mm; align-items:center; gap:6mm; padding:13mm 76mm 7mm 16mm; }
 .name h1 { font-size:21px; font-weight:800; line-height:1.12; letter-spacing:.6px; text-transform:uppercase; color:var(--ink); }
 .name .rule { height:1px; background:var(--line); margin:7px 0 5px; }
 .name .role { font-size:14px; font-weight:400; line-height:1.15; letter-spacing:1px; text-transform:uppercase; color:var(--ink); }
@@ -31,21 +31,21 @@ a { color:inherit; text-decoration:none; }
 /* Titres */
 .pad { padding:0 14mm 0 16mm; }
 .st { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:3px; border-bottom:1px solid var(--line); margin-bottom:6px; }
-.profile { margin-top:8mm; }
-.profile p { text-align:justify; font-size:8.9px; line-height:1.6; }
-.exp-wrap { margin-top:6mm; }
+.profile { margin-top:13mm; }
+.profile p { text-align:justify; font-size:9.5px; line-height:1.7; padding-bottom:4mm; }
+.exp-wrap { margin-top:10mm; }
 
 /* Timeline */
 .tl { border-left:1.5px solid var(--line); margin-left:1mm; padding-left:5mm; }
-.it { position:relative; margin-bottom:9px; }
+.it { position:relative; margin-bottom:16px; }
 .it:last-child { margin-bottom:0; }
 .it::before { content:''; position:absolute; left:calc(-5mm - 3.7px); top:15px; width:6px; height:6px; border-radius:50%; background:var(--sage); }
 .it .h { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
-.it .t { font-size:10px; font-weight:700; }
-.it .d { font-size:7.8px; font-style:italic; color:var(--mute); white-space:nowrap; }
-.it .c { font-size:9.2px; font-weight:700; color:var(--sage); margin-bottom:2px; }
+.it .t { font-size:11px; font-weight:700; }
+.it .d { font-size:8.4px; font-style:italic; color:var(--mute); white-space:nowrap; }
+.it .c { font-size:10px; font-weight:700; color:var(--sage); margin-bottom:3px; }
 ul { list-style:none; }
-.it > ul > li { position:relative; padding-left:11px; font-weight:600; margin-bottom:1px; }
+.it > ul > li { position:relative; padding-left:11px; font-weight:600; margin-bottom:3px; }
 .it > ul > li::before { content:'•'; position:absolute; left:2px; }
 .it li ul { margin:0 0 2px 11px; }
 .it li li { position:relative; padding-left:11px; font-weight:400; margin:0; }
@@ -61,14 +61,14 @@ ul { list-style:none; }
 .e { position:relative; margin-bottom:8px; }
 .e::before { content:''; position:absolute; left:calc(-4mm - 3.7px); top:4px; width:6px; height:6px; border-radius:50%; background:var(--sage); }
 .e .h { display:flex; justify-content:space-between; gap:6px; align-items:baseline; }
-.e b { font-size:8.8px; font-weight:700; font-style:italic; }
-.e .d { font-size:7.4px; font-style:italic; color:var(--mute); white-space:nowrap; }
-.e .s { font-size:8px; color:var(--mute); }
+.e b { font-size:9.5px; font-weight:700; font-style:italic; }
+.e .d { font-size:8px; font-style:italic; color:var(--mute); white-space:nowrap; }
+.e .s { font-size:8.6px; color:var(--mute); }
 .sk { padding:8mm 14mm 8mm 8mm; }
 .sk h3 { text-align:center; padding-bottom:4px; border-bottom:1px solid var(--line); margin-bottom:8px; }
 .sk table { width:100%; border-collapse:collapse; border:1px solid #e3e3e3; }
-.sk td { padding:4px 7px; text-align:center; vertical-align:middle; font-size:8.3px; border-bottom:2px solid #fff; }
-.sk td:first-child { background:var(--sage); color:#fff; font-weight:700; width:32mm; font-size:8px; }
+.sk td { padding:4.5px 7px; text-align:center; vertical-align:middle; font-size:8.8px; border-bottom:2px solid #fff; }
+.sk td:first-child { background:var(--sage); color:#fff; font-weight:700; width:32mm; font-size:8.5px; }
 .sk td:last-child { font-weight:500; }
 </style>
 </head>
