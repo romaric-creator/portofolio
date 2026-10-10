@@ -14,13 +14,14 @@ export const PROFILE = {
     exp: "4+",
     projects: "15+",
   },
-  languages: ["Français (Courant)", "Anglais (Débutant)"],
+  languages: ["Français (Courant)", "Anglais (Intermédiaire)"],
 };
 
 export const TECH_STACK = {
   "Frontend": ["React", "TypeScript", "Tailwind CSS"],
-  "Mobile": ["React Native", "Expo"],
-  "Backend": ["Node.js", "NestJS", "Express"],
+  "Mobile": ["React Native", "Expo", "Firebase"],
+  "Backend": ["Node.js", "NestJS", "Express", "Socket.io", "BullMQ"],
+  "IA": ["Cohere AI", "Python", "Scikit-learn"],
   "Data": ["MySQL", "PostgreSQL", "Redis", "Prisma", "Sequelize"],
   "Infrastructure": ["Docker", "GitHub", "REST", "WebSockets"],
   "Desktop": ["Electron"],
@@ -51,9 +52,140 @@ export const PROJECTS = [
     visualPlaceholder: "gradient-vitasang",
     caseStudy: {
       problem: "Les hôtels et restaurants de Douala géraient réservations, commandes et comptabilité sur papier ou Excel, causant erreurs et pertes.",
-      process: "Conception modulaire : chaque métier (hôtel, restaurant, caisse, compta) est un module indépendant avec son propre RBAC. Architecture Docker pour isoler les services.",
+      process: "Backend NestJS organisé en modules par domaine métier (hôtel, restaurant, caisse, stock). Chaque module gère ses propres routes et validations. Déploiement Docker Compose avec PostgreSQL et Redis.",
       solution: "Plateforme unifiée couvrant tout le cycle : réservation → check-in → commande → facturation → comptabilité en partie double.",
       results: ["+40% d'efficacité opérationnelle", "Zéro double saisie", "Rapports temps réel"],
+    },
+    caseStudyExtended: {
+      architecture: {
+        nodes: [
+          {
+            id: 'electron',
+            label: 'Desktop Electron',
+            sublabel: 'Application bureau Windows',
+            detail: {
+              role: "Encapsule l'interface React dans une application de bureau native. Permet l'installation locale sur Windows sans navigateur.",
+              why: "Les établissements de Douala préfèrent une application installée en local, plus robuste sans connexion internet stable et sans dépendance à un navigateur.",
+              tech: 'Electron',
+            },
+          },
+          {
+            id: 'react',
+            label: 'React 19 + Ant Design',
+            sublabel: 'Interface utilisateur',
+            detail: {
+              role: "Interface structurée par domaine métier. Chaque module (hôtel, restaurant, caisse) a ses propres vues et composants React construits sur Ant Design.",
+              why: "React découpe l'interface par domaine tout en partageant les composants communs. Ant Design apporte les composants métier complexes (tableaux, formulaires, modales) prêts à l'emploi.",
+              tech: 'React 19 + Ant Design + Vite',
+            },
+          },
+          {
+            id: 'nestjs',
+            label: 'API NestJS',
+            sublabel: 'Backend modulaire',
+            modules: [
+              { id: 'auth', label: 'Auth & RBAC' },
+              { id: 'hotel', label: 'Hôtel' },
+              { id: 'restaurant', label: 'Restaurant' },
+              { id: 'caisse', label: 'Caisse' },
+              { id: 'stock', label: 'Stock' },
+              { id: 'personnel', label: 'Personnel' },
+            ],
+            detail: {
+              role: "Backend organisé en modules NestJS par domaine métier. Chaque module gère ses propres routes, services et validations de manière indépendante.",
+              why: "La modularité NestJS permet à chaque domaine d'évoluer sans impacter les autres, sans la complexité opérationnelle de microservices distribués. Les Guards centralisent le contrôle d'accès par rôle.",
+              tech: 'NestJS + JWT + Guards RBAC',
+            },
+          },
+          {
+            id: 'prisma',
+            label: 'Prisma ORM',
+            sublabel: 'Accès aux données',
+            detail: {
+              role: "Couche d'accès aux données avec schéma TypeScript typé bout-en-bout. Les migrations sont versionnées et les transactions garantissent la cohérence lors des opérations critiques.",
+              why: "Prisma offre un typage fort et simplifie les transactions multi-tables essentielles aux opérations de caisse (vente + stock + comptabilité en une seule transaction atomique).",
+              tech: 'Prisma ORM',
+            },
+          },
+          {
+            id: 'db',
+            label: 'PostgreSQL + Redis',
+            sublabel: 'Données persistantes + cache',
+            detail: {
+              role: "PostgreSQL stocke les données relationnelles (réservations, commandes, transactions). Redis cache les sessions et les données fréquemment consultées pour réduire la charge.",
+              why: "Le modèle relationnel correspond aux données métier fortement interconnectées (réservation → chambre → client → facturation). Redis évite de recalculer les données de référence à chaque requête.",
+              tech: 'PostgreSQL + Redis',
+            },
+          },
+        ],
+      },
+      workflow: {
+        title: "De la commande à l'encaissement",
+        steps: [
+          {
+            id: 1,
+            label: 'Commande',
+            description: "Le serveur sélectionne une table sur l'interface React et ajoute des articles du menu. La commande est créée via l'API NestJS (module Restaurant) et persistée en base avec statut 'en attente'.",
+            module: 'Restaurant',
+            screenshotIdx: 3,
+          },
+          {
+            id: 2,
+            label: 'Cuisine',
+            description: "La commande passe en statut 'en préparation'. La cuisine voit les commandes en attente et met à jour les statuts. L'interface serveur reflète les changements en temps réel.",
+            module: 'Restaurant',
+            screenshotIdx: 3,
+          },
+          {
+            id: 3,
+            label: 'Encaissement',
+            description: "Le caissier récupère la commande finalisée dans le module Caisse. Le paiement est enregistré avec le moyen de règlement choisi (espèces, mobile money).",
+            module: 'Caisse',
+            screenshotIdx: 4,
+          },
+          {
+            id: 4,
+            label: 'Transaction',
+            description: "Prisma exécute une transaction atomique : vente enregistrée, stock décrémenté, écriture comptable créée. Si une étape échoue, toutes les modifications sont annulées. La base reste cohérente.",
+            module: 'Backend',
+            screenshotIdx: 4,
+          },
+        ],
+      },
+      techDecisions: [
+        {
+          tech: 'Electron',
+          label: 'Application bureau',
+          problem: "Les établissements ont besoin d'une app installée localement, fonctionnant de façon fiable sans connexion internet stable.",
+          decision: "Encapsuler l'interface React dans Electron pour produire un exécutable Windows installable directement sur les machines des établissements.",
+          tradeoff: "Distribution des mises à jour plus complexe qu'une webapp. Taille de l'exécutable supérieure. Pas d'accès multi-appareils en dehors du réseau local.",
+          result: "Déployable sur n'importe quelle machine Windows sans infrastructure serveur côté établissement ni dépendance à une connexion stable.",
+        },
+        {
+          tech: 'NestJS',
+          label: 'Backend modulaire',
+          problem: "Hôtel, restaurant, caisse, stock : plusieurs domaines métier doivent cohabiter dans un seul backend sans créer une boule de spaghettis.",
+          decision: "Organiser le backend en modules NestJS par domaine, chacun avec ses routes, services, DTOs et Guards — pas de microservices distribués.",
+          tradeoff: "Plus verbeux qu'Express. La gestion des dépendances entre modules demande de la discipline. Pas de déploiement indépendant des modules.",
+          result: "Chaque domaine évolue sans impacter les autres. Les modules se testent isolément. L'ajout d'un nouveau domaine suit le même pattern.",
+        },
+        {
+          tech: 'Prisma',
+          label: 'Transactions atomiques',
+          problem: "Un encaissement implique plusieurs écritures : vente, décrémentation du stock, écriture comptable. Une erreur partielle corrompt les données.",
+          decision: "Utiliser les transactions Prisma ($transaction) pour garantir que toutes les écritures réussissent ou sont annulées ensemble.",
+          tradeoff: "Les migrations Prisma sont moins flexibles que du SQL brut pour les changements de schéma complexes. La syntaxe interactive peut être verbeuse.",
+          result: "Cohérence des données garantie même en cas d'erreur réseau ou serveur en cours d'opération.",
+        },
+        {
+          tech: 'RBAC',
+          label: "Contrôle d'accès par rôle",
+          problem: "Un caissier ne doit pas accéder aux rapports comptables. Un serveur ne doit pas modifier le stock. Les permissions doivent être vérifiées sans dupliquer la logique.",
+          decision: "Implémenter des rôles (admin, manager, caissier, serveur) avec permissions vérifiées par Guards NestJS décorateurs sur chaque route ou contrôleur.",
+          tradeoff: "La matrice de permissions devient complexe quand les rôles prolifèrent. Nécessite une documentation à jour et des tests dédiés.",
+          result: "Chaque rôle accède uniquement aux fonctionnalités qui le concernent. La logique de vérification est centralisée et réutilisable.",
+        },
+      ],
     },
   },
   {
@@ -76,6 +208,119 @@ export const PROJECTS = [
       process: "Mise en place d'un système de matching donneur/receveur par groupe sanguin avec files d'attente BullMQ pour gérer les pics de demande.",
       solution: "App mobile connectant donneurs, hôpitaux et administration avec notifications push en temps réel et géolocalisation.",
       results: ["Coordination don de sang", "Notifications temps réel", "Tableau de bord admin"],
+    },
+    caseStudyExtended: {
+      architecture: {
+        nodes: [
+          {
+            id: 'mobile',
+            label: 'React Native + Expo',
+            sublabel: 'Application mobile iOS / Android',
+            detail: {
+              role: "Interface principale utilisée par les donneurs, hôpitaux et administrateurs. Gère l'authentification, la localisation et les notifications push.",
+              why: "Expo accélère le développement cross-platform sans sacrifier les fonctionnalités natives (push, géolocalisation). Un seul codebase pour iOS et Android.",
+              tech: 'React Native',
+            },
+          },
+          {
+            id: 'api',
+            label: 'API Express',
+            sublabel: 'Backend REST Node.js',
+            detail: {
+              role: "Expose les endpoints REST : inscription donneur, demande de sang, matching par groupe, tableau de bord admin. Gère l'authentification JWT.",
+              why: "Express offre la flexibilité nécessaire pour un MVP mobile. Léger, bien documenté et suffisant pour orchestrer les queues BullMQ et la BDD.",
+              tech: 'Express',
+            },
+          },
+          {
+            id: 'queue',
+            label: 'BullMQ + Redis',
+            sublabel: "Files d'attente asynchrones",
+            detail: {
+              role: "Traite les demandes urgentes de sang en file d'attente : notification des donneurs compatibles, retry automatique, gestion des pics de charge.",
+              why: "BullMQ sur Redis garantit qu'aucune notification n'est perdue même sous charge. La persistance Redis assure la durabilité des jobs entre redémarrages.",
+              tech: 'BullMQ',
+            },
+          },
+          {
+            id: 'db',
+            label: 'MySQL',
+            sublabel: 'Base de données relationnelle',
+            detail: {
+              role: "Stocke donneurs, groupes sanguins, hôpitaux, demandes et historique des dons. Les jointures relationnelles garantissent la cohérence du matching.",
+              why: "MySQL est adapté aux données structurées et aux relations complexes (donneur → groupe sanguin → compatibilité → historique don).",
+              tech: 'MySQL',
+            },
+          },
+        ],
+      },
+      workflow: {
+        title: "De la demande à la transfusion",
+        steps: [
+          {
+            id: 1,
+            label: 'Demande',
+            description: "Un hôpital crée une demande urgente en précisant le groupe sanguin requis et la quantité. La demande est persistée et transmise à la queue BullMQ.",
+            module: 'API',
+            screenshotIdx: 0,
+          },
+          {
+            id: 2,
+            label: 'Matching',
+            description: "L'algorithme de matching interroge la BDD pour trouver les donneurs compatibles dans un rayon géographique défini et disponibles selon leur historique.",
+            module: 'Backend',
+            screenshotIdx: 1,
+          },
+          {
+            id: 3,
+            label: 'Notification',
+            description: "BullMQ envoie des notifications push ciblées aux donneurs compatibles via Expo Push Service. Les retries automatiques garantissent la délivrance.",
+            module: 'Queue',
+            screenshotIdx: 2,
+          },
+          {
+            id: 4,
+            label: 'Confirmation',
+            description: "Le donneur confirme sa disponibilité dans l'app. L'hôpital reçoit les coordonnées et un historique du don est créé en base.",
+            module: 'Mobile',
+            screenshotIdx: 3,
+          },
+        ],
+      },
+      techDecisions: [
+        {
+          tech: 'BullMQ',
+          label: "Files d'attente persistantes",
+          problem: "Les pics de demandes urgentes risquent de surcharger l'API et de faire perdre des notifications critiques.",
+          decision: "Utiliser BullMQ sur Redis pour traiter les notifications en asynchrone avec retry automatique et persistence des jobs.",
+          tradeoff: "Complexité infra supplémentaire (Redis). Debugging des jobs plus difficile qu'un appel direct.",
+          result: "Zéro perte de notification même sous charge. Retry automatique en cas d'échec d'envoi push.",
+        },
+        {
+          tech: 'Expo',
+          label: 'Cross-platform mobile',
+          problem: "Développer deux apps natives (iOS et Android) multiplierait le temps de développement par deux avec des ressources limitées.",
+          decision: "React Native + Expo pour un seul codebase déployé sur les deux plateformes, avec accès aux API natives (push, géolocalisation).",
+          tradeoff: "Performances légèrement inférieures au natif pur. Dépendance à l'écosystème Expo pour les mises à jour OTA.",
+          result: "Une seule équipe livre iOS et Android simultanément. Les mises à jour sont déployées sans passer par les stores.",
+        },
+        {
+          tech: 'JWT',
+          label: 'Authentification stateless',
+          problem: "Les utilisateurs (donneurs, hôpitaux, admins) ont des rôles différents et doivent s'authentifier depuis mobile sans session serveur.",
+          decision: "JWT avec rôles encodés (donneur, hôpital, admin) vérifié à chaque requête API sans état serveur.",
+          tradeoff: "Révocation des tokens complexe avant expiration. Payload JWT visible côté client.",
+          result: "Authentification scalable sans state serveur. Chaque rôle accède uniquement à ses endpoints.",
+        },
+        {
+          tech: 'Matching',
+          label: 'Algorithme de compatibilité',
+          problem: "La compatibilité sanguine suit des règles précises (O- universel, AB+ receveur universel). Un matching erroné peut être fatal.",
+          decision: "Table de compatibilité codée en dur et testée unitairement, combinée à un filtre géographique par rayon et un filtre d'historique de don récent.",
+          tradeoff: "La logique de compatibilité est statique et doit être maintenue manuellement si les règles médicales évoluent.",
+          result: "Zéro erreur de compatibilité. Les donneurs récemment sollicités ne sont pas recontactés immédiatement.",
+        },
+      ],
     },
   },
   {
@@ -174,6 +419,125 @@ export const PROJECTS = [
       solution: "Application desktop complete : inscriptions, paiements, presences, planning moniteurs, suivi apprenants multi-sites.",
       results: ["Gestion multi-sites", "Workflow automatise", "Synchronisation hors-ligne"],
     },
+    caseStudyExtended: {
+      architecture: {
+        nodes: [
+          {
+            id: 'electron',
+            label: 'Desktop Electron',
+            sublabel: 'Application bureau Windows',
+            detail: {
+              role: "Couche desktop qui encapsule l'interface React et communique avec le serveur NestJS local. Installable sur les machines de chaque site.",
+              why: "Les auto-écoles ont besoin d'une app installée qui fonctionne sans connexion internet stable. Electron permet de packager React en exécutable natif.",
+              tech: 'Electron',
+            },
+          },
+          {
+            id: 'react',
+            label: 'React + TypeScript',
+            sublabel: 'Interface utilisateur',
+            detail: {
+              role: "Dashboard multi-vues : inscriptions, paiements, planning moniteurs, suivi apprenants, rapports par site.",
+              why: "React + TypeScript garantit la cohérence de l'interface sur toutes les vues complexes (planning, tableaux de bord) avec un typage strict.",
+              tech: 'React',
+            },
+          },
+          {
+            id: 'nestjs',
+            label: 'API NestJS',
+            sublabel: 'Backend modulaire local',
+            modules: [
+              { id: 'inscriptions', label: 'Inscriptions' },
+              { id: 'paiements', label: 'Paiements' },
+              { id: 'planning', label: 'Planning' },
+              { id: 'presences', label: 'Présences' },
+            ],
+            detail: {
+              role: "API locale organisée en modules NestJS par domaine métier : inscriptions, paiements, planning moniteurs, gestion des présences.",
+              why: "NestJS impose une structure modulaire qui isole chaque domaine. Idéal pour une application multi-sites où chaque fonctionnalité évolue indépendamment.",
+              tech: 'NestJS',
+            },
+          },
+          {
+            id: 'db',
+            label: 'MySQL + TypeORM',
+            sublabel: 'Données locales',
+            detail: {
+              role: "Base de données locale par site. TypeORM gère les migrations et les relations entre apprenants, moniteurs, sessions et paiements.",
+              why: "MySQL local garantit le fonctionnement hors-ligne. TypeORM simplifie les migrations de schéma lors des mises à jour de l'application.",
+              tech: 'MySQL',
+            },
+          },
+        ],
+      },
+      workflow: {
+        title: "De l'inscription à l'examen",
+        steps: [
+          {
+            id: 1,
+            label: 'Inscription',
+            description: "Le secrétariat enregistre l'apprenant : informations personnelles, formule choisie, documents. Un dossier est créé avec statut 'En attente de paiement'.",
+            module: 'Inscriptions',
+            screenshotIdx: 0,
+          },
+          {
+            id: 2,
+            label: 'Paiement',
+            description: "L'encaissement est saisi avec mode de paiement et montant. Le solde restant est calculé automatiquement. Un reçu est généré.",
+            module: 'Paiements',
+            screenshotIdx: 1,
+          },
+          {
+            id: 3,
+            label: 'Planning',
+            description: "Le responsable assigne les séances de conduite à un moniteur selon ses disponibilités. L'apprenant est notifié de son planning.",
+            module: 'Planning',
+            screenshotIdx: 2,
+          },
+          {
+            id: 4,
+            label: 'Suivi',
+            description: "Les présences sont enregistrées à chaque séance. Le tableau de bord affiche la progression de chaque apprenant et les heures restantes.",
+            module: 'Présences',
+            screenshotIdx: 3,
+          },
+        ],
+      },
+      techDecisions: [
+        {
+          tech: 'Electron',
+          label: 'Application hors-ligne',
+          problem: "Les sites de l'auto-école n'ont pas toujours une connexion internet stable. Une webapp serait inutilisable en cas de coupure.",
+          decision: "Encapsuler React + NestJS dans Electron pour produire un exécutable installé localement, fonctionnant sans internet.",
+          tradeoff: "Mises à jour à déployer manuellement sur chaque poste. Pas de synchronisation temps réel entre sites.",
+          result: "Fonctionnement garanti quelle que soit la connexion réseau. Déploiement sur n'importe quelle machine Windows.",
+        },
+        {
+          tech: 'NestJS',
+          label: 'Modules métier isolés',
+          problem: "Inscriptions, paiements, planning et présences sont des domaines distincts. Mélanger leur logique rend la maintenance impossible.",
+          decision: "Organiser le backend en modules NestJS par domaine, chacun avec ses routes, services et entités TypeORM.",
+          tradeoff: "Plus verbeux qu'Express. La gestion des dépendances entre modules demande de la rigueur.",
+          result: "Chaque fonctionnalité évolue sans impacter les autres. L'ajout d'un nouveau site suit le même pattern.",
+        },
+        {
+          tech: 'TypeORM',
+          label: 'Migrations de schéma',
+          problem: "L'application évolue : nouveaux champs, nouvelles tables. Mettre à jour la BDD sur chaque installation sans casser les données existantes.",
+          decision: "TypeORM migrations pour versionner le schéma et l'appliquer automatiquement au démarrage de l'application.",
+          tradeoff: "Les migrations mal écrites peuvent bloquer le démarrage. Nécessite des tests de migration sur des données réelles.",
+          result: "Les mises à jour de l'app mettent à jour la BDD automatiquement sans intervention manuelle sur chaque site.",
+        },
+        {
+          tech: 'Multi-sites',
+          label: 'Architecture multi-campus',
+          problem: "Chaque site a ses propres moniteurs, apprenants et plannings, mais la direction veut une vue consolidée de tous les sites.",
+          decision: "Un champ `siteId` sur toutes les entités filtre les données par site. Le rôle 'direction' a accès à tous les sites.",
+          tradeoff: "Pas de synchronisation en temps réel entre sites. Les rapports multi-sites nécessitent un export manuel.",
+          result: "Chaque site opère indépendamment. La direction peut consulter les rapports consolidés par export.",
+        },
+      ],
+    },
   },
   {
     id: "08",
@@ -204,6 +568,119 @@ export const PROJECTS = [
       solution: "Logiciel desktop complet : reception, tickets, facturation PDF, gestion clients, rapports et inventaire.",
       results: ["Export PDF et Excel", "Historique client complet", "Gestion d'inventaire"],
     },
+    caseStudyExtended: {
+      architecture: {
+        nodes: [
+          {
+            id: 'electron',
+            label: 'Desktop Electron',
+            sublabel: 'Application bureau Windows',
+            detail: {
+              role: "Couche desktop qui package l'application React. Gère les événements natifs (impression, accès fichiers) et l'intégration avec l'OS.",
+              why: "Les ateliers de réparation travaillent sur des postes fixes sans serveur central. Electron permet un déploiement standalone.",
+              tech: 'Electron',
+            },
+          },
+          {
+            id: 'react',
+            label: 'React + Zustand',
+            sublabel: 'Interface + State management',
+            detail: {
+              role: "Interface multi-vues : réception clients, tickets actifs, facturation, rapports. Zustand centralise l'état global (tickets ouverts, inventaire).",
+              why: "Zustand est plus simple que Redux pour ce cas d'usage. Un store léger qui gère les tickets ouverts et le panier de facturation sans boilerplate.",
+              tech: 'React',
+            },
+          },
+          {
+            id: 'prisma',
+            label: 'Prisma ORM',
+            sublabel: 'Accès aux données local',
+            detail: {
+              role: "Couche d'accès à la base SQLite locale. Gère les relations clients → tickets → pièces → factures avec migrations automatiques.",
+              why: "Prisma génère un client typé depuis le schéma. Les migrations versionnent la BDD pour les mises à jour sans perte de données.",
+              tech: 'Prisma',
+            },
+          },
+          {
+            id: 'pdf',
+            label: 'React PDF',
+            sublabel: 'Facturation automatisée',
+            detail: {
+              role: "Génère les factures et devis en PDF directement depuis les données du ticket : client, pièces, main-d'oeuvre, total.",
+              why: "React PDF permet de définir le layout de la facture en JSX, avec le même langage que le reste de l'app.",
+              tech: 'React PDF',
+            },
+          },
+        ],
+      },
+      workflow: {
+        title: "De la réception à la facturation",
+        steps: [
+          {
+            id: 1,
+            label: 'Réception',
+            description: "Le technicien enregistre l'appareil : client, marque, modèle, panne déclarée. Un ticket est créé avec statut 'Reçu' et un numéro unique.",
+            module: 'Tickets',
+            screenshotIdx: 0,
+          },
+          {
+            id: 2,
+            label: 'Diagnostic',
+            description: "Le technicien met à jour le ticket avec son diagnostic, les pièces nécessaires et un devis estimatif. Le client peut être notifié.",
+            module: 'Tickets',
+            screenshotIdx: 1,
+          },
+          {
+            id: 3,
+            label: 'Réparation',
+            description: "Les pièces utilisées sont saisies (décrémentation du stock) et le temps de main-d'oeuvre enregistré. Statut passé à 'En réparation'.",
+            module: 'Inventaire',
+            screenshotIdx: 2,
+          },
+          {
+            id: 4,
+            label: 'Facturation',
+            description: "React PDF génère la facture finale depuis le ticket. L'encaissement est saisi, le ticket clôturé et l'historique client mis à jour.",
+            module: 'Facturation',
+            screenshotIdx: 4,
+          },
+        ],
+      },
+      techDecisions: [
+        {
+          tech: 'Zustand',
+          label: 'State management léger',
+          problem: "L'interface doit afficher en temps réel les tickets ouverts, le stock et le panier de facturation sans rechargement constant de la BDD.",
+          decision: "Zustand pour un store global minimal : liste des tickets actifs, panier de facturation en cours, alertes stock critique.",
+          tradeoff: "State non persisté : un redémarrage recharge depuis Prisma. Moins adapté si l'app évolue vers du collaboratif multi-poste.",
+          result: "Interface réactive sans requêtes superflues. Le panier de facturation s'accumule fluide sans aller-retour BDD.",
+        },
+        {
+          tech: 'Prisma',
+          label: 'Migrations locales',
+          problem: "La BDD locale doit évoluer avec les mises à jour de l'app (nouveaux champs, nouvelles tables) sans perdre les données existantes.",
+          decision: "Prisma migrations versionnées, appliquées automatiquement au démarrage de l'application Electron.",
+          tradeoff: "Prisma génère une couche d'abstraction qui peut être verbeuse pour des requêtes SQL complexes.",
+          result: "Mises à jour de schéma transparentes pour l'utilisateur. Zéro perte de données lors des mises à jour.",
+        },
+        {
+          tech: 'React PDF',
+          label: 'Facturation en JSX',
+          problem: "Générer des factures PDF professionnelles avec le logo de l'atelier, les détails du ticket et les totaux calculés.",
+          decision: "React PDF pour définir le layout de la facture en JSX réutilisant les mêmes données que l'interface.",
+          tradeoff: "React PDF a ses propres composants de layout (View, Text, Image) différents du HTML standard.",
+          result: "Factures générées instantanément depuis les données du ticket, directement imprimables ou envoyables par email.",
+        },
+        {
+          tech: 'SQLite',
+          label: 'Base embarquée',
+          problem: "Les ateliers n'ont pas de serveur de BDD. MySQL ou PostgreSQL seraient trop complexes à installer et maintenir sur un poste client.",
+          decision: "SQLite embarquée via Prisma : aucune installation requise, la BDD est un simple fichier sur le disque.",
+          tradeoff: "Pas de multi-utilisateurs simultanés. Pas de backup automatique sans script dédié.",
+          result: "Déploiement zero-config. L'atelier lance l'app et tout fonctionne sans configuration serveur.",
+        },
+      ],
+    },
   },
   {
     id: "09",
@@ -233,6 +710,135 @@ export const PROJECTS = [
       process: "Pipeline Two-Pass : Pass 1 (Cohere sélectionne les outils), exécution SQL whitlistée par tenant, Pass 2 (réponse streamée SSE avec résultats injectés). Snapshot temps réel (CA, stock critique, meilleur plat) injecté dans chaque preamble. Sécurité stricte : 6 tables whitelistées, injection tenant automatique, rate limiting par rôle.",
       solution: "Console IQ (admin) : copilote analytique qui lit et écrit la BDD via Tool Use, génère 6 types de widgets UI custom. Menu Researcher : synthèse multi-source (Reddit, Wikidata, OpenFoodFacts + base africaine) avec labels de fiabilité. Recommandations client personnalisées basées sur l'historique.",
       results: ["Pipeline Two-Pass + Tool Use natif", "6 widgets UI générés par l'IA", "Menu Researcher multi-source", "Snapshot BDD temps réel"],
+    },
+    caseStudyExtended: {
+      architecture: {
+        nodes: [
+          {
+            id: 'frontend',
+            label: 'React 18',
+            sublabel: 'Dashboard admin + Menu QR + Cuisine',
+            modules: [
+              { id: 'admin', label: 'Dashboard admin' },
+              { id: 'qr', label: 'Menu QR client' },
+              { id: 'kitchen', label: 'Interface cuisine' },
+              { id: 'iq', label: 'Console IQ' },
+            ],
+            detail: {
+              role: "Trois interfaces distinctes : dashboard admin (gestion complète), menu QR (commandes client depuis smartphone), interface cuisine (tickets temps réel), Console IQ (copilote IA).",
+              why: "React 18 avec ses capacités de streaming natif s'intègre parfaitement avec les réponses SSE du pipeline Two-Pass Cohere.",
+              tech: 'React',
+            },
+          },
+          {
+            id: 'api',
+            label: 'API Express',
+            sublabel: 'Backend multi-tenant',
+            detail: {
+              role: "Orchestre toutes les opérations : commandes, menus, analytics, authentification. Injecte automatiquement le `tenantId` dans chaque requête SQL pour l'isolation multi-tenant.",
+              why: "Express offre la flexibilité pour gérer le streaming SSE des réponses IA et les WebSockets des commandes temps réel dans le même process.",
+              tech: 'Express',
+            },
+          },
+          {
+            id: 'ai',
+            label: 'Cohere Command R+',
+            sublabel: 'Pipeline Two-Pass + Tool Use',
+            detail: {
+              role: "Pass 1 : le modèle sélectionne les outils SQL à exécuter (query_database, execute_manager_action). Pass 2 : répond en streaming SSE avec les résultats injectés. 6 widgets UI générés dynamiquement.",
+              why: "Command R+ est optimisé pour le Tool Use natif et la génération structurée. Le modèle comprend le contexte business africain et répond en français.",
+              tech: 'Cohere',
+            },
+          },
+          {
+            id: 'rt',
+            label: 'Socket.io',
+            sublabel: 'Commandes temps réel',
+            detail: {
+              role: "Pousse les nouvelles commandes à l'interface cuisine en temps réel. Notifie le dashboard quand une commande est prête ou modifiée.",
+              why: "Socket.io gère la reconnexion automatique et le fallback polling — essentiel dans des restaurants avec une connectivité WiFi variable.",
+              tech: 'Socket.io',
+            },
+          },
+          {
+            id: 'db',
+            label: 'MySQL + Redis',
+            sublabel: 'Données + cache multi-niveau',
+            detail: {
+              role: "MySQL stocke les données multi-tenant (menus, commandes, stock, analytics). Redis cache le snapshot BDD injecté dans chaque preamble IA (CA jour, stock critique, meilleur plat).",
+              why: "Le snapshot temps réel est recalculé à chaque requête IA sans Redis. Le cache Redis réduit la latence du contexte IA de ~200ms à <5ms.",
+              tech: 'MySQL',
+            },
+          },
+        ],
+      },
+      workflow: {
+        title: "De la commande à l'analyse IA",
+        steps: [
+          {
+            id: 1,
+            label: 'Commande QR',
+            description: "Le client scanne le QR code de sa table, parcourt le menu et passe commande depuis son smartphone. La commande est persistée en BDD.",
+            module: 'Menu QR',
+            screenshotIdx: 0,
+          },
+          {
+            id: 2,
+            label: 'Cuisine',
+            description: "L'interface cuisine reçoit le ticket en temps réel via Socket.io. Le chef valide chaque plat et met à jour le statut de la commande.",
+            module: 'Cuisine',
+            screenshotIdx: 2,
+          },
+          {
+            id: 3,
+            label: 'Encaissement',
+            description: "L'admin valide la commande, le stock est décrémenté automatiquement et la vente est enregistrée dans les analytics du jour.",
+            module: 'Dashboard',
+            screenshotIdx: 0,
+          },
+          {
+            id: 4,
+            label: 'Console IQ',
+            description: "L'admin interroge la Console IQ. Pass 1 sélectionne les outils SQL, Pass 2 génère une réponse streamée avec widgets dynamiques (graphiques, alertes stock, actions).",
+            module: 'IA',
+            screenshotIdx: 2,
+          },
+        ],
+      },
+      techDecisions: [
+        {
+          tech: 'Two-Pass Pipeline',
+          label: 'Pipeline IA en deux temps',
+          problem: "Le modèle IA doit lire la BDD pour répondre, mais exécuter du SQL non contrôlé sur une BDD multi-tenant est un risque de sécurité critique.",
+          decision: "Pass 1 : le modèle choisit parmi des outils whitelistés (6 tables, injection tenantId automatique). Pass 2 : le modèle génère la réponse avec les résultats injectés.",
+          tradeoff: "Deux appels API Cohere par requête = latence doublée (~2s). Les outils whitelistés limitent les questions auxquelles l'IA peut répondre.",
+          result: "L'IA accède aux données réelles sans risque d'injection SQL. Chaque tenant ne voit que ses propres données.",
+        },
+        {
+          tech: 'Socket.io',
+          label: 'Temps réel cuisine',
+          problem: "Les commandes doivent apparaître en cuisine en moins de 2 secondes. Le polling HTTP génère une charge inutile et des délais variables.",
+          decision: "Socket.io avec reconnexion automatique et fallback polling pour les environments WiFi dégradés en cuisine.",
+          tradeoff: "Maintenir une connexion WebSocket persistante par client cuisine. Gestion plus complexe des déconnexions.",
+          result: "Tickets cuisine affichés en <500ms. La cuisine ne manque aucune commande même avec une connectivité instable.",
+        },
+        {
+          tech: 'Multi-tenant',
+          label: 'Isolation par restaurant',
+          problem: "Plusieurs restaurants partagent la même BDD. Chaque restaurant doit voir uniquement ses données, sans jamais accéder à celles d'un autre.",
+          decision: "Middleware Express injecte automatiquement le `tenantId` dans chaque requête SQL. Le pipeline IA utilise les mêmes outils whitelistés avec injection tenant.",
+          tradeoff: "Toutes les requêtes SQL doivent inclure la clause WHERE tenant. Un oubli expose des données d'autres tenants.",
+          result: "Isolation garantie à tous les niveaux : API REST, WebSockets et requêtes SQL du pipeline IA.",
+        },
+        {
+          tech: 'Redis',
+          label: 'Snapshot BDD pour l\'IA',
+          problem: "Chaque requête à la Console IQ doit inclure le contexte business (CA jour, stock critique, meilleur plat). Recalculer à chaque fois prend ~200ms.",
+          decision: "Redis cache le snapshot BDD par tenant avec TTL de 30 secondes. Le preamble IA est enrichi à partir du cache.",
+          tradeoff: "Le snapshot peut avoir jusqu'à 30 secondes de retard. Cohérence éventuelle acceptable pour de l'analytique.",
+          result: "Latence du contexte IA réduite de ~200ms à <5ms. L'IA répond avec des données fraîches sans requête BDD à chaque fois.",
+        },
+      ],
     },
   }
 ];
@@ -274,7 +880,7 @@ export const TECH_ICONS: Record<string, string> = {
 
 export const PROJECT_META: Record<string, { badge: string; metrics: string[] }> = {
   "01": { badge: "Architecture d'entreprise", metrics: ["+40% efficacité opérationnelle", "Modules RBAC sécurisés"] },
-  "02": { badge: "Impact social", metrics: ["Coordination don de sang", "Notifications temps réel"] },
+  "02": { badge: "Impact social · Finaliste OIC", metrics: ["App mobile React Native", "Files asynchrones BullMQ"] },
   "03": { badge: "Plateforme collaborative", metrics: ["TypeScript end-to-end", "Multi-plateforme"] },
   "04": { badge: "Intelligence artificielle", metrics: ["Prédiction ML agricole", "Recommandations optimisées"] },
   "05": { badge: "API haute disponibilité", metrics: ["Cache Redis intégré", "Import PDF automatisé"] },

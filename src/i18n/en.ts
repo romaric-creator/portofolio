@@ -25,7 +25,7 @@ export const en: Translations = {
       'simple and',
       'efficient software.',
     ],
-    subtitle: "I automate the manual processes of SMBs: from Excel and WhatsApp to a real app.",
+    subtitle: "I build management software, SaaS platforms and AI-powered tools to help SMBs work better.",
     ctaPrimary: 'Start a project',
     ctaSecondary: 'View my work',
     statExpLabel: 'years of experience',
@@ -36,7 +36,7 @@ export const en: Translations = {
 
   marquee: {
     items: [
-      'Business apps', 'SaaS', 'Automation',
+      'Business apps', 'SaaS', 'Automation', 'AI Integration',
       'React', 'Node.js', 'TypeScript', 'React Native',
       'Electron', 'Web', 'Mobile', 'Desktop', 'Backend',
     ],
@@ -210,17 +210,17 @@ export const en: Translations = {
     headingLine1: 'I turn concrete needs',
     headingLine2: 'into',
     headingEm: 'functional digital tools.',
-    bio: "Full-Stack Developer based in Douala, I work across the entire development cycle: interfaces, APIs, databases, deployment. I particularly enjoy replacing manual processes with simple, structured and usable tools.",
+    bio: "I'm a Full-Stack Developer based in Douala. Over the past four years, I've built management software for Cameroonian SMBs — hotels, restaurants, driving schools, repair shops. Among my recent projects: a restaurant SaaS with a built-in AI copilot, and a mobile app recognised at the Orange Innovation Challenge.",
     metaLabels: {
       domains: 'Domains',
       experience: 'Experience',
       languages: 'Languages',
     },
     metaValues: {
-      domains: 'Web · Mobile · Desktop · Backend',
+      domains: 'Web, Mobile, Desktop and Backend',
       expUnit: 'years',
       projectsUnit: 'products delivered',
-      languages: 'French · English',
+      languages: 'French and English',
     },
     badges: {
       available: 'Available',
@@ -234,23 +234,23 @@ export const en: Translations = {
     events: [
       {
         years: 'June – August 2026',
-        title: 'IT Consultant Intern',
-        description: "SIMS BTP Holdings. Internal process automation, business app development to replace manual workflows, IT strategy consulting and company website creation.",
-      },
-      {
-        years: '2025',
-        title: 'Co-founder & CTO - SparkNest',
-        description: "Co-founded a digital solutions collective based in Douala. Design and development of custom web, mobile and desktop applications for Cameroonian SMBs.",
+        title: 'IT Consultant Intern at SIMS BTP Holdings',
+        description: "I automated internal processes and built tools to replace their manual files and workflows. I also advised on IT strategy and created the company website.",
       },
       {
         years: '2026',
-        title: 'VitaSang - OIC Finalist',
-        description: "Blood donation coordination mobile app recognised at the Orange Innovation Challenge Cameroon.",
+        title: 'VitaSang, OIC Finalist',
+        description: "A mobile app connecting blood donors and hospitals in urgent situations, recognised among the top projects at the Orange Innovation Challenge Cameroon.",
+      },
+      {
+        years: '2025',
+        title: 'Co-founder and CTO of SparkNest',
+        description: "We built SparkNest to design custom software for Cameroonian SMBs. I handled technical architecture and project delivery.",
       },
       {
         years: '2022 – 2026',
         title: 'Freelance Developer',
-        description: "Design and development of web, mobile and desktop applications for SMBs, startups and entrepreneurs.",
+        description: "Four years of projects for SMBs, startups and entrepreneurs. I built software for hotels, restaurants, driving schools and IT repair shops.",
       },
     ],
   },

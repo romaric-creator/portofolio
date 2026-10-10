@@ -25,7 +25,7 @@ export const fr: Translations = {
       'en logiciels simples',
       'et efficaces.',
     ],
-    subtitle: "J'automatise les processus manuels des PME : d'Excel et WhatsApp vers une vraie application.",
+    subtitle: "Je construis des logiciels de gestion, des SaaS et des outils avec de l'IA pour aider les PME à mieux travailler.",
     ctaPrimary: 'Démarrer un projet',
     ctaSecondary: 'Voir mes travaux',
     statExpLabel: "ans d'expérience",
@@ -36,7 +36,7 @@ export const fr: Translations = {
 
   marquee: {
     items: [
-      'Applications métier', 'SaaS', 'Automatisation',
+      'Applications métier', 'SaaS', 'Automatisation', 'Intégration IA',
       'React', 'Node.js', 'TypeScript', 'React Native',
       'Electron', 'Web', 'Mobile', 'Desktop', 'Backend',
     ],
@@ -69,7 +69,7 @@ export const fr: Translations = {
         tagline: "Application de gestion commerciale et comptabilité pour résidences, hôtels, restaurants et PME.",
         description: "Système complet avec modules hôtel (réservations, check-in/out), bar/restaurant (commandes, workflow cuisine), ventes & caisse, comptabilité en partie double, gestion du personnel et rapports. Architecture Docker multi-services avec RBAC et transactions sécurisées.",
         caseStudy: {
-          problem: "Les hôtels et restaurants de Douala géraient réservations, commandes et comptabilité sur papier ou Excel - aucune donnée partagée entre modules, pas de piste d'audit, doubles saisies fréquentes.",
+          problem: "Les hôtels et restaurants de Douala géraient réservations, commandes et comptabilité sur papier ou Excel. Aucune donnée partagée entre modules, pas de piste d'audit, des doubles saisies à répétition.",
           process: "Chaque métier (hôtel, restaurant, caisse, compta) est un service isolé avec son propre RBAC, déployé via Docker Compose pour un scaling indépendant. Moteur de comptabilité en partie double développé from scratch avec garanties d'intégrité transactionnelle. Workflow événementiel entre modules : réservation → check-in → commande → facturation → écriture comptable.",
           solution: "Une seule plateforme couvre l'intégralité du cycle opérationnel. Chaque équipe travaille dans son module, les managers obtiennent une vue consolidée. Zéro réconciliation manuelle entre systèmes.",
           results: ["+40% d'efficacité opérationnelle mesurée sur site", "Zéro double saisie entre modules", "Rapports financiers temps réel remplaçant les totaux manuels de fin de journée"],
@@ -79,7 +79,7 @@ export const fr: Translations = {
         tagline: "Plateforme mobile de coordination du don de sang au Cameroun.",
         description: "Application mobile complète (React Native + Expo) connectant donneurs, hôpitaux et administration. Files d'attente BullMQ avec lanes prioritaires, notifications push Firebase, matching géolocalisé, auth JWT multi-rôles (donneur, hôpital, admin) et dashboard web admin.",
         caseStudy: {
-          problem: "Au Cameroun, trouver un donneur de sang compatible en urgence repose entièrement sur le bouche-à-oreille et les appels - un processus qui perd des minutes critiques quand chaque minute compte.",
+          problem: "Au Cameroun, trouver un donneur de sang compatible en urgence repose entièrement sur le bouche-à-oreille et les appels téléphoniques. Un processus qui perd des minutes critiques quand chaque minute compte.",
           process: "Algorithme de matching par groupe sanguin, niveau d'urgence et proximité du donneur. Files d'attente BullMQ avec lanes prioritaires pour qu'aucune demande ne soit perdue lors des pics. Firebase Cloud Messaging gère la livraison push cross-platform. JWT + accès par rôle sépare les flux donneur, hôpital et admin.",
           solution: "Une app mobile où les hôpitaux publient les urgences et les donneurs compatibles reçoivent une notification instantanée. La géolocalisation affine le rayon de match. Les admins coordonnent en temps réel depuis un dashboard web.",
           results: ["Reconnu au Orange Innovation Challenge Cameroun (Finaliste OIC)", "Les files BullMQ absorbent les pics de demande sans perte d'événement", "Livraison push cross-platform Android et iOS via Firebase"],
@@ -129,7 +129,7 @@ export const fr: Translations = {
       },
       '09': {
         tagline: "SaaS restaurant multi-tenant avec copilote IA analytique, Tool Use natif et commandes temps réel.",
-        description: "Plateforme SaaS pour restaurants africains : dashboard admin, menu client QR, interface cuisine. Le cœur : Console IQ - copilote IA Cohere Command R+ avec pipeline Two-Pass, Tool Use natif (query_database, execute_manager_action, search_dish_images), snapshot temps réel injecté dans chaque preamble et 6 widgets UI générés dynamiquement (ChatChart, StockAlert, SmartActions, StrategyInsight, MenuForm, DecisionTool). Architecture microservices (9 services), cache Redis multi-niveau, Electron desktop, freemium IA.",
+        description: "Plateforme SaaS pour restaurants africains : dashboard admin, menu client QR, interface cuisine. Le cœur : Console IQ, copilote IA Cohere Command R+ avec pipeline Two-Pass, Tool Use natif (query_database, execute_manager_action, search_dish_images), snapshot temps réel injecté dans chaque preamble et 6 widgets UI générés dynamiquement (ChatChart, StockAlert, SmartActions, StrategyInsight, MenuForm, DecisionTool). Architecture microservices (9 services), cache Redis multi-niveau, Electron desktop, freemium IA.",
         caseStudy: {
           problem: "Les restaurants africains gèrent menus, commandes et cuisine avec des outils fragmentés, sans analytics centralisées ni intelligence opérationnelle.",
           process: "Pipeline Two-Pass : Pass 1 (Cohere sélectionne les outils), exécution SQL whitelistée par tenant, Pass 2 (réponse streamée SSE avec résultats injectés). Snapshot temps réel (CA, stock critique, meilleur plat) injecté dans chaque preamble. Sécurité stricte : 6 tables whitelistées, injection tenant automatique, rate limiting par rôle.",
@@ -147,7 +147,7 @@ export const fr: Translations = {
       '06': { badge: "API REST", metrics: ["Auth JWT sécurisée", "Rôles et permissions"] },
       '07': { badge: "Application métier", metrics: ["Gestion multi-sites", "Workflow automatisé"] },
       '08': { badge: "Outil métier desktop", metrics: ["Export PDF et Excel", "State Zustand"] },
-      '09': { badge: "SaaS IA · Projet phare", metrics: ["Pipeline Two-Pass + Tool Use", "9 microservices · Cache Redis"] },
+      '09': { badge: "SaaS IA · Projet phare", metrics: ["Pipeline Two-Pass + Tool Use", "9 microservices, cache Redis"] },
     },
   },
 
@@ -210,17 +210,17 @@ export const fr: Translations = {
     headingLine1: 'Je transforme des besoins concrets',
     headingLine2: 'en outils',
     headingEm: 'numériques fonctionnels.',
-    bio: "Développeur Full-Stack basé à Douala, j'interviens sur l'ensemble du cycle de développement : interfaces, API, bases de données, déploiement. J'aime particulièrement remplacer des processus manuels par des outils simples, structurés et exploitables.",
+    bio: "Je suis développeur Full-Stack basé à Douala. Ces quatre dernières années, j'ai conçu des logiciels de gestion pour des PME camerounaises — des hôtels, des restaurants, des auto-écoles, des ateliers de réparation. Parmi mes projets récents : un SaaS restaurant avec un copilote IA intégré et une application mobile primée au concours Orange Innovation Challenge.",
     metaLabels: {
       domains: 'Domaines',
       experience: 'Expérience',
       languages: 'Langues',
     },
     metaValues: {
-      domains: 'Web · Mobile · Desktop · Backend',
+      domains: 'Web, Mobile, Desktop et Backend',
       expUnit: 'ans',
       projectsUnit: 'projets livrés',
-      languages: 'Français · Anglais',
+      languages: 'Français et Anglais',
     },
     badges: {
       available: 'Disponible',
@@ -234,23 +234,23 @@ export const fr: Translations = {
     events: [
       {
         years: 'Juin – Août 2026',
-        title: 'Stage Consultant IT',
-        description: "SIMS BTP Holdings. Automatisation des processus internes, développement d'applications métier pour remplacer les workflows manuels, conseil en stratégie IT et création du site web de l'entreprise.",
-      },
-      {
-        years: '2025',
-        title: 'Co-fondateur & CTO - SparkNest',
-        description: "Co-fondation d'un collectif de solutions numériques basé à Douala. Conception d'applications web, mobile et desktop sur mesure pour les PME camerounaises.",
+        title: 'Stage Consultant IT chez SIMS BTP Holdings',
+        description: "J'ai automatisé des processus internes et conçu des outils pour remplacer leurs fichiers et workflows manuels. J'ai aussi conseillé sur la stratégie IT et créé le site web de l'entreprise.",
       },
       {
         years: '2026',
-        title: 'VitaSang - Finaliste OIC',
-        description: "Application mobile de coordination du don de sang reconnue au concours Orange Innovation Challenge Cameroun.",
+        title: 'VitaSang, finaliste Orange Innovation Challenge',
+        description: "Application mobile qui connecte des donneurs de sang et des hôpitaux en situation d'urgence, reconnue parmi les meilleurs projets du concours Orange Innovation Challenge Cameroun.",
+      },
+      {
+        years: '2025',
+        title: 'Co-fondateur et CTO de SparkNest',
+        description: "On a créé SparkNest pour concevoir des applications sur mesure pour les PME camerounaises. Je m'occupais de l'architecture technique et de la livraison des projets.",
       },
       {
         years: '2022 – 2026',
         title: 'Développeur Freelance',
-        description: "Conception et développement d'applications web, mobiles et desktop pour des PME, startups et entrepreneurs.",
+        description: "Quatre ans de projets pour des PME, des startups et des entrepreneurs. J'ai conçu des logiciels pour des hôtels, des restaurants, des auto-écoles et des ateliers de réparation informatique.",
       },
     ],
   },
