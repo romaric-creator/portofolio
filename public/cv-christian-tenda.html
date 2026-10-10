@@ -9,7 +9,7 @@
 @page { size: A4; margin: 0; }
 * { margin:0; padding:0; box-sizing:border-box; }
 :root { --sage:#587560; --sage-l:#edf0ed; --ink:#2f2f2f; --mute:#6a6a6a; --line:#c8cec8; }
-body { font-family:'Montserrat','Segoe UI',Arial,sans-serif; color:var(--ink); background:#dcdcdc; font-size:11px; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body { font-family:'Montserrat','Segoe UI',Arial,sans-serif; color:var(--ink); background:#dcdcdc; font-size:12px; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 a { color:inherit; text-decoration:none; }
 .page { width:210mm; min-height:297mm; margin:0 auto; background:#fff; position:relative; display:flex; flex-direction:column; }
 @media screen { .page { margin:8mm auto; box-shadow:0 2px 12px rgba(0,0,0,.25); } }
@@ -23,16 +23,16 @@ a { color:inherit; text-decoration:none; }
 .photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; }
 .contact { position:absolute; top:0; right:14mm; width:55mm; padding-left:12mm; }
 .contact::before { content:''; position:absolute; left:0; top:0; width:8.5mm; height:100%; background:var(--sage); border-radius:0 0 4.5mm 4.5mm; }
-.contact .r { position:relative; height:7mm; display:flex; align-items:center; font-size:8.5px; font-weight:600; color:#4a4a4a; white-space:nowrap; }
+.contact .r { position:relative; height:7.5mm; display:flex; align-items:center; font-size:10px; font-weight:600; color:#4a4a4a; white-space:nowrap; }
 .contact .r:first-child { margin-top:8mm; }
-.contact .i { position:absolute; left:-12mm; width:8.5mm; display:flex; justify-content:center; color:#fff; font-size:7.5px; font-weight:800; }
-.contact svg { width:3.8mm; height:3.8mm; fill:#fff; }
+.contact .i { position:absolute; left:-12mm; width:8.5mm; display:flex; justify-content:center; color:#fff; font-size:8px; font-weight:800; }
+.contact svg { width:4.2mm; height:4.2mm; fill:#fff; }
 
 /* Titres de section */
 .pad { padding:0 14mm 0 16mm; }
-.st { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:3px; border-bottom:1px solid #3a3a3a; margin-bottom:7px; }
+.st { font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:3px; border-bottom:1px solid #3a3a3a; margin-bottom:7px; }
 .profile { margin-top:12mm; }
-.profile p { text-align:left; hyphens:auto; font-size:11px; line-height:1.65; padding-bottom:3mm; }
+.profile p { text-align:left; hyphens:auto; font-size:12px; line-height:1.65; padding-bottom:3mm; }
 .exp-wrap { margin-top:9mm; }
 
 /* Timeline */
@@ -41,9 +41,9 @@ a { color:inherit; text-decoration:none; }
 .it:last-child { margin-bottom:0; }
 .it::before { content:''; position:absolute; left:calc(-5mm - 3.7px); top:15px; width:7px; height:7px; border-radius:50%; background:var(--sage); }
 .it .h { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
-.it .t { font-size:11px; font-weight:700; }
-.it .d { font-size:9px; font-style:italic; color:var(--mute); white-space:nowrap; }
-.it .c { font-size:10px; font-weight:700; color:var(--sage); margin-bottom:3px; }
+.it .t { font-size:12px; font-weight:700; }
+.it .d { font-size:10px; font-style:italic; color:var(--mute); white-space:nowrap; }
+.it .c { font-size:11px; font-weight:700; color:var(--sage); margin-bottom:3px; }
 ul { list-style:none; }
 .it > ul > li { position:relative; padding-left:11px; font-weight:400; margin-bottom:3px; }
 .it > ul > li::before { content:'•'; position:absolute; left:2px; color:var(--sage); }
@@ -55,22 +55,22 @@ b.proj { font-weight:700; }
 /* Bas */
 .bottom { margin-top:auto; display:grid; grid-template-columns:80mm 1fr; align-items:stretch; }
 .edu { background:var(--sage-l); border-top-right-radius:9mm; padding:8mm 7mm 8mm 16mm; }
-.edu h3, .sk h3 { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:4px; border-bottom:1px solid #3a3a3a; margin-bottom:7px; }
+.edu h3, .sk h3 { font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:4px; border-bottom:1px solid #3a3a3a; margin-bottom:7px; }
 .edu h3 { display:flex; align-items:center; gap:6px; }
 .edu h3 svg { width:5mm; height:5mm; fill:var(--sage); }
-.lang-title { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:4px; border-bottom:1px solid #3a3a3a; margin:10px 0 7px; }
+.lang-title { font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:4px; border-bottom:1px solid #3a3a3a; margin:10px 0 7px; }
 .etl { border-left:1.5px solid var(--line); margin:7px 0 0 1mm; padding-left:4mm; }
 .e { position:relative; margin-bottom:8px; }
 .e::before { content:''; position:absolute; left:calc(-4mm - 3.7px); top:4px; width:6px; height:6px; border-radius:50%; background:var(--sage); }
 .e .h { display:flex; justify-content:space-between; gap:6px; align-items:baseline; }
-.e b { font-size:9.5px; font-weight:700; font-style:italic; }
-.e .d { font-size:8.5px; font-style:italic; color:var(--mute); white-space:nowrap; }
-.e .s { font-size:8.6px; color:var(--mute); }
+.e b { font-size:11px; font-weight:700; font-style:italic; }
+.e .d { font-size:10px; font-style:italic; color:var(--mute); white-space:nowrap; }
+.e .s { font-size:10px; color:var(--mute); }
 .sk { padding:8mm 14mm 8mm 8mm; }
 .sk h3 { text-align:left; }
 .sk table { width:100%; border-collapse:collapse; border:1px solid #e3e3e3; }
-.sk td { padding:4.5px 7px; vertical-align:middle; font-size:8.8px; border-bottom:2px solid #fff; }
-.sk td:first-child { background:var(--sage); color:#fff; font-weight:700; width:34mm; font-size:8.5px; text-align:center; }
+.sk td { padding:5px 7px; vertical-align:middle; font-size:10px; border-bottom:2px solid #fff; }
+.sk td:first-child { background:var(--sage); color:#fff; font-weight:700; width:34mm; font-size:9.5px; text-align:center; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 .sk td:last-child { font-weight:500; text-align:left; }
 </style>
 </head>
