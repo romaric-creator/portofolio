@@ -11,12 +11,12 @@ export default function About() {
 
   const META = [
     { label: t.about.metaLabels.domains,    value: t.about.metaValues.domains },
-    { label: t.about.metaLabels.experience, value: `${PROFILE.stats.exp} ${t.about.metaValues.expUnit} · ${PROFILE.stats.projects} ${t.about.metaValues.projectsUnit}` },
+    { label: t.about.metaLabels.experience, value: `${PROFILE.stats.exp} ${t.about.metaValues.expUnit}, ${PROFILE.stats.projects} ${t.about.metaValues.projectsUnit}` },
     { label: t.about.metaLabels.languages,  value: t.about.metaValues.languages },
   ];
 
   return (
-    <section id="about" className="py-14 bg-canvas overflow-hidden">
+    <section id="about" className="py-20 bg-canvas overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.p
@@ -24,7 +24,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease }}
-          className="font-code text-[10px] tracking-[0.2em] uppercase text-dust pb-8"
+          className="font-code text-[10px] tracking-[0.2em] uppercase text-dust pb-10"
         >
           {t.about.sectionLabel}
         </motion.p>
@@ -50,25 +50,25 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, delay: 0.14, ease }}
-              className="text-sand text-base leading-relaxed mt-7 max-w-lg"
+              className="text-sand text-base leading-relaxed mt-8 max-w-lg"
             >
               {t.about.bio}
             </motion.p>
 
-            <motion.dl
+            <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.55, delay: 0.22, ease }}
-              className="mt-10 space-y-4"
+              className="mt-12 pt-8 border-t border-line grid grid-cols-1 sm:grid-cols-3 gap-6"
             >
               {META.map(({ label, value }) => (
-                <div key={label} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6">
-                  <dt className="font-code text-[9px] tracking-widest uppercase text-dust sm:w-28 flex-shrink-0">{label}</dt>
-                  <dd className="font-body text-sm text-ink">{value}</dd>
+                <div key={label}>
+                  <span className="font-code text-[10px] tracking-widest uppercase text-dust block mb-2">{label}</span>
+                  <span className="font-body text-sm text-ink leading-relaxed">{value}</span>
                 </div>
               ))}
-            </motion.dl>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -112,9 +112,9 @@ export default function About() {
               />
             </motion.div>
 
-            <div className="mt-5">
+            <div className="mt-6">
               <p className="font-display text-base font-normal text-ink">{PROFILE.fullName}</p>
-              <p className="font-code text-[10px] tracking-widest uppercase text-dust mt-1">
+              <p className="font-code text-[10px] tracking-widest uppercase text-dust mt-1.5">
                 Full-Stack Developer
               </p>
             </div>
