@@ -1,517 +1,171 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - Tenda Boupda Christian Romaric | Développeur Full-Stack</title>
-    <style>
-        @page {
-            size: A4;
-            margin: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tenda Boupda Christian Romaric - CV Développeur Full-Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 0; }
+* { margin:0; padding:0; box-sizing:border-box; }
+:root { --sage:#6e8a73; --sage-l:#eef1ee; --ink:#2f2f2f; --mute:#6a6a6a; --line:#3a3a3a; }
+body { font-family:'Montserrat','Segoe UI',Arial,sans-serif; color:var(--ink); background:#dcdcdc; font-size:8.8px; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+a { color:inherit; text-decoration:none; }
+.page { width:210mm; height:297mm; margin:0 auto; background:#fff; position:relative; overflow:hidden; display:flex; flex-direction:column; }
+@media screen { .page { margin:8mm auto; box-shadow:0 2px 12px rgba(0,0,0,.25); } }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* En-tête */
+.top { position:relative; display:grid; grid-template-columns:1fr 33mm; align-items:center; gap:6mm; padding:13mm 76mm 0 16mm; }
+.name h1 { font-size:21px; font-weight:800; line-height:1.12; letter-spacing:.6px; text-transform:uppercase; color:var(--ink); }
+.name .rule { height:1px; background:var(--line); margin:7px 0 5px; }
+.name .role { font-size:14px; font-weight:400; line-height:1.15; letter-spacing:1px; text-transform:uppercase; color:var(--ink); }
+.photo { width:33mm; height:33mm; border-radius:50%; border:2px solid #d4d4d4; background:#9aa59c; color:#fff; font-size:24px; font-weight:700; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; }
+.contact { position:absolute; top:0; right:10mm; width:58mm; padding-left:12mm; }
+.contact::before { content:''; position:absolute; left:0; top:0; width:8.5mm; height:100%; background:var(--sage); border-radius:0 0 4.5mm 4.5mm; }
+.contact .r { position:relative; height:6.6mm; display:flex; align-items:center; font-size:7.4px; font-weight:600; color:#4a4a4a; white-space:nowrap; }
+.contact .r:first-child { margin-top:8mm; }
+.contact .i { position:absolute; left:-12mm; width:8.5mm; display:flex; justify-content:center; color:#fff; font-size:7px; font-weight:800; }
+.contact svg { width:3.6mm; height:3.6mm; fill:#fff; }
 
-        body {
-            font-family: 'Segoe UI', 'Inter', Tahoma, sans-serif;
-            color: #1a1a1a;
-            background: #f0f0f0;
-            line-height: 1.5;
-            font-size: 12px;
-        }
+/* Titres */
+.pad { padding:0 14mm 0 16mm; }
+.st { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:3px; border-bottom:1px solid var(--line); margin-bottom:6px; }
+.profile { margin-top:8mm; }
+.profile p { text-align:justify; font-size:8.9px; line-height:1.6; }
+.exp-wrap { margin-top:6mm; }
 
-        .page {
-            width: 210mm;
-            height: 297mm;
-            margin: 0 auto;
-            background: #fff;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+/* Timeline */
+.tl { border-left:1.5px solid var(--line); margin-left:1mm; padding-left:5mm; }
+.it { position:relative; margin-bottom:9px; }
+.it:last-child { margin-bottom:0; }
+.it::before { content:''; position:absolute; left:calc(-5mm - 3.7px); top:15px; width:6px; height:6px; border-radius:50%; background:var(--sage); }
+.it .h { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.it .t { font-size:10px; font-weight:700; }
+.it .d { font-size:7.8px; font-style:italic; color:var(--mute); white-space:nowrap; }
+.it .c { font-size:9.2px; font-weight:700; color:var(--sage); margin-bottom:2px; }
+ul { list-style:none; }
+.it > ul > li { position:relative; padding-left:11px; font-weight:600; margin-bottom:1px; }
+.it > ul > li::before { content:'•'; position:absolute; left:2px; }
+.it li ul { margin:0 0 2px 11px; }
+.it li li { position:relative; padding-left:11px; font-weight:400; margin:0; }
+.it li li::before { content:'○'; position:absolute; left:0; font-size:7px; top:1px; }
 
-        /* Accent bar left */
-        .page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(180deg, #84c225 0%, #6db320 100%);
-        }
-
-        /* ─── Header ─── */
-        .header {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            padding: 28px 30px 22px 35px;
-            gap: 16px;
-            border-bottom: 1px solid #d8dfe8;
-        }
-
-        .header-name h1 {
-            font-size: 34px;
-            font-weight: 900;
-            line-height: 1;
-            color: #1e3a5f;
-            letter-spacing: -0.5px;
-        }
-
-        .header-name .title-line {
-            width: 45px;
-            height: 3px;
-            background: #84c225;
-            margin: 8px 0;
-        }
-
-        .header-name h2 {
-            font-size: 12px;
-            font-weight: 700;
-            color: #84c225;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .header-photo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid #84c225;
-            overflow: hidden;
-            background: #e2e8f0;
-        }
-
-        .header-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
-        }
-
-        .header-contact {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .header-contact .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            font-size: 10.5px;
-            color: #444;
-        }
-
-        .header-contact .contact-item .icon {
-            width: 13px;
-            height: 13px;
-            fill: #84c225;
-            flex-shrink: 0;
-        }
-
-        .header-contact .contact-item a {
-            color: #444;
-            text-decoration: none;
-        }
-
-        /* ─── Content ─── */
-        .content {
-            flex: 1;
-            padding: 16px 30px 18px 35px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        /* ─── Section title ─── */
-        .section-title {
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #1e3a5f;
-            padding-bottom: 5px;
-            border-bottom: 2px solid #1e3a5f;
-            margin-bottom: 10px;
-        }
-
-        /* ─── Profile ─── */
-        .profile p {
-            font-size: 11px;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* ─── Experience ─── */
-        .exp-item {
-            margin-bottom: 10px;
-        }
-
-        .exp-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .exp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-        }
-
-        .exp-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: #1e3a5f;
-        }
-
-        .exp-date {
-            font-size: 10px;
-            color: #84c225;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .exp-company {
-            font-size: 10.5px;
-            color: #666;
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .exp-bullets {
-            list-style: none;
-            padding: 0;
-        }
-
-        .exp-bullets li {
-            font-size: 10.5px;
-            color: #333;
-            padding-left: 10px;
-            position: relative;
-            margin-bottom: 2px;
-            line-height: 1.5;
-        }
-
-        .exp-bullets li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #84c225;
-            font-weight: bold;
-        }
-
-        /* ─── Bottom grid ─── */
-        .bottom-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.4fr;
-            gap: 25px;
-            padding-top: 14px;
-            border-top: 1px solid #d8dfe8;
-        }
-
-        /* ─── Formation ─── */
-        .formation-header {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 10px;
-        }
-
-        .formation-header .grad-icon {
-            width: 16px;
-            height: 16px;
-            fill: #84c225;
-        }
-
-        .formation-header h3 {
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #1e3a5f;
-        }
-
-        .edu-item {
-            margin-bottom: 8px;
-        }
-
-        .edu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-        }
-
-        .edu-degree {
-            font-size: 11px;
-            font-weight: 700;
-            color: #1e3a5f;
-        }
-
-        .edu-date {
-            font-size: 10px;
-            color: #84c225;
-            font-weight: 700;
-        }
-
-        .edu-school {
-            font-size: 10px;
-            color: #666;
-            font-style: italic;
-        }
-
-        /* ─── Skills table ─── */
-        .skills-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 5px;
-        }
-
-        .skills-table td {
-            padding: 6px 8px;
-            vertical-align: middle;
-        }
-
-        .skills-table td:first-child {
-            background: #1e3a5f;
-            color: #fff;
-            font-size: 9.5px;
-            font-weight: 700;
-            text-align: center;
-            width: 105px;
-            border-radius: 4px;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-
-        .skills-table td:last-child {
-            font-size: 10.5px;
-            color: #333;
-            padding-left: 12px;
-        }
-
-        /* ─── Print ─── */
-        @media print {
-            body {
-                background: none;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            .page {
-                box-shadow: none;
-                margin: 0;
-                width: 100%;
-                height: 100vh;
-            }
-
-            .page::before {
-                background: linear-gradient(180deg, #84c225 0%, #6db320 100%) !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            .header-photo {
-                border-color: #84c225 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            .skills-table td:first-child {
-                background: #1e3a5f !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-        }
-    </style>
+/* Bas */
+.bottom { margin-top:auto; display:grid; grid-template-columns:80mm 1fr; align-items:stretch; }
+.edu { background:var(--sage-l); border-top-right-radius:9mm; padding:8mm 7mm 8mm 16mm; }
+.edu h3, .sk h3 { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; }
+.edu h3 { display:flex; align-items:center; gap:6px; margin-bottom:3px; padding-bottom:5px; border-bottom:1px solid var(--line); width:46mm; }
+.edu h3 svg { width:5mm; height:5mm; fill:var(--sage); }
+.etl { border-left:1.5px solid var(--line); margin:7px 0 0 1mm; padding-left:4mm; }
+.e { position:relative; margin-bottom:8px; }
+.e::before { content:''; position:absolute; left:calc(-4mm - 3.7px); top:4px; width:6px; height:6px; border-radius:50%; background:var(--sage); }
+.e .h { display:flex; justify-content:space-between; gap:6px; align-items:baseline; }
+.e b { font-size:8.8px; font-weight:700; font-style:italic; }
+.e .d { font-size:7.4px; font-style:italic; color:var(--mute); white-space:nowrap; }
+.e .s { font-size:8px; color:var(--mute); }
+.sk { padding:8mm 14mm 8mm 8mm; }
+.sk h3 { text-align:center; padding-bottom:4px; border-bottom:1px solid var(--line); margin-bottom:8px; }
+.sk table { width:100%; border-collapse:collapse; border:1px solid #e3e3e3; }
+.sk td { padding:4px 7px; text-align:center; vertical-align:middle; font-size:8.3px; border-bottom:2px solid #fff; }
+.sk td:first-child { background:var(--sage); color:#fff; font-weight:700; width:32mm; font-size:8px; }
+.sk td:last-child { font-weight:500; }
+</style>
 </head>
 <body>
-    <div class="page">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-name">
-                <h1>TENDA BOUPDA<br>CHRISTIAN ROMARIC</h1>
-                <div class="title-line"></div>
-                <h2>Développeur Full-Stack</h2>
-            </div>
+<div class="page">
 
-            <div class="header-photo">
-                <img src="./photo-christian-tenda.jpg" alt="Tenda Boupda Christian Romaric">
-            </div>
-
-            <div class="header-contact">
-                <div class="contact-item">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                    <span>christiantenda.netlify.app</span>
-                </div>
-                <div class="contact-item">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                    <span>+237 678 261 699</span>
-                </div>
-                <div class="contact-item">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    <a href="mailto:christiantendainfo2006@gmail.com">christiantendainfo2006@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    <span>Douala, Cameroun</span>
-                </div>
-                <div class="contact-item">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    <a href="https://cm.linkedin.com/in/christian-tenda-5a3529354">LinkedIn</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Content -->
-        <div class="content">
-            <!-- Profile -->
-            <section class="profile">
-                <h3 class="section-title">Profil</h3>
-                <p>
-                    Développeur Full-Stack avec 4+ ans d'expérience, spécialisé en React, React Native, Node.js et TypeScript.
-                    Conception d'applications métier, SaaS et intégrations IA de bout en bout : ERP hôtelier multi-modules,
-                    SaaS restaurant avec copilote IA (Cohere Command R+, Tool Use natif), app mobile primée au concours
-                    Orange Innovation Challenge. Architectures Docker, RBAC, transactions sécurisées, temps réel WebSockets.
-                    Autonome, rigoureux et orienté résultats.
-                </p>
-            </section>
-
-            <!-- Experience -->
-            <section class="experience">
-                <h3 class="section-title">Expériences Professionnelles</h3>
-
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <span class="exp-title">Stage Consultant IT</span>
-                        <span class="exp-date">Juin — Août 2026</span>
-                    </div>
-                    <div class="exp-company">SIMS BTP Holdings — Douala, Cameroun</div>
-                    <ul class="exp-bullets">
-                        <li>Automatisation des processus internes et développement d'outils métier pour remplacer les workflows manuels</li>
-                        <li>Conseil en stratégie IT et création du site web institutionnel de l'entreprise</li>
-                    </ul>
-                </div>
-
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <span class="exp-title">Développeur Full-Stack Freelance</span>
-                        <span class="exp-date">2022 — 2026</span>
-                    </div>
-                    <div class="exp-company">Indépendant — Douala, Cameroun</div>
-                    <ul class="exp-bullets">
-                        <li><strong>GLOBEApp :</strong> ERP de gestion multi-modules (hôtel, restaurant, caisse, comptabilité). Architecture Docker, RBAC, transactions sécurisées</li>
-                        <li><strong>Gourmi IQ :</strong> SaaS restaurant multi-tenant avec copilote IA (Cohere Command R+), pipeline Two-Pass, Tool Use natif et commandes temps réel</li>
-                        <li><strong>VitaSang :</strong> App mobile de coordination du don de sang — finaliste Orange Innovation Challenge Cameroun. Notifications push, files BullMQ</li>
-                        <li><strong>SafeDriving / TechFlow :</strong> Applications desktop Electron de gestion métier (auto-école multi-sites, atelier de maintenance informatique)</li>
-                    </ul>
-                </div>
-
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <span class="exp-title">Développeur Backend — Mentor-X</span>
-                        <span class="exp-date">2025 — 2026</span>
-                    </div>
-                    <div class="exp-company">Projet universitaire — IUC, Douala</div>
-                    <ul class="exp-bullets">
-                        <li>Développement d'une API REST complète pour une plateforme de parrainage et réseau social universitaire</li>
-                        <li>Attribution automatique parrain/filleul, import PDF des listes de classe, cache Redis, documentation Swagger</li>
-                        <li>Gestion multi-campus et système de posts/commentaires/likes</li>
-                    </ul>
-                </div>
-
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <span class="exp-title">Développeur Full-Stack — Sparknest</span>
-                        <span class="exp-date">2025</span>
-                    </div>
-                    <div class="exp-company">Plateforme collaborative</div>
-                    <ul class="exp-bullets">
-                        <li>Développement d'un écosystème complet : site web React, API backend Node.js et application mobile React Native</li>
-                        <li>Architecture TypeScript end-to-end, authentification, gestion d'utilisateurs et collaboration en temps réel</li>
-                    </ul>
-                </div>
-
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <span class="exp-title">Data Science — AgrisIA</span>
-                        <span class="exp-date">2024</span>
-                    </div>
-                    <div class="exp-company">Projet de recherche</div>
-                    <ul class="exp-bullets">
-                        <li>Développement d'un modèle Machine Learning de prédiction du rendement agricole (tonnes/hectare)</li>
-                        <li>Analyse de données avec Pandas/NumPy, entraînement avec Scikit-learn, recommandations d'amélioration</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Bottom: Formation + Skills -->
-            <div class="bottom-grid">
-                <div class="formation">
-                    <div class="formation-header">
-                        <svg class="grad-icon" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-                        <h3>Formations</h3>
-                    </div>
-
-                    <div class="edu-item">
-                        <div class="edu-header">
-                            <span class="edu-degree">BTS en Génie Logiciel</span>
-                            <span class="edu-date">2024 — 2026</span>
-                        </div>
-                        <div class="edu-school">Institut Universitaire de la Côte (IUC), Douala</div>
-                    </div>
-
-                    <div class="edu-item">
-                        <div class="edu-header">
-                            <span class="edu-degree">Baccalauréat TI</span>
-                            <span class="edu-date">2023 — 2024</span>
-                        </div>
-                        <div class="edu-school">Collège Evangélique de New Bell</div>
-                    </div>
-
-                    <div style="margin-top: 14px;">
-                        <h3 class="section-title" style="font-size: 11px; margin-bottom: 8px;">Langues</h3>
-                        <div style="font-size: 10.5px; color: #333; margin-bottom: 4px;"><strong>Français</strong> — Langue maternelle</div>
-                        <div style="font-size: 10.5px; color: #333;"><strong>Anglais</strong> — Intermédiaire (B1)</div>
-                    </div>
-                </div>
-
-                <div class="skills">
-                    <h3 class="section-title">Compétences Techniques</h3>
-                    <table class="skills-table">
-                        <tr>
-                            <td>Frontend</td>
-                            <td>React, Next.js, TypeScript, JavaScript, Tailwind CSS, HTML5</td>
-                        </tr>
-                        <tr>
-                            <td>Mobile</td>
-                            <td>React Native, Expo, Firebase</td>
-                        </tr>
-                        <tr>
-                            <td>Backend</td>
-                            <td>Node.js, NestJS, Express, PHP, PostgreSQL, MySQL, Redis, Prisma</td>
-                        </tr>
-                        <tr>
-                            <td>DevOps</td>
-                            <td>Docker, Docker Compose, Netlify, Vercel, Railway</td>
-                        </tr>
-                        <tr>
-                            <td>Data Science</td>
-                            <td>Python, Pandas, NumPy, Scikit-learn, Matplotlib</td>
-                        </tr>
-                        <tr>
-                            <td>Outils</td>
-                            <td>Git/GitHub, Postman, Swagger, VS Code, npm, MERISE, UML</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
+  <header class="top">
+    <div class="name">
+      <h1>Tenda Boupda<br>Christian Romaric</h1>
+      <div class="rule"></div>
+      <div class="role">Développeur<br>Full-Stack &amp; IA</div>
     </div>
+    <div class="photo">CT<img src="./photo-christian-tenda.jpg" alt="" onerror="this.style.display='none'"></div>
+
+    <div class="contact">
+      <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></span><a href="https://christiantenda.netlify.app">christiantenda.netlify.app</a></div>
+      <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg></span><a href="https://github.com/romaric-creator">github.com/romaric-creator</a></div>
+      <div class="r"><span class="i">in</span><a href="https://cm.linkedin.com/in/christian-tenda-5a3529354">linkedin.com/in/christian-tenda</a></div>
+      <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>+237 678 261 699</div>
+      <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span><a href="mailto:christiantendainfo2006@gmail.com">christiantendainfo2006@gmail.com</a></div>
+      <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></span>Douala, Cameroun</div>
+    </div>
+  </header>
+
+  <section class="pad profile">
+    <h2 class="st">Profil</h2>
+    <p>Développeur Full-Stack spécialisé en React et Node.js, avec une forte expertise en TypeScript, NestJS et en intégration d'intelligence artificielle (LLM, Tool Use). Co-fondateur de SparkNest, je conçois des logiciels de gestion pour PME — ERP, SaaS, applications mobiles et desktop — avec des architectures Docker, RBAC, temps réel WebSocket et Redis. Finaliste de l'Orange Innovation Challenge Cameroun avec l'application mobile VitaSang.</p>
+  </section>
+
+  <section class="pad exp-wrap">
+    <h2 class="st">Expériences professionnelles</h2>
+    <div class="tl">
+
+      <div class="it">
+        <div class="h"><span class="t">Consultant IT (stage)</span><span class="d">Juin 2026 – Août 2026</span></div>
+        <div class="c">SIMS BTP Holdings</div>
+        <ul>
+          <li>Automatisation des processus internes et outils métier remplaçant les workflows manuels</li>
+          <li>Conseil en stratégie IT et création du site web institutionnel de l'entreprise</li>
+        </ul>
+      </div>
+
+      <div class="it">
+        <div class="h"><span class="t">Co-fondateur &amp; CTO</span><span class="d">2025 – Aujourd'hui</span></div>
+        <div class="c">SparkNest</div>
+        <ul>
+          <li>Architecture technique et livraison des projets de l'équipe (applications sur mesure pour PME camerounaises)
+            <ul><li>Écosystème complet : site React, API Node.js, application React Native, TypeScript de bout en bout</li></ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="it">
+        <div class="h"><span class="t">Développeur Full-Stack Freelance</span><span class="d">2022 – 2026</span></div>
+        <div class="c">Indépendant</div>
+        <ul>
+          <li>GLOBEApp : ERP de gestion (hôtel, restaurant, caisse, comptabilité)
+            <ul><li>Docker, RBAC, transactions sécurisées</li></ul>
+          </li>
+          <li>Gourmi IQ (en cours) : SaaS restaurant multi-tenant avec copilote IA
+            <ul><li>Cohere Command R+, Tool Use natif, pipeline Two-Pass, SQL isolé par tenant, réponses streamées SSE, 6 widgets UI générés par l'IA</li></ul>
+          </li>
+          <li>VitaSang : application mobile de don de sang, finaliste Orange Innovation Challenge
+            <ul><li>React Native, Expo, notifications push, files BullMQ</li></ul>
+          </li>
+          <li>SafeDriving et TechFlow (Electron), Mentor-X et Taskly (API REST), AgrisIA (modèle ML de rendement agricole)</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="bottom">
+    <aside class="edu">
+      <h3><svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>Formations</h3>
+      <div class="etl">
+        <div class="e"><div class="h"><b>BTS en Génie Logiciel</b><span class="d">2024 – 2026</span></div><div class="s">Institut Universitaire de la Côte (IUC), Douala</div></div>
+        <div class="e"><div class="h"><b>Baccalauréat TI</b><span class="d">2023 – 2024</span></div><div class="s">Collège Évangélique de New Bell</div></div>
+      </div>
+      <h3 style="margin-top:12px;width:30mm">Langues</h3>
+      <div class="s" style="font-size:8.4px;margin-top:5px"><b>Français</b> : langue maternelle<br><b>Anglais</b> : intermédiaire (B1)</div>
+    </aside>
+
+    <section class="sk">
+      <h3>Compétences techniques</h3>
+      <table>
+        <tr><td>Frontend</td><td>React, Next.js, TypeScript, Tailwind CSS</td></tr>
+        <tr><td>Mobile</td><td>React Native, Expo, Firebase</td></tr>
+        <tr><td>Backend</td><td>Node.js, NestJS, Express, Socket.io, Prisma, PHP</td></tr>
+        <tr><td>Données &amp; temps réel</td><td>PostgreSQL, MySQL, Redis, WebSockets, BullMQ</td></tr>
+        <tr><td>IA / LLM</td><td>Cohere Command R+, Tool Use, streaming SSE</td></tr>
+        <tr><td>DevOps &amp; déploiement</td><td>Docker, GitLab CI/CD, Railway, Vercel, Netlify</td></tr>
+        <tr><td>Outils &amp; data</td><td>Git/GitHub, Postman, Swagger, Electron, Python, Scikit-learn</td></tr>
+      </table>
+    </section>
+  </div>
+
+</div>
 </body>
 </html>
