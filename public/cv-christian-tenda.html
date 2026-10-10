@@ -8,68 +8,70 @@
 <style>
 @page { size: A4; margin: 0; }
 * { margin:0; padding:0; box-sizing:border-box; }
-:root { --sage:#6e8a73; --sage-l:#eef1ee; --ink:#2f2f2f; --mute:#6a6a6a; --line:#3a3a3a; }
-body { font-family:'Montserrat','Segoe UI',Arial,sans-serif; color:var(--ink); background:#dcdcdc; font-size:9.5px; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+:root { --sage:#587560; --sage-l:#edf0ed; --ink:#2f2f2f; --mute:#6a6a6a; --line:#c8cec8; }
+body { font-family:'Montserrat','Segoe UI',Arial,sans-serif; color:var(--ink); background:#dcdcdc; font-size:11px; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 a { color:inherit; text-decoration:none; }
-.page { width:210mm; height:297mm; margin:0 auto; background:#fff; position:relative; overflow:hidden; display:flex; flex-direction:column; }
+.page { width:210mm; min-height:297mm; margin:0 auto; background:#fff; position:relative; display:flex; flex-direction:column; }
 @media screen { .page { margin:8mm auto; box-shadow:0 2px 12px rgba(0,0,0,.25); } }
 
 /* En-tête */
-.top { position:relative; display:grid; grid-template-columns:1fr 33mm; align-items:center; gap:6mm; padding:13mm 76mm 7mm 16mm; }
+.top { position:relative; display:grid; grid-template-columns:1fr 33mm; align-items:center; gap:6mm; padding:13mm 76mm 9mm 16mm; }
 .name h1 { font-size:21px; font-weight:800; line-height:1.12; letter-spacing:.6px; text-transform:uppercase; color:var(--ink); }
-.name .rule { height:1px; background:var(--line); margin:7px 0 5px; }
+.name .rule { height:1px; background:#3a3a3a; margin:7px 0 5px; }
 .name .role { font-size:14px; font-weight:400; line-height:1.15; letter-spacing:1px; text-transform:uppercase; color:var(--ink); }
 .photo { width:33mm; height:33mm; border-radius:50%; border:2px solid #d4d4d4; background:#9aa59c; color:#fff; font-size:24px; font-weight:700; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
 .photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; }
-.contact { position:absolute; top:0; right:10mm; width:58mm; padding-left:12mm; }
+.contact { position:absolute; top:0; right:14mm; width:55mm; padding-left:12mm; }
 .contact::before { content:''; position:absolute; left:0; top:0; width:8.5mm; height:100%; background:var(--sage); border-radius:0 0 4.5mm 4.5mm; }
-.contact .r { position:relative; height:6.6mm; display:flex; align-items:center; font-size:7.4px; font-weight:600; color:#4a4a4a; white-space:nowrap; }
+.contact .r { position:relative; height:7mm; display:flex; align-items:center; font-size:8.5px; font-weight:600; color:#4a4a4a; white-space:nowrap; }
 .contact .r:first-child { margin-top:8mm; }
-.contact .i { position:absolute; left:-12mm; width:8.5mm; display:flex; justify-content:center; color:#fff; font-size:7px; font-weight:800; }
-.contact svg { width:3.6mm; height:3.6mm; fill:#fff; }
+.contact .i { position:absolute; left:-12mm; width:8.5mm; display:flex; justify-content:center; color:#fff; font-size:7.5px; font-weight:800; }
+.contact svg { width:3.8mm; height:3.8mm; fill:#fff; }
 
-/* Titres */
+/* Titres de section */
 .pad { padding:0 14mm 0 16mm; }
-.st { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:3px; border-bottom:1px solid var(--line); margin-bottom:6px; }
-.profile { margin-top:13mm; }
-.profile p { text-align:justify; font-size:9.5px; line-height:1.7; padding-bottom:4mm; }
-.exp-wrap { margin-top:10mm; }
+.st { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:3px; border-bottom:1px solid #3a3a3a; margin-bottom:7px; }
+.profile { margin-top:12mm; }
+.profile p { text-align:left; hyphens:auto; font-size:11px; line-height:1.65; padding-bottom:3mm; }
+.exp-wrap { margin-top:9mm; }
 
 /* Timeline */
 .tl { border-left:1.5px solid var(--line); margin-left:1mm; padding-left:5mm; }
 .it { position:relative; margin-bottom:16px; }
 .it:last-child { margin-bottom:0; }
-.it::before { content:''; position:absolute; left:calc(-5mm - 3.7px); top:15px; width:6px; height:6px; border-radius:50%; background:var(--sage); }
+.it::before { content:''; position:absolute; left:calc(-5mm - 3.7px); top:15px; width:7px; height:7px; border-radius:50%; background:var(--sage); }
 .it .h { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
 .it .t { font-size:11px; font-weight:700; }
-.it .d { font-size:8.4px; font-style:italic; color:var(--mute); white-space:nowrap; }
+.it .d { font-size:9px; font-style:italic; color:var(--mute); white-space:nowrap; }
 .it .c { font-size:10px; font-weight:700; color:var(--sage); margin-bottom:3px; }
 ul { list-style:none; }
-.it > ul > li { position:relative; padding-left:11px; font-weight:600; margin-bottom:3px; }
-.it > ul > li::before { content:'•'; position:absolute; left:2px; }
-.it li ul { margin:0 0 2px 11px; }
+.it > ul > li { position:relative; padding-left:11px; font-weight:400; margin-bottom:3px; }
+.it > ul > li::before { content:'•'; position:absolute; left:2px; color:var(--sage); }
+.it li ul { margin:1px 0 3px 11px; }
 .it li li { position:relative; padding-left:11px; font-weight:400; margin:0; }
-.it li li::before { content:'○'; position:absolute; left:0; font-size:7px; top:1px; }
+.it li li::before { content:'○'; position:absolute; left:0; font-size:7.5px; top:1px; color:var(--mute); }
+b.proj { font-weight:700; }
 
 /* Bas */
 .bottom { margin-top:auto; display:grid; grid-template-columns:80mm 1fr; align-items:stretch; }
 .edu { background:var(--sage-l); border-top-right-radius:9mm; padding:8mm 7mm 8mm 16mm; }
-.edu h3, .sk h3 { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; }
-.edu h3 { display:flex; align-items:center; gap:6px; margin-bottom:3px; padding-bottom:5px; border-bottom:1px solid var(--line); width:46mm; }
+.edu h3, .sk h3 { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:4px; border-bottom:1px solid #3a3a3a; margin-bottom:7px; }
+.edu h3 { display:flex; align-items:center; gap:6px; }
 .edu h3 svg { width:5mm; height:5mm; fill:var(--sage); }
+.lang-title { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--ink); padding-bottom:4px; border-bottom:1px solid #3a3a3a; margin:10px 0 7px; }
 .etl { border-left:1.5px solid var(--line); margin:7px 0 0 1mm; padding-left:4mm; }
 .e { position:relative; margin-bottom:8px; }
 .e::before { content:''; position:absolute; left:calc(-4mm - 3.7px); top:4px; width:6px; height:6px; border-radius:50%; background:var(--sage); }
 .e .h { display:flex; justify-content:space-between; gap:6px; align-items:baseline; }
 .e b { font-size:9.5px; font-weight:700; font-style:italic; }
-.e .d { font-size:8px; font-style:italic; color:var(--mute); white-space:nowrap; }
+.e .d { font-size:8.5px; font-style:italic; color:var(--mute); white-space:nowrap; }
 .e .s { font-size:8.6px; color:var(--mute); }
 .sk { padding:8mm 14mm 8mm 8mm; }
-.sk h3 { text-align:center; padding-bottom:4px; border-bottom:1px solid var(--line); margin-bottom:8px; }
+.sk h3 { text-align:left; }
 .sk table { width:100%; border-collapse:collapse; border:1px solid #e3e3e3; }
-.sk td { padding:4.5px 7px; text-align:center; vertical-align:middle; font-size:8.8px; border-bottom:2px solid #fff; }
-.sk td:first-child { background:var(--sage); color:#fff; font-weight:700; width:32mm; font-size:8.5px; }
-.sk td:last-child { font-weight:500; }
+.sk td { padding:4.5px 7px; vertical-align:middle; font-size:8.8px; border-bottom:2px solid #fff; }
+.sk td:first-child { background:var(--sage); color:#fff; font-weight:700; width:34mm; font-size:8.5px; text-align:center; }
+.sk td:last-child { font-weight:500; text-align:left; }
 </style>
 </head>
 <body>
@@ -86,7 +88,7 @@ ul { list-style:none; }
     <div class="contact">
       <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></span><a href="https://christiantenda.netlify.app">christiantenda.netlify.app</a></div>
       <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg></span><a href="https://github.com/romaric-creator">github.com/romaric-creator</a></div>
-      <div class="r"><span class="i">in</span><a href="https://cm.linkedin.com/in/christian-tenda-5a3529354">linkedin.com/in/christian-tenda</a></div>
+      <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></span><a href="https://cm.linkedin.com/in/christian-tenda-5a3529354">linkedin.com/in/christian-tenda</a></div>
       <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>+237 678 261 699</div>
       <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span><a href="mailto:christiantendainfo2006@gmail.com">christiantendainfo2006@gmail.com</a></div>
       <div class="r"><span class="i"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></span>Douala, Cameroun</div>
@@ -125,16 +127,16 @@ ul { list-style:none; }
         <div class="h"><span class="t">Développeur Full-Stack Freelance</span><span class="d">2022 – 2026</span></div>
         <div class="c">Indépendant</div>
         <ul>
-          <li>GLOBEApp : ERP de gestion (hôtel, restaurant, caisse, comptabilité)
+          <li><b class="proj">GLOBEApp</b> : ERP de gestion (hôtel, restaurant, caisse, comptabilité)
             <ul><li>Docker, RBAC, transactions sécurisées</li></ul>
           </li>
-          <li>Gourmi IQ (en cours) : SaaS restaurant multi-tenant avec copilote IA
+          <li><b class="proj">Gourmi IQ</b> (en cours) : SaaS restaurant multi-tenant avec copilote IA
             <ul><li>Cohere Command R+, Tool Use natif, pipeline Two-Pass, SQL isolé par tenant, réponses streamées SSE, 6 widgets UI générés par l'IA</li></ul>
           </li>
-          <li>VitaSang : application mobile de don de sang, finaliste Orange Innovation Challenge
+          <li><b class="proj">VitaSang</b> : application mobile de don de sang, finaliste Orange Innovation Challenge
             <ul><li>React Native, Expo, notifications push, files BullMQ</li></ul>
           </li>
-          <li>SafeDriving et TechFlow (Electron), Mentor-X et Taskly (API REST), AgrisIA (modèle ML de rendement agricole)</li>
+          <li>Autres projets : <b class="proj">SafeDriving</b> et <b class="proj">TechFlow</b> (Electron desktop), <b class="proj">AgrisIA</b> (modèle ML de rendement agricole)</li>
         </ul>
       </div>
 
@@ -148,8 +150,13 @@ ul { list-style:none; }
         <div class="e"><div class="h"><b>BTS en Génie Logiciel</b><span class="d">2024 – 2026</span></div><div class="s">Institut Universitaire de la Côte (IUC), Douala</div></div>
         <div class="e"><div class="h"><b>Baccalauréat TI</b><span class="d">2023 – 2024</span></div><div class="s">Collège Évangélique de New Bell</div></div>
       </div>
-      <h3 style="margin-top:12px;width:30mm">Langues</h3>
-      <div class="s" style="font-size:8.4px;margin-top:5px"><b>Français</b> : langue maternelle<br><b>Anglais</b> : intermédiaire (B1)</div>
+      <div class="lang-title">Distinctions</div>
+      <ul style="list-style:none;margin-bottom:8px">
+        <li style="font-size:9px;padding-left:11px;position:relative;margin-bottom:3px"><span style="position:absolute;left:0;color:var(--sage);font-size:8px;top:1px">★</span>Finaliste OIC — Orange Innovation Challenge Cameroun (VitaSang, 2026)</li>
+        <li style="font-size:9px;padding-left:11px;position:relative"><span style="position:absolute;left:0;color:var(--sage);font-size:8px;top:1px">★</span>Finaliste — L'Afrique Qui Innove (2025)</li>
+      </ul>
+      <div class="lang-title">Langues</div>
+      <div class="s" style="font-size:9px"><b>Français</b> : langue maternelle<br><b>Anglais</b> : intermédiaire (B1)</div>
     </aside>
 
     <section class="sk">
