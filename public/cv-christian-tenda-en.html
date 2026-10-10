@@ -15,14 +15,13 @@
   --ink: #1a1a1a;
   --mute: #666;
   --line: #d8dfe8;
-  --surface: #f4f7fb;
 }
 body {
-  font-family: 'Montserrat','Segoe UI', Arial, sans-serif;
+  font-family: 'Montserrat','Segoe UI',Arial,sans-serif;
   color: var(--ink);
   background: #dcdcdc;
-  font-size: 11px;
-  line-height: 1.5;
+  font-size: 11.5px;
+  line-height: 1.55;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
@@ -36,7 +35,6 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
 }
-/* Left accent bar */
 .page::before {
   content: '';
   position: absolute;
@@ -74,15 +72,17 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   background: #e2e8f0;
   flex-shrink: 0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 .header-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-.header-contact { display: flex; flex-direction: column; gap: 5px; }
+.header-contact { display: flex; flex-direction: column; gap: 5.5px; }
 .contact-item { display: flex; align-items: center; gap: 6px; font-size: 9px; color: #444; }
 .contact-item svg { width: 12px; height: 12px; fill: var(--lime-text); flex-shrink: 0; }
 .contact-item a { color: #444; }
 
 /* ─── Content ─── */
-.content { flex: 1; padding: 14px 28px 16px 30px; display: flex; flex-direction: column; gap: 11px; }
+.content { flex: 1; padding: 15px 28px 18px 30px; display: flex; flex-direction: column; gap: 13px; }
 
 /* ─── Section title ─── */
 .st {
@@ -97,22 +97,22 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ─── Profile ─── */
-.profile p { font-size: 11px; color: #333; line-height: 1.65; text-align: left; hyphens: auto; }
+.profile-text { font-size: 11.5px; color: #333; line-height: 1.65; text-align: left; hyphens: auto; }
 
 /* ─── Experience ─── */
-.exp-item { margin-bottom: 10px; }
+.exp-item { margin-bottom: 12px; }
 .exp-item:last-child { margin-bottom: 0; }
 .exp-header { display: flex; justify-content: space-between; align-items: baseline; }
 .exp-title { font-size: 11.5px; font-weight: 700; color: var(--navy); }
 .exp-date { font-size: 9.5px; color: var(--lime-text); font-weight: 700; white-space: nowrap; }
-.exp-company { font-size: 10px; color: var(--mute); font-weight: 500; margin-bottom: 4px; }
+.exp-company { font-size: 10px; color: var(--mute); font-weight: 500; margin-bottom: 5px; }
 .exp-bullets { list-style: none; }
 .exp-bullets li {
-  font-size: 10.5px;
+  font-size: 11px;
   color: #333;
-  padding-left: 11px;
+  padding-left: 12px;
   position: relative;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
   line-height: 1.5;
   font-weight: 400;
 }
@@ -124,25 +124,30 @@ b.proj { font-weight: 700; }
   display: grid;
   grid-template-columns: 88mm 1fr;
   gap: 22px;
-  padding-top: 12px;
+  padding-top: 13px;
   border-top: 1px solid var(--line);
+  align-items: start;
 }
-.bottom-left { display: flex; flex-direction: column; gap: 12px; }
+.bottom-left { display: flex; flex-direction: column; gap: 13px; }
 
 /* ─── Education / Distinctions / Languages ─── */
-.edu-item { margin-bottom: 7px; }
+.edu-item { margin-bottom: 8px; }
 .edu-header { display: flex; justify-content: space-between; align-items: baseline; }
-.edu-degree { font-size: 10px; font-weight: 700; color: var(--navy); }
+.edu-degree { font-size: 10.5px; font-weight: 700; color: var(--navy); }
 .edu-date { font-size: 9px; color: var(--lime-text); font-weight: 700; }
 .edu-school { font-size: 9.5px; color: var(--mute); font-style: italic; }
-.lang-body { font-size: 10px; color: #333; }
+.lang-body { font-size: 10.5px; color: #333; line-height: 1.6; }
 .lang-body strong { font-weight: 700; }
-.distinction-item { font-size: 10px; color: #333; padding-left: 11px; position: relative; margin-bottom: 3px; }
-.distinction-item::before { content: '★'; position: absolute; left: 0; color: var(--lime-text); font-size: 8px; top: 1px; }
+.distinction-item {
+  font-size: 10.5px; color: #333;
+  padding-left: 12px; position: relative;
+  margin-bottom: 4px; line-height: 1.5;
+}
+.distinction-item::before { content: '•'; position: absolute; left: 0; color: var(--lime); font-weight: bold; }
 
 /* ─── Skills ─── */
-.skills-table { width: 100%; border-collapse: collapse; border: 1px solid #e3e3e3; }
-.skills-table td { padding: 4.5px 7px; vertical-align: middle; font-size: 9px; border-bottom: 2px solid #fff; }
+.skills-table { width: 100%; border-collapse: collapse; }
+.skills-table td { padding: 5px 7px; vertical-align: middle; font-size: 9.5px; border-bottom: 1.5px solid #fff; }
 .skills-table td:first-child {
   background: var(--navy);
   color: #fff;
@@ -153,7 +158,7 @@ b.proj { font-weight: 700; }
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
-.skills-table td:last-child { text-align: left; font-weight: 500; color: #333; }
+.skills-table td:last-child { text-align: left; font-weight: 500; color: #333; background: #f7f9fb; }
 </style>
 </head>
 <body>
@@ -184,11 +189,11 @@ b.proj { font-weight: 700; }
     <!-- Profile -->
     <section>
       <h3 class="st">Profile</h3>
-      <p class="profile p" style="font-size:11px;color:#333;line-height:1.65;text-align:left;">
-        Full-Stack Developer with 4+ years of experience, specialised in React, React Native, Node.js and TypeScript.
+      <p class="profile-text">
+        Full-Stack Developer with project experience since 2022, specialised in React, React Native, Node.js and TypeScript.
         I design business apps, SaaS platforms and AI integrations end-to-end: from a multi-module hotel ERP to a
         restaurant SaaS with an AI copilot (Cohere Command R+, native Tool Use), and a mobile app recognised
-        at the Orange Innovation Challenge Cameroon. Docker architectures, RBAC, secure transactions, real-time WebSockets.
+        at the Orange Innovation Challenge (OIC).
       </p>
     </section>
 
@@ -201,7 +206,7 @@ b.proj { font-weight: 700; }
           <span class="exp-title">IT Consultant Intern</span>
           <span class="exp-date">June – August 2026</span>
         </div>
-        <div class="exp-company">SIMS BTP Holdings — Douala, Cameroon</div>
+        <div class="exp-company">SIMS BTP Holdings, Douala</div>
         <ul class="exp-bullets">
           <li>Internal process automation and business app development to replace manual workflows</li>
           <li>IT strategy consulting and creation of the company's institutional website</li>
@@ -213,7 +218,7 @@ b.proj { font-weight: 700; }
           <span class="exp-title">Co-founder &amp; CTO</span>
           <span class="exp-date">2025 – Present</span>
         </div>
-        <div class="exp-company">SparkNest — Douala, Cameroon</div>
+        <div class="exp-company">SparkNest, Douala</div>
         <ul class="exp-bullets">
           <li>Technical leadership and delivery of custom web, mobile and desktop applications for Cameroonian SMBs</li>
           <li>End-to-end TypeScript architecture: React website, Node.js API, React Native mobile app</li>
@@ -225,12 +230,12 @@ b.proj { font-weight: 700; }
           <span class="exp-title">Freelance Full-Stack Developer</span>
           <span class="exp-date">2022 – 2026</span>
         </div>
-        <div class="exp-company">Independent — Douala, Cameroon</div>
+        <div class="exp-company">Douala</div>
         <ul class="exp-bullets">
-          <li><b class="proj">GLOBEApp</b>: Multi-module ERP (hotel, restaurant, POS, accounting) — Docker, RBAC, secure transactions</li>
+          <li><b class="proj">GLOBEApp</b>: Multi-module ERP (hotel, restaurant, POS, accounting), Docker, RBAC, secure transactions</li>
           <li><b class="proj">Gourmi IQ</b>: Multi-tenant restaurant SaaS with AI copilot (Cohere Command R+), Two-Pass pipeline, native Tool Use, real-time SSE</li>
-          <li><b class="proj">VitaSang</b>: Blood donation coordination mobile app — OIC Finalist. React Native, Expo, Firebase, BullMQ queues</li>
-          <li>Other projects: <b class="proj">SafeDriving</b> &amp; <b class="proj">TechFlow</b> (Electron desktop), <b class="proj">AgrisIA</b> (agricultural ML model)</li>
+          <li><b class="proj">VitaSang</b>: Blood donation coordination mobile app. React Native, Expo, Firebase, BullMQ async queues</li>
+          <li>Other projects: <b class="proj">SafeDriving</b>, <b class="proj">TechFlow</b> (Electron desktop), <b class="proj">AgrisIA</b> (agricultural ML model)</li>
         </ul>
       </div>
     </section>
@@ -252,13 +257,13 @@ b.proj { font-weight: 700; }
 
         <div>
           <h3 class="st">Distinctions</h3>
-          <div class="distinction-item">OIC Finalist — Orange Innovation Challenge Cameroon (VitaSang, 2026)</div>
-          <div class="distinction-item">Finalist — L'Afrique Qui Innove tech competition (2025)</div>
+          <div class="distinction-item">OIC Finalist: Orange Innovation Challenge Cameroon (VitaSang, 2026)</div>
+          <div class="distinction-item">Finalist: L'Afrique Qui Innove tech competition (2025)</div>
         </div>
 
         <div>
           <h3 class="st">Languages</h3>
-          <div class="lang-body"><strong>French</strong> — Native<br><strong>English</strong> — Intermediate (B1)</div>
+          <div class="lang-body"><strong>French:</strong> Native<br><strong>English:</strong> Intermediate (B1)</div>
         </div>
       </div>
 
